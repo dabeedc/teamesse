@@ -20,7 +20,7 @@ Minimal Requirements:
 - Authentication
 
 Standard Requirements:
-- Tracking study habits and/or stats
+- Tracking study habits and/or stats (GitHub style heatmap for days/intervals)
 - Sharing user profile/stats with others
 - Commenting/reacting to other user's stats
 
