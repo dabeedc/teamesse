@@ -27,3 +27,5 @@ Standard Requirements:
 Stretch Requirements:
 - Live collaboration pomodoro session
 - Optional chatroom/video call feature
+- Add (optional) music to play during pomodoro session
+- Add sounds for start/finish/pause
