@@ -29,3 +29,6 @@ Stretch Requirements:
 - Optional chatroom/video call feature.
 - Add (optional) music to play during pomodoro session.
 - Add sounds for start/finish/pause of pomodoro session.
+
+![pomodoro](https://github.com/dabeedc/teamesse/blob/main/pomodoroproto.drawio.png)
+![userprofile](https://github.com/dabeedc/teamesse/blob/main/userprofileproto.drawio.png)
