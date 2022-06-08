@@ -22,22 +22,32 @@ export const ColorSampler = () => {
       }}
     >
       <Typography variant="h3">The default text color is white</Typography>
-      <Box sx={{ backgroundColor: (theme) => theme.palette.common.first }}>
-        first color
+
+      {/* do it like this */}
+      <Box backgroundColor="common.first">
+        <Typography>first color</Typography>
       </Box>
+
+      {/* or do it like this */}
       <Box sx={{ backgroundColor: (theme) => theme.palette.common.second }}>
-        second color
+        <Typography>second color</Typography>
       </Box>
+
       <Box sx={{ backgroundColor: (theme) => theme.palette.common.third }}>
-        third color
+        <Typography>third color</Typography>
       </Box>
+
       <Box sx={{ backgroundColor: (theme) => theme.palette.common.fourth }}>
-        fourth color
+        <Typography>fourth color</Typography>
       </Box>
+
       <Box sx={{ backgroundColor: (theme) => theme.palette.common.fifth }}>
-        fifth color
+        <Typography>fifth color</Typography>
       </Box>
-      <Button color="primary">Primary Color</Button>
+
+      <Button color="primary">
+        <Typography color="common.white">Primary Color</Typography>
+      </Button>
       <Button color="secondary">Secondary Color</Button>
     </Box>
   );
