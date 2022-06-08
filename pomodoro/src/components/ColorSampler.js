@@ -29,10 +29,11 @@ export const ColorSampler = () => {
       </Box>
 
       {/* or do it like this */}
-      <Box sx={{ backgroundColor: (theme) => theme.palette.common.second }}>
+      <Box sx={{ backgroundColor: "common.second" }}>
         <Typography>second color</Typography>
       </Box>
 
+      {/* or do it like this */}
       <Box sx={{ backgroundColor: (theme) => theme.palette.common.third }}>
         <Typography>third color</Typography>
       </Box>
