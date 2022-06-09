@@ -64,8 +64,8 @@ export const Clock = () => {
       <Box
         sx={{
           borderRadius: 5,
-          width: "50%",
-          height: "60%",
+          // width: "50%",
+          // height: "60%",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -124,8 +124,8 @@ export const Clock = () => {
         </Box>
         <Box
           sx={{
-            width: "400px",
-            height: "400px",
+            // width: "400px",
+            // height: "400px",
             position: "relative",
             display: "flex",
             alignItems: "center",
