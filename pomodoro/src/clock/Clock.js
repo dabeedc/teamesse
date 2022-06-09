@@ -1,15 +1,7 @@
-import {
-  Box,
-  CircularProgress,
-  Button,
-  Typography,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-} from "@mui/material";
+import { Box, CircularProgress, Button, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { CustomCard } from "../components/CustomCard";
+import { TimeSelect } from "./TimeSelect";
 
 const FOCUS = "Focusing...";
 const BREAK = "Break time!";
@@ -61,49 +53,19 @@ export const Clock = () => {
           div: { width: "200px" },
         }}
       >
-        <FormControl>
-          <InputLabel sx={{ color: "white" }} id="interval-picker">
-            Interval
-          </InputLabel>
-          <Select
-            MenuProps={{ PaperProps: { style: { maxHeight: 300 } } }}
-            value={initialFocusTime}
-            label="Age"
-            onChange={(e) => setInitialFocusTime(e.target.value)}
-          >
-            {Array.from({ length: 32 }, (_, i) => i + 1).map((interval) => {
-              return (
-                <MenuItem key={interval} value={interval * 5 * 60}>
-                  {interval * 5} minutes
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
-        <FormControl>
-          <InputLabel sx={{ color: "white" }} id="interval-picker">
-            Break
-          </InputLabel>
-          <Select
-            MenuProps={{ PaperProps: { style: { maxHeight: 300 } } }}
-            value={initialBreakTime}
-            label="Age"
-            onChange={(e) => setInitialBreakTime(e.target.value)}
-          >
-            {Array.from({ length: 32 }, (_, i) => i + 1).map((interval) => {
-              return (
-                <MenuItem key={interval} value={interval * 5 * 60}>
-                  {interval * 5} minutes
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
+        <TimeSelect
+          title="Interval"
+          initialTime={initialFocusTime}
+          setInitialTime={setInitialFocusTime}
+        />
+        <TimeSelect
+          title="Break"
+          initialTime={initialBreakTime}
+          setInitialTime={setInitialBreakTime}
+        />
       </Box>
       <Box
         sx={{
-          // width: "400px",
-          // height: "400px",
           position: "relative",
           display: "flex",
           alignItems: "center",
