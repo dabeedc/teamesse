@@ -5,7 +5,8 @@ import { ColorSampler } from "./components/ColorSampler";
 function App() {
   return (
     <div className="App">
-      <ColorSampler />
+      <Clock />
+      {/* <ColorSampler /> */}
     </div>
   );
 }

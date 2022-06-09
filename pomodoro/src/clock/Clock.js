@@ -10,9 +10,14 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 
+const FOCUS = "Focusing...";
+const BREAK = "Break time!";
+
 export const Clock = () => {
-  const [initialTime, setInitialTime] = useState(25);
-  const [timeLeft, setTimeLeft] = useState(10);
+  const [mode, setMode] = useState(FOCUS);
+  const [initialFocusTime, setInitialFocusTime] = useState(5 * 60);
+  const [initialBreakTime, setInitialBreakTime] = useState(5 * 60);
+  const [timeLeft, setTimeLeft] = useState(0);
   const [started, setStarted] = useState(false);
 
   useEffect(() => {
@@ -26,6 +31,14 @@ export const Clock = () => {
       }, 100);
     }
   }, [started, timeLeft]);
+
+  useEffect(() => {
+    if (mode === FOCUS) {
+      setTimeLeft(initialFocusTime);
+    } else {
+      setTimeLeft(initialBreakTime);
+    }
+  }, [initialFocusTime, initialBreakTime, mode]);
 
   const getTimeString = (time) => {
     const minutes = Math.floor(time / 60);
@@ -58,18 +71,51 @@ export const Clock = () => {
           boxShadow: 20,
         }}
       >
-        <Box>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+        <Box
+          sx={{
+            mt: 5,
+            display: "flex",
+            flexDirection: "row",
+            gap: 5,
+            div: { width: "200px" },
+          }}
+        >
+          <FormControl>
+            <InputLabel sx={{ color: "white" }} id="interval-picker">
+              Interval
+            </InputLabel>
             <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={10}
+              MenuProps={{ PaperProps: { style: { maxHeight: 300 } } }}
+              value={initialFocusTime}
               label="Age"
+              onChange={(e) => setInitialFocusTime(e.target.value)}
             >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              {Array.from({ length: 32 }, (_, i) => i + 1).map((interval) => {
+                return (
+                  <MenuItem key={interval} value={interval * 5 * 60}>
+                    {interval * 5} minutes
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+          <FormControl>
+            <InputLabel sx={{ color: "white" }} id="interval-picker">
+              Break
+            </InputLabel>
+            <Select
+              MenuProps={{ PaperProps: { style: { maxHeight: 300 } } }}
+              value={initialBreakTime}
+              label="Age"
+              onChange={(e) => setInitialBreakTime(e.target.value)}
+            >
+              {Array.from({ length: 32 }, (_, i) => i + 1).map((interval) => {
+                return (
+                  <MenuItem key={interval} value={interval * 5 * 60}>
+                    {interval * 5} minutes
+                  </MenuItem>
+                );
+              })}
             </Select>
           </FormControl>
         </Box>
@@ -91,7 +137,11 @@ export const Clock = () => {
           >
             <CircularProgress
               variant="determinate"
-              value={(timeLeft / initialTime) * 100}
+              value={
+                (timeLeft /
+                  (mode === BREAK ? initialBreakTime : initialFocusTime)) *
+                100
+              }
               size={400}
             />
           </Box>
@@ -103,9 +153,11 @@ export const Clock = () => {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
+              zIndex: 10,
             }}
           >
-            <Typography variant="h4">{getTimeString(timeLeft)}</Typography>
+            <Typography variant="h6">{mode}</Typography>
+            <Typography variant="h2">{getTimeString(timeLeft)}</Typography>
           </Box>
         </Box>
 
@@ -123,7 +175,14 @@ export const Clock = () => {
             <Button onClick={() => setStarted(!started)}>
               {!started ? "Start" : "Pause"}
             </Button>
-            <Button>Skip</Button>
+            <Button
+              onClick={() => {
+                setMode(!mode);
+                setStarted(true);
+              }}
+            >
+              Skip
+            </Button>
             <Button>Stop</Button>
             <Button>Reset</Button>
           </Box>
