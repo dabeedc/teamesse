@@ -1,4 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
+import { CustomCard } from "./CustomCard";
 
 export const ColorSampler = () => {
   return (
@@ -50,6 +51,10 @@ export const ColorSampler = () => {
         <Typography color="common.white">Primary Color</Typography>
       </Button>
       <Button color="secondary">Secondary Color</Button>
+
+      <CustomCard sx={{ m: 5 }}>
+        <Typography variant="h6">This is a custom card</Typography>
+      </CustomCard>
     </Box>
   );
 };
