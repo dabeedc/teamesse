@@ -86,7 +86,7 @@ export const Clock = () => {
               100
             }
             size={400}
-            sx={{ color: mode === FOCUS ? "primary" : "#6D8A36" }}
+            sx={{ color: mode === FOCUS ? "primary" : "common.blueAccent" }}
           />
         </Box>
         <Box
