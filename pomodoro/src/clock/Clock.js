@@ -5,6 +5,7 @@ import { TimeSelect } from "./TimeSelect";
 
 const FOCUS = "Focusing...";
 const BREAK = "Break time!";
+const CLOCK_SIZE = 400;
 
 export const Clock = () => {
   const [mode, setMode] = useState(FOCUS);
@@ -85,14 +86,14 @@ export const Clock = () => {
                 (mode === BREAK ? initialBreakTime : initialFocusTime)) *
               100
             }
-            size={400}
+            size={CLOCK_SIZE}
             sx={{ color: mode === FOCUS ? "primary" : "common.blueAccent" }}
           />
         </Box>
         <Box
           sx={{
-            width: "400px",
-            height: "400px",
+            width: CLOCK_SIZE,
+            height: CLOCK_SIZE,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
