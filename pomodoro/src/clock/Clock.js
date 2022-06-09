@@ -58,11 +58,13 @@ export const Clock = () => {
           title="Interval"
           initialTime={initialFocusTime}
           setInitialTime={setInitialFocusTime}
+          inSession={inSession}
         />
         <TimeSelect
           title="Break"
           initialTime={initialBreakTime}
           setInitialTime={setInitialBreakTime}
+          inSession={inSession}
         />
       </Box>
       <Box
@@ -101,7 +103,7 @@ export const Clock = () => {
             zIndex: 10,
           }}
         >
-          <Typography variant="h6">{mode}</Typography>
+          <Typography variant="h6">{inSession && mode}</Typography>
           <Typography variant="h2">{getTimeString(timeLeft)}</Typography>
         </Box>
       </Box>
