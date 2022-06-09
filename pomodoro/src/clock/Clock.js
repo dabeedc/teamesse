@@ -19,6 +19,7 @@ export const Clock = () => {
   const [initialBreakTime, setInitialBreakTime] = useState(5 * 60);
   const [timeLeft, setTimeLeft] = useState(0);
   const [started, setStarted] = useState(false);
+  const [inSession, setInSession] = useState(false);
 
   useEffect(() => {
     if (started) {
@@ -33,12 +34,14 @@ export const Clock = () => {
   }, [started, timeLeft]);
 
   useEffect(() => {
-    if (mode === FOCUS) {
-      setTimeLeft(initialFocusTime);
-    } else {
-      setTimeLeft(initialBreakTime);
+    if (!started && !inSession) {
+      if (mode === FOCUS) {
+        setTimeLeft(initialFocusTime);
+      } else {
+        setTimeLeft(initialBreakTime);
+      }
     }
-  }, [initialFocusTime, initialBreakTime, mode]);
+  }, [initialFocusTime, initialBreakTime, mode, started, inSession]);
 
   const getTimeString = (time) => {
     const minutes = Math.floor(time / 60);
@@ -143,6 +146,7 @@ export const Clock = () => {
                 100
               }
               size={400}
+              sx={{ color: mode === FOCUS ? "primary" : "#6D8A36" }}
             />
           </Box>
           <Box
@@ -172,19 +176,40 @@ export const Clock = () => {
               },
             }}
           >
-            <Button onClick={() => setStarted(!started)}>
+            <Button
+              onClick={() => {
+                setStarted(!started);
+                if (!inSession) {
+                  setInSession(true);
+                }
+              }}
+            >
               {!started ? "Start" : "Pause"}
             </Button>
             <Button
               onClick={() => {
-                setMode(!mode);
-                setStarted(true);
+                setInSession(false);
+                setStarted(false);
+                setTimeLeft(0);
+                setTimeLeft(
+                  mode === BREAK ? initialFocusTime : initialBreakTime
+                );
+                setMode(mode === BREAK ? FOCUS : BREAK);
               }}
+              disabled={started}
             >
               Skip
             </Button>
-            <Button>Stop</Button>
-            <Button>Reset</Button>
+            <Button
+              onClick={() => {
+                setInSession(false);
+                setStarted(false);
+                setMode(FOCUS);
+              }}
+              disabled={started}
+            >
+              Reset
+            </Button>
           </Box>
         </Box>
       </Box>
