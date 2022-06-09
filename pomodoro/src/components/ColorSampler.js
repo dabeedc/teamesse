@@ -52,9 +52,21 @@ export const ColorSampler = () => {
       </Button>
       <Button color="secondary">Secondary Color</Button>
 
-      <CustomCard sx={{ m: 5 }}>
-        <Typography variant="h6">This is a custom card</Typography>
-      </CustomCard>
+      <Box sx={{ display: "flex", flexDirection: "row" }}>
+        <CustomCard>
+          <Typography variant="h6">This is a custom card</Typography>
+        </CustomCard>
+        <CustomCard sx={{ backgroundColor: "common.greenAccent" }}>
+          <Typography variant="h6" sx={{ color: "common.fifth" }}>
+            Green Accent
+          </Typography>
+        </CustomCard>
+        <CustomCard sx={{ backgroundColor: "common.blueAccent" }}>
+          <Typography variant="h6" sx={{ color: "common.fifth" }}>
+            Blue Accent
+          </Typography>
+        </CustomCard>
+      </Box>
     </Box>
   );
 };
