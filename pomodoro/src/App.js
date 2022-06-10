@@ -6,7 +6,6 @@ import SignUpPage from "./components/login/SignUpPage";
 
 import { Profile } from "./profile/Profile"
 
-// random comment
 function App() {
   return (
     <div className="App">
