@@ -1,4 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
+import { CustomCard } from "./CustomCard";
 
 export const ColorSampler = () => {
   return (
@@ -50,6 +51,22 @@ export const ColorSampler = () => {
         <Typography color="common.white">Primary Color</Typography>
       </Button>
       <Button color="secondary">Secondary Color</Button>
+
+      <Box sx={{ display: "flex", flexDirection: "row" }}>
+        <CustomCard>
+          <Typography variant="h6">This is a custom card</Typography>
+        </CustomCard>
+        <CustomCard sx={{ backgroundColor: "common.greenAccent" }}>
+          <Typography variant="h6" sx={{ color: "common.fifth" }}>
+            Green Accent
+          </Typography>
+        </CustomCard>
+        <CustomCard sx={{ backgroundColor: "common.blueAccent" }}>
+          <Typography variant="h6" sx={{ color: "common.fifth" }}>
+            Blue Accent
+          </Typography>
+        </CustomCard>
+      </Box>
     </Box>
   );
 };

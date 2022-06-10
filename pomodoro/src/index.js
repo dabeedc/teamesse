@@ -9,6 +9,7 @@ const theme = createTheme({
   palette: {
     background: {
       default: "#2D142C",
+      paper: "#510A32",
     },
     text: {
       primary: "#fff",
@@ -25,6 +26,8 @@ const theme = createTheme({
       third: "#801336",
       fourth: "#510A32",
       fifth: "#2D142C",
+      blueAccent: "#20B7C9",
+      greenAccent: "#20C968",
     },
   },
 });
