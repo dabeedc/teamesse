@@ -3,7 +3,7 @@ import { Clock } from "./clock/Clock";
 import { ColorSampler } from "./components/ColorSampler";
 import LoginPage from "./components/login/LoginPage";
 import SignUpPage from "./components/login/SignUpPage";
-
+import { Sidebar } from "./sidebar/Sidebar";
 import { Profile } from "./profile/Profile"
 
 function App() {
@@ -16,6 +16,7 @@ function App() {
       <LoginPage />
       <hr />
       <SignUpPage/>
+	  <Sidebar/>
     </div>
     
   );
