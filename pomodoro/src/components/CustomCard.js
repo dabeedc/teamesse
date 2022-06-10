@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 
 export const CustomCard = ({ children, ...props }) => {
-  const { sx, rest } = props;
+  const { sx, ...rest } = props;
 
   return (
     <Box
