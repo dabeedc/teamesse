@@ -16,6 +16,7 @@ function App() {
       <hr />
       <SignUpPage/>
     </div>
+    
   );
 }
 
