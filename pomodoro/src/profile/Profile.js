@@ -25,7 +25,7 @@ export const Profile = () => {
     <>
       <Box
         sx={{
-          backgroundColor: (theme) => theme.palette.common.third,
+          backgroundColor: (theme) => theme.palette.common.fifth,
         }}
       >
         <Typography
@@ -68,7 +68,7 @@ export const Profile = () => {
         <Grid container spacing={2} columns={16}>
           <Grid item xs={8}>
             <TextField
-              sx={{ width: "70%", backgroundColor: "common.second" }}
+              sx={{ width: "70%", backgroundColor: "common.third" }}
               multiline
               rows={23}
               label="Description"
@@ -79,14 +79,14 @@ export const Profile = () => {
           <Grid item xs={8}>
             <Button
               variant="contained"
-              sx={{ backgroundColor: "common.fourth" }}
+              sx={{ backgroundColor: "common.third" }}
             >
               Edit Profile
             </Button>
             &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
             <Button
               variant="contained"
-              sx={{ backgroundColor: "common.fourth" }}
+              sx={{ backgroundColor: "common.third" }}
             >
               Toggle Visibility
             </Button>
@@ -97,7 +97,7 @@ export const Profile = () => {
               label="Account Username"
               sx={{
                 width: "90%",
-                backgroundColor: "common.second"
+                backgroundColor: "common.third",
               }}
             />
             <br></br>
@@ -107,7 +107,7 @@ export const Profile = () => {
               label="Name"
               sx={{
                 width: "90%",
-                backgroundColor: "common.second"
+                backgroundColor: "common.third",
               }}
             />
             <br></br>
@@ -117,7 +117,7 @@ export const Profile = () => {
               label="Email"
               sx={{
                 width: "90%",
-                backgroundColor: "common.second"
+                backgroundColor: "common.third",
               }}
             />
             <br></br>
@@ -127,7 +127,7 @@ export const Profile = () => {
               label="Occupation"
               sx={{
                 width: "90%",
-                backgroundColor: "common.second"
+                backgroundColor: "common.third",
               }}
             />
             <br></br>
@@ -137,7 +137,7 @@ export const Profile = () => {
               label="Employer/School"
               sx={{
                 width: "90%",
-                backgroundColor: "common.second"
+                backgroundColor: "common.third",
               }}
             />
             <br></br>
