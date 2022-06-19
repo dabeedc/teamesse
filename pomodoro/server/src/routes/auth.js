@@ -23,7 +23,7 @@ router.post("/login", (req, res) => {
     return;
   }
 
-  const { password: pw, ...userDetails } = user;
+  const { password: pw, ...userDetails } = user; // filters out the password. don't want to send it with the rest of the user details
   res.status(200).send(userDetails);
 });
 

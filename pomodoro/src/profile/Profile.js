@@ -79,7 +79,10 @@ export const Profile = () => {
               label="Description"
               value={currentUser?.description}
               variant="filled"
-              InputLabelProps={{ style: { color: "#fff" }, shrink: true }}
+              InputLabelProps={{
+                style: { color: "#fff" },
+                shrink: currentUser?.description,
+              }}
             />
           </Grid>
           <Grid item xs={8}>
@@ -106,7 +109,10 @@ export const Profile = () => {
                 backgroundColor: "common.third",
               }}
               value={currentUser?.username}
-              InputLabelProps={{ style: { color: "#fff" }, shrink: true }}
+              InputLabelProps={{
+                style: { color: "#fff" },
+                shrink: currentUser?.username,
+              }}
             />
             <br></br>
             <br></br>
@@ -118,7 +124,10 @@ export const Profile = () => {
                 backgroundColor: "common.third",
               }}
               value={currentUser?.name}
-              InputLabelProps={{ style: { color: "#fff" }, shrink: true }}
+              InputLabelProps={{
+                style: { color: "#fff" },
+                shrink: currentUser?.name,
+              }}
             />
             <br></br>
             <br></br>
@@ -130,7 +139,10 @@ export const Profile = () => {
                 backgroundColor: "common.third",
               }}
               value={currentUser?.email}
-              InputLabelProps={{ style: { color: "#fff" }, shrink: true }}
+              InputLabelProps={{
+                style: { color: "#fff" },
+                shrink: currentUser?.email,
+              }}
             />
             <br></br>
             <br></br>
@@ -142,7 +154,10 @@ export const Profile = () => {
                 backgroundColor: "common.third",
               }}
               value={currentUser?.occupation}
-              InputLabelProps={{ style: { color: "#fff" }, shrink: true }}
+              InputLabelProps={{
+                style: { color: "#fff" },
+                shrink: currentUser?.occupation,
+              }}
             />
             <br></br>
             <br></br>
@@ -154,7 +169,10 @@ export const Profile = () => {
                 backgroundColor: "common.third",
               }}
               value={currentUser?.employer}
-              InputLabelProps={{ style: { color: "#fff" }, shrink: true }}
+              InputLabelProps={{
+                style: { color: "#fff" },
+                shrink: currentUser?.employer,
+              }}
             />
             <br></br>
             <br></br>
