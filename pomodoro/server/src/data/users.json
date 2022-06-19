@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Santa Ono",
+    "email": "johnsmith@example.me",
+    "username": "santa",
+    "password": "password123",
+    "occupation": "President of UBC",
+    "employer": "University of British Columbia",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi mattis mollis dui, at condimentum leo accumsan sit amet. Vivamus augue metus, malesuada mattis scelerisque convallis, consequat eget erat. Etiam a mi vehicula, feugiat erat nec, tincidunt mi. Vivamus maximus urna sit amet turpis posuere, nec hendrerit enim pretium. Aenean at lorem vitae leo sollicitudin fermentum. Fusce molestie, odio vel euismod iaculis, orci est blandit mauris, id lobortis quam enim eu nunc. Nam vel justo sed dui dignissim pretium sit amet eget ex. Mauris non suscipit turpis, scelerisque congue dui. Etiam pellentesque lectus eu ex aliquet sodales a vitae felis. In facilisis sem quis elit maximus fermentum vitae vel tellus. Proin eu leo a purus malesuada luctus et at sapien. Nullam id odio nisl. Aenean ante magna, blandit sit amet molestie aliquam, porta vel risus. Sed id venenatis dui. Ut bibendum rutrum quam, sed porta purus laoreet et. Aliquam a leo vel urna viverra viverra vitae in lectus.",
+    "avatar": "https://www.univcan.ca/wp-content/uploads/2018/09/santa-ono-ubc-board-bio.jpg"
+  },
+  {
+    "name": "Lofi Girl",
+    "email": "lofigirl@example.me",
+    "username": "lofi",
+    "password": "hiphop",
+    "occupation": "YouTuber",
+    "employer": "Google",
+    "description": "🎶 | study - chill - sleep - repeat \n\n🎧 | Listen on Spotify, Apple music and more \n→   https://bit.ly/lofigirl-playlists \n\n💬 | Join the Lofi Girl community \n→   https://bit.ly/lofigirl-discord \n→   https://bit.ly/lofigirl-reddit \n\n🌎 | Lofi Girl on all social media \n→   https://bit.ly/lofigirl-sociaI",
+    "avatar": "https://cdn.vox-cdn.com/thumbor/hyMdgolGwJY4Srm2iLr7SP3E-js=/1400x1400/filters:format(png)/cdn.vox-cdn.com/uploads/chorus_asset/file/22382760/40c40c35_3727_4939_b82b_2f1061b12197.png"
+  }
+]

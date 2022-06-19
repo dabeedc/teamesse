@@ -169,10 +169,7 @@ export const Profile = () => {
                 backgroundColor: "common.third",
               }}
               value={currentUser?.employer}
-              InputLabelProps={{
-                style: { color: "#fff" },
-                shrink: currentUser?.employer,
-              }}
+              InputLabelProps={{ style: { color: "#fff" }, shrink: true }}
             />
             <br></br>
             <br></br>

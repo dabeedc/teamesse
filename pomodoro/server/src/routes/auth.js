@@ -1,9 +1,9 @@
-const santa = require("../data/fakeUser.json");
+const allUsers = require("../data/users.json");
 const { v4: uuid } = require("uuid");
 const { Router } = require("express");
 const router = Router();
 
-const users = [{ id: uuid(), ...santa }];
+const users = allUsers.map((user) => ({ id: uuid(), ...user }));
 
 router.get("/", (_, res) => {
   res.send(users);
