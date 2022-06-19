@@ -19,8 +19,11 @@ import {
   Avatar,
   Grid,
 } from "@mui/material";
+import { useSelector } from "react-redux";
 
 export const Profile = () => {
+  const { currentUser } = useSelector((state) => state.account);
+
   return (
     <>
       <Box
@@ -59,6 +62,8 @@ export const Profile = () => {
                 width: 250,
                 height: 250,
               }}
+              src={currentUser?.avatar}
+              alt="avatar"
             ></Avatar>
           </Grid>
         </Grid>
@@ -72,8 +77,9 @@ export const Profile = () => {
               multiline
               rows={23}
               label="Description"
-              defaultValue="Description"
+              value={currentUser?.description}
               variant="filled"
+              InputLabelProps={{ style: { color: "#fff" }, shrink: true }}
             />
           </Grid>
           <Grid item xs={8}>
@@ -99,6 +105,8 @@ export const Profile = () => {
                 width: "90%",
                 backgroundColor: "common.third",
               }}
+              value={currentUser?.username}
+              InputLabelProps={{ style: { color: "#fff" }, shrink: true }}
             />
             <br></br>
             <br></br>
@@ -109,6 +117,8 @@ export const Profile = () => {
                 width: "90%",
                 backgroundColor: "common.third",
               }}
+              value={currentUser?.name}
+              InputLabelProps={{ style: { color: "#fff" }, shrink: true }}
             />
             <br></br>
             <br></br>
@@ -119,6 +129,8 @@ export const Profile = () => {
                 width: "90%",
                 backgroundColor: "common.third",
               }}
+              value={currentUser?.email}
+              InputLabelProps={{ style: { color: "#fff" }, shrink: true }}
             />
             <br></br>
             <br></br>
@@ -129,6 +141,8 @@ export const Profile = () => {
                 width: "90%",
                 backgroundColor: "common.third",
               }}
+              value={currentUser?.occupation}
+              InputLabelProps={{ style: { color: "#fff" }, shrink: true }}
             />
             <br></br>
             <br></br>
@@ -139,6 +153,8 @@ export const Profile = () => {
                 width: "90%",
                 backgroundColor: "common.third",
               }}
+              value={currentUser?.employer}
+              InputLabelProps={{ style: { color: "#fff" }, shrink: true }}
             />
             <br></br>
             <br></br>

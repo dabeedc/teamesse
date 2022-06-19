@@ -1,11 +1,18 @@
+import { useState } from "react";
 import { CustomCard } from "../CustomCard"
 import { Box, Button, Typography, Input, Stack, Link } from "@mui/material";
 import "./login.css";
+import { useDispatch } from "react-redux";
+import { userLogin } from "../../redux/account";
 
 const CARD_SIZE_WIDTH = 475;
 const CARD_SIZE_HEIGHT = 675;
 
 const LoginPage = () => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
+
     return (
         <CustomCard sx={{ m: 20 }}>
             <Box sx={{ width: CARD_SIZE_WIDTH, height: CARD_SIZE_HEIGHT }}>
@@ -16,11 +23,11 @@ const LoginPage = () => {
                         alignItems="center"
                         spacing={2}
                     >
-                        <Input placeholder="Username">asdasd</Input>
-                        <Input placeholder="Password">asdasd</Input>
+                        <Input placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                        <Input placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     </Stack>
                     <Stack>
-                        <Button>Sign In</Button>
+                        <Button onClick={() => dispatch(userLogin({username, password}))}>Sign In</Button>
                         <Link sx={{ color: "common.second" }} href="">Forgot your password?</Link>
                         <br />
                         <Typography sx={{pt:25}}variant="button text">
