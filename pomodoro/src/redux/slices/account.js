@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { login } from "./api";
+import { login } from "../api";
 
 const accountSlice = createSlice({
   name: "account",

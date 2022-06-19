@@ -3,7 +3,7 @@ import { CustomCard } from "../CustomCard"
 import { Box, Button, Typography, Input, Stack, Link } from "@mui/material";
 import "./login.css";
 import { useDispatch } from "react-redux";
-import { userLogin } from "../../redux/account";
+import { userLogin } from "../../redux/slices/account";
 
 const CARD_SIZE_WIDTH = 475;
 const CARD_SIZE_HEIGHT = 675;
