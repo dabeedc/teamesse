@@ -5,7 +5,7 @@ const router = Router();
 
 const users = allUsers.map((user) => ({ id: uuid(), ...user }));
 
-router.get("/", (_, res) => {
+router.get("/users", (_, res) => {
   res.send(users);
 });
 
