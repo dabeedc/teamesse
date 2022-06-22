@@ -46,6 +46,7 @@ export const Sidebar = () => {
           <Button
             variant="contained"
             sx={{ backgroundColor: "common.fourth", width: "200px" }}
+            href="pomodoro"
           >
             Pomodoro
           </Button>
@@ -93,6 +94,7 @@ export const Sidebar = () => {
             <Button
               variant="contained"
               sx={{ backgroundColor: "common.fourth" }}
+              href="login"
             >
               Login
             </Button>

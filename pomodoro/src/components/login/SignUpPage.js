@@ -1,5 +1,5 @@
 import { CustomCard } from "../CustomCard"
-import { Box, Button, Typography, Input, Stack } from "@mui/material";
+import { Box, Button, Typography, Input, Stack, Link, Icon } from "@mui/material";
 
 const CARD_SIZE_WIDTH = 475;
 const CARD_SIZE_HEIGHT = 675;
@@ -23,6 +23,13 @@ const SignUpPage = () => {
                     </Stack>
                     <Stack>
                         <Button>Sign Up!</Button>
+                    </Stack>
+                    <Stack>
+                    <Typography sx={{ pt: 25 }} variant="button text">
+                            Already have an Account?
+                            <br />
+                            <Link sx={{ color: "common.second" }} href="login">Sign in</Link>
+                        </Typography>
                     </Stack>
                 </Box>
 

@@ -44,7 +44,7 @@ const LoginPage = () => {
                         <Typography sx={{ pt: 25 }} variant="button text">
                             Don't have an Account?
                             <br />
-                            <Link sx={{ color: "common.second" }} href="">Sign up</Link>
+                            <Link sx={{ color: "common.second" }} href="signup">Sign up</Link>
                         </Typography>
                     </Stack>
                 </Box>
