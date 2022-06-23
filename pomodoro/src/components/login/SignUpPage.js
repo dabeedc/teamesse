@@ -9,8 +9,8 @@ const SignUpPage = () => {
         <CustomCard sx={{ m: 20 }}>
             <Box sx={{ width: CARD_SIZE_WIDTH, height: CARD_SIZE_HEIGHT }}>
                 <Typography sx={{ color: "common.first", pt: 5 }} variant="h3">Let's collaborate.</Typography>
-                <Box sx={{pt:15}}>
-                    
+                <Box sx={{ pt: 15 }}>
+
                     <Stack
                         justifyContent="center"
                         alignItems="center"
@@ -25,7 +25,7 @@ const SignUpPage = () => {
                         <Button>Sign Up!</Button>
                     </Stack>
                     <Stack>
-                    <Typography sx={{ pt: 25 }} variant="button text">
+                        <Typography sx={{ pt: 24 }} variant="button text">
                             Already have an Account?
                             <br />
                             <Link sx={{ color: "common.second" }} href="login">Sign in</Link>

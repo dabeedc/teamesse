@@ -1,9 +1,11 @@
 import React from "react";
 import { Box, Button, TextField, Avatar, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export const Sidebar = () => {
   const { currentUser } = useSelector((state) => state.account);
+  let navigate = useNavigate();
 
   return (
     <>
@@ -46,7 +48,7 @@ export const Sidebar = () => {
           <Button
             variant="contained"
             sx={{ backgroundColor: "common.fourth", width: "200px" }}
-            href="pomodoro"
+            onClick={() => {navigate("/pomodoro");}}
           >
             Pomodoro
           </Button>
@@ -94,7 +96,7 @@ export const Sidebar = () => {
             <Button
               variant="contained"
               sx={{ backgroundColor: "common.fourth" }}
-              href="login"
+              onClick={() => {navigate("/login");}}
             >
               Login
             </Button>

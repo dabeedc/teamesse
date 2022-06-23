@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { CustomCard } from "../CustomCard"
-import { Box, Button, Typography, Input, Stack, Link, Icon } from "@mui/material";
+import { Box, Button, Typography, Input, Stack, Icon } from "@mui/material";
 import VisibilityOffSharpIcon from '@mui/icons-material/VisibilityOffSharp';
 import VisibilitySharpIcon from '@mui/icons-material/VisibilitySharp';
 import { useDispatch } from "react-redux";
 import { userLogin } from "../../redux/slices/account";
+import { Link, useNavigate } from "react-router-dom";
 
 const CARD_SIZE_WIDTH = 475;
 const CARD_SIZE_HEIGHT = 675;
@@ -16,10 +17,13 @@ const LoginPage = () => {
     const [eye, setEye] = useState(false);
     const dispatch = useDispatch();
 
+    let navigate = useNavigate();
+
     const eyeControl = () => {
         setEye(!eye);
         setPasswordVisibility(!passwordVisibility);
     };
+
 
     return (
         <CustomCard sx={{ m: 20 }}>
@@ -38,13 +42,16 @@ const LoginPage = () => {
                         </Icon>
                     </Stack>
                     <Stack>
-                        <Button onClick={() => dispatch(userLogin({ username, password }))}>Sign In</Button>
-                        <Link sx={{ color: "common.second" }} href="">Forgot your password?</Link>
+                        <Button onClick={() => {
+                            dispatch(userLogin({ username, password }))
+                            navigate("/pomodoro")
+                        }}
+                        >Sign In</Button>
                         <br />
                         <Typography sx={{ pt: 25 }} variant="button text">
                             Don't have an Account?
                             <br />
-                            <Link sx={{ color: "common.second" }} href="signup">Sign up</Link>
+                            <Link to={"/signup"}>Sign Up</Link>
                         </Typography>
                     </Stack>
                 </Box>
