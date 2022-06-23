@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, Button, TextField, Avatar, Typography } from "@mui/material";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { userLogout } from "../redux/slices/account";
 import { useSelector, useDispatch } from "react-redux";
@@ -20,6 +19,7 @@ export const Sidebar = () => {
           justifyContent: "space-evenly",
           width: "300px",
           height: "100vh",
+          position: "fixed",
           backgroundColor: (theme) => theme.palette.common.third,
         }}
       >
@@ -58,6 +58,7 @@ export const Sidebar = () => {
           <Button
             variant="contained"
             sx={{ backgroundColor: "common.fourth", width: "200px" }}
+            onClick={() => {navigate("/userstats");}}
           >
             Statistics
           </Button>

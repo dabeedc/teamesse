@@ -26,7 +26,7 @@ const LoginPage = () => {
 
 
     return (
-        <CustomCard sx={{ m: 20 }}>
+        <CustomCard sx={{ m: 20, }}>
             <Box sx={{ width: CARD_SIZE_WIDTH, height: CARD_SIZE_HEIGHT }}>
                 <Typography sx={{ color: "common.first", pt: 5 }} variant="h3">teamesse</Typography>
                 <Box sx={{ pt: 15 }} >
