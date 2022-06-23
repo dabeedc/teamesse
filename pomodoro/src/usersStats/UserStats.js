@@ -98,7 +98,8 @@ export const UserStats = () => {
             width: "50%",
             backgroundColor: (theme) => theme.palette.common.third,
             justifyContent: "space-evenly",
-            maxWidth: "1100px"
+            maxWidth: "1100px",
+            borderColor: "common.third",
           }}
           columns={fields}
         />
