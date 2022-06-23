@@ -10,6 +10,7 @@ const accountSlice = createSlice({
   reducers: {
     userLogout(state) {
       state.currentUser = null;
+      alert("Successfully logged out.")
     },
   },
   extraReducers: (builder) => {
@@ -40,3 +41,4 @@ export const userLogin = createAsyncThunk(
 
 export const { userLogout } = accountSlice.actions;
 export default accountSlice.reducer;
+  

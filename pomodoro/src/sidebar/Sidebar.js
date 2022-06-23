@@ -2,8 +2,11 @@ import React from "react";
 import { Box, Button, TextField, Avatar, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { userLogout } from "../redux/slices/account";
+import { useSelector, useDispatch } from "react-redux";
 
 export const Sidebar = () => {
+  const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.account);
   let navigate = useNavigate();
 
@@ -89,6 +92,9 @@ export const Sidebar = () => {
             <Button
               variant="contained"
               sx={{ backgroundColor: "common.fourth" }}
+              onClick={() => {
+                dispatch(userLogout());
+              }}
             >
               Logout
             </Button>
