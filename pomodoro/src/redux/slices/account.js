@@ -1,16 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { login } from "../api";
+import { login, getUserStats } from "../api";
 
 const accountSlice = createSlice({
   name: "account",
   initialState: {
     currentUser: null,
+    stats: null,
     loading: false,
   },
   reducers: {
     userLogout(state) {
       state.currentUser = null;
-      alert("Successfully logged out.")
+      alert("Successfully logged out.");
     },
   },
   extraReducers: (builder) => {
@@ -23,6 +24,16 @@ const accountSlice = createSlice({
         state.loading = false;
       })
       .addCase(userLogin.rejected, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(userStats.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(userStats.fulfilled, (state, action) => {
+        state.stats = action.payload;
+        state.loading = false;
+      })
+      .addCase(userStats.rejected, (state, action) => {
         state.loading = false;
       });
   },
@@ -39,6 +50,9 @@ export const userLogin = createAsyncThunk(
   }
 );
 
+export const userStats = createAsyncThunk("userStats", async () => {
+  return await getUserStats();
+});
+
 export const { userLogout } = accountSlice.actions;
 export default accountSlice.reducer;
-  

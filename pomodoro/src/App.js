@@ -6,7 +6,7 @@ import SignUpPage from "./components/login/SignUpPage";
 import { Sidebar } from "./sidebar/Sidebar";
 import { Profile } from "./profile/Profile";
 import ReactDOM from "react-dom/client";
-
+import { UserStats } from "./usersStats/UserStats";
 import { BrowserRouter as Router, Switch, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -23,6 +23,7 @@ function App() {
           <Route path="/pomodoro" element={<Clock />} />
         </Routes>
       </div >
+      <UserStats />
     </ Router>
   );
 }
