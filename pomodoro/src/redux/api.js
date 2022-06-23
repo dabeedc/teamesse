@@ -21,3 +21,16 @@ export const login = async (username, password) => {
   const json = await res.json();
   return json;
 };
+
+export const getUserStats = async () => {
+  const res = await fetch(`${BASE_URL}/stats`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!res.ok) throw getErrorMessage(res);
+  const json = await res.json();
+  return json;
+};

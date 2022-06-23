@@ -1,5 +1,6 @@
 const express = require("express");
 const auth = require("./routes/auth");
+const stats = require("./routes/stats");
 const cors = require("cors");
 const PORT = 3001;
 
@@ -11,6 +12,7 @@ app.use(cors());
 
 /** Routes */
 app.use("/auth", auth);
+app.use("/stats", stats);
 
 /** Start server */
 app.listen(PORT, () => {

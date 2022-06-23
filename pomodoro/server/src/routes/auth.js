@@ -1,4 +1,5 @@
 const allUsers = require("../data/users.json");
+
 const { v4: uuid } = require("uuid");
 const { Router } = require("express");
 const router = Router();

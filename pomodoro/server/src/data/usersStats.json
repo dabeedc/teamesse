@@ -1,0 +1,18 @@
+[
+    { 
+        "id": "1",
+        "username": "lofi",
+        "subject": "math", 
+        "duration": 30,
+        "date": "2022/06/20", 
+        "completion": true 
+    },
+    {   
+        "id": "2",
+        "username": "santa",
+        "subject": "computer science", 
+        "duration": 60,
+        "date": "2022/06/20", 
+        "completion": true 
+    }
+]

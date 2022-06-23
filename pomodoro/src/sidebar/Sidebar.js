@@ -51,14 +51,14 @@ export const Sidebar = () => {
           <Button
             variant="contained"
             sx={{ backgroundColor: "common.fourth", width: "200px" }}
-            onClick={() => {navigate("/pomodoro");}}
+            onClick={() => { navigate("/pomodoro"); }}
           >
             Pomodoro
           </Button>
           <Button
             variant="contained"
             sx={{ backgroundColor: "common.fourth", width: "200px" }}
-            onClick={() => {navigate("/userstats");}}
+            onClick={() => { navigate("/userstats"); }}
           >
             Statistics
           </Button>
@@ -103,13 +103,13 @@ export const Sidebar = () => {
             <Button
               variant="contained"
               sx={{ backgroundColor: "common.fourth" }}
-              onClick={() => {navigate("/login");}}
+              onClick={() => { navigate("/login"); }}
             >
               Login
             </Button>
           )}
 
-          <Button variant="contained" sx={{ backgroundColor: "common.fourth" }}>
+          <Button variant="contained" sx={{ backgroundColor: "common.fourth" }} onClick={() => { navigate("/userprofile"); }}>
             Settings
           </Button>
         </Box>

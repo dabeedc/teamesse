@@ -5,9 +5,8 @@ import LoginPage from "./components/login/LoginPage";
 import SignUpPage from "./components/login/SignUpPage";
 import { Sidebar } from "./sidebar/Sidebar";
 import { Profile } from "./profile/Profile";
-import { UserStats } from "./components/usersStats/UserStats";
-
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { UserStats } from "./usersStats/UserStats";
+import { BrowserRouter as Router, Switch, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
