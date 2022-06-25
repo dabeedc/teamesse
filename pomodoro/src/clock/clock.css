@@ -1,17 +1,21 @@
-.focus {
-  animation-name: move;
-  animation-duration: 600ms;
+:root {
+  --duration: 500ms;
+  --margin: -300px;
+}
+
+.animate {
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-duration: var(--duration);
+}
+
+.focus {
+  animation-name: move;
 }
 
 .not-focus {
   animation-name: move-back;
-  animation-duration: 600ms;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes move {
@@ -19,13 +23,13 @@
     margin-left: 0px;
   }
   100% {
-    margin-left: -300px;
+    margin-left: var(--margin);
   }
 }
 
 @keyframes move-back {
   0% {
-    margin-left: -300px;
+    margin-left: var(--margin);
   }
   100% {
     margin-left: 0px;

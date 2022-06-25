@@ -55,7 +55,11 @@ export const Clock = () => {
   };
 
   return (
-    <Box className={inSession ? (focusMode ? "focus" : "not-focus") : ""}>
+    <Box
+      className={`animate ${
+        inSession ? (focusMode ? "focus" : "not-focus") : ""
+      }`}
+    >
       <CustomCard sx={{ m: 20 }}>
         <Box
           sx={{
