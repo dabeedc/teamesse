@@ -1,0 +1,33 @@
+.focus {
+  animation-name: move;
+  animation-duration: 600ms;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.not-focus {
+  animation-name: move-back;
+  animation-duration: 600ms;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes move {
+  0% {
+    margin-left: 0px;
+  }
+  100% {
+    margin-left: -300px;
+  }
+}
+
+@keyframes move-back {
+  0% {
+    margin-left: -300px;
+  }
+  100% {
+    margin-left: 0px;
+  }
+}
