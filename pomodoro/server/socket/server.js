@@ -1,48 +1,61 @@
 const { WebSocket, WebSocketServer } = require("ws");
-const { v4: uuid } = require("uuid");
 const axios = require("axios");
 
 // https://www.reddit.com/r/bashonubuntuonwindows/comments/lvyret/connecting_to_a_websocket_server_from_wsl_2/
-const wss = new WebSocketServer({ port: 8080, host: "0.0.0.0", path: "/math" });
+const wss = new WebSocketServer({ port: 8080, host: "0.0.0.0" });
 
-const getStats = async (client) => {
-  const { data } = await axios("http://localhost:3001/stats");
-  client.send(JSON.stringify(data));
+const subjects = {
+  math: [],
+  compsci: [],
+  english: [],
 };
 
-const broadcast = (msg) => {
-  wss.clients.forEach((client) => {
+const broadcast = (subject, msg) => {
+  subjects[subject].forEach((client) => {
     if (client.readyState === WebSocket.OPEN) {
       client.send(msg);
     }
   });
 };
 
-wss.on("connection", (ws) => {
-  ws.id = uuid();
-  broadcast(`New user joined. Active users: ${wss.clients.size}`);
-  getStats(ws);
+const getParams = (path) =>
+  path.split("/")[1].toLowerCase().split("?username=");
+
+const connectToRoom = (subject, ws) => {
+  if (subject in subjects) {
+    subjects[subject].push(ws);
+  } else {
+    throw new Error(`${subject} not a valid subject`);
+  }
+};
+
+wss.on("connection", (ws, req) => {
+  const [subject, username] = getParams(req.url);
+  ws.id = username;
+
+  try {
+    connectToRoom(subject, ws);
+  } catch (err) {
+    console.error(err);
+    ws.close();
+  }
+
+  broadcast(
+    subject,
+    `${ws.id} joined. Active users: ${subjects[subject].length}`
+  );
 
   ws.on("message", (data) => {
-    broadcast(`${ws.id} says: ${data}`);
+    broadcast(subject, `${ws.id} says: ${data}`);
   });
 
   ws.on("close", () => {
-    broadcast(`User left. Active users: ${wss.clients.size}`);
+    subjects[subject] = subjects[subject].filter(
+      (client) => client.id !== ws.id
+    );
+    broadcast(
+      subject,
+      `${ws.id} left. Active users: ${subjects[subject].length}`
+    );
   });
 });
-
-// const express = require("express");
-// const app = express();
-// const http = require("http");
-// const server = http.createServer(app);
-// const { Server } = require("socket.io");
-// const io = new Server(server);
-
-// io.on("connection", (socket) => {
-//   console.log("a user connected");
-// });
-
-// server.listen(3002, "0.0.0.0", () => {
-//   console.log("listening on *:3002");
-// });
