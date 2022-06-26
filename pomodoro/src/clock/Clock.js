@@ -5,6 +5,7 @@ import { TimeSelect } from "./TimeSelect";
 import { setFocusMode } from "../redux/slices/timer";
 import { useDispatch, useSelector } from "react-redux";
 import "./clock.css";
+import { useSocket } from "../hooks/useSocket";
 
 const FOCUS = "Focusing...";
 const BREAK = "Break time!";
@@ -54,12 +55,17 @@ export const Clock = () => {
     return `${minutes}:${seconds < 10 ? 0 : ""}${seconds}`;
   };
 
+  const { messages, error } = useSocket();
+
   return (
     <Box
       className={`animate ${
         inSession ? (focusMode ? "focus" : "not-focus") : ""
       }`}
     >
+      {messages.map((msg) => (
+        <p>{msg}</p>
+      ))}
       <CustomCard sx={{ m: 20 }}>
         <Box
           sx={{
