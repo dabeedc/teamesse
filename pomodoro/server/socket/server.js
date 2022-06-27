@@ -1,5 +1,11 @@
 const { WebSocket, WebSocketServer } = require("ws");
-const Timer = require("easytimer.js").Timer;
+const {
+  startTimerForRoom,
+  pauseTimerForRoom,
+  resetTimerForRoom,
+  stopTimerForRoom,
+  resumeTimerForRoom,
+} = require("./timer");
 
 const subjectNames = [
   "math",
@@ -8,14 +14,13 @@ const subjectNames = [
   "biology",
   "chemistry",
   "polisci",
+  "general",
 ];
 
 const subjects = subjectNames.reduce((res, curr) => {
   res[curr] = [];
   return res;
 }, {});
-
-const timers = {};
 
 const wss = new WebSocketServer({ port: 8080, host: "0.0.0.0" });
 
@@ -71,82 +76,6 @@ const disconnectFromRoom = (ws) => {
   }
 };
 
-const updateRoomTimer = (subject) => {
-  const { mode, timer, interval } = timers[subject];
-  subjects[subject].forEach((client) => {
-    client.send(
-      JSON.stringify({
-        mode,
-        timeLeft: timer.getTimeValues().toString(),
-        ratio: timer.getTotalTimeValues().seconds / interval,
-      })
-    );
-  });
-};
-
-const startTimerForRoom = ({ id, subject, interval, mode }) => {
-  if (subject in subjects) {
-    broadcastToRoom(
-      subject,
-      "server",
-      `${id} started the ${mode} timer! ${interval} minutes in this interval.`
-    );
-
-    const timer = new Timer();
-
-    timer.addEventListener("secondsUpdated", () => {
-      updateRoomTimer(subject);
-    });
-
-    timer.addEventListener("targetAchieved", () => {
-      stopTimerForRoom({ id, subject });
-      startTimerForRoom({
-        id,
-        subject,
-        interval,
-        mode: mode === "focus" ? "break" : "focus",
-      });
-    });
-
-    timer.start({ countdown: true, startValues: { seconds: interval } });
-
-    timers[subject] = {
-      mode,
-      timer,
-      interval,
-    };
-  }
-};
-
-const pauseTimerForRoom = ({ id, subject }) => {
-  if (subject in timers) {
-    broadcastToRoom(subject, "server", `${id} paused the timer.`);
-    timers[subject].timer.pause();
-  }
-};
-
-const resetTimerForRoom = ({ id, subject }) => {
-  if (subject in timers) {
-    broadcastToRoom(subject, "server", `${id} reset the timer.`);
-    timers[subject].timer.reset();
-  }
-};
-
-const stopTimerForRoom = ({ id, subject }) => {
-  if (subject in timers) {
-    broadcastToRoom(subject, "server", `${id} stopped the timer.`);
-    timers[subject].timer.stop();
-    delete timers[subject];
-  }
-};
-
-const resumeTimerForRoom = ({ id, subject }) => {
-  if (subject in timers) {
-    broadcastToRoom(subject, "server", `${id} resumed the timer.`);
-    timers[subject].timer.start();
-  }
-};
-
 wss.on("connection", (ws, req) => {
   const username = getUsername(req.url);
   ws.id = username;
@@ -181,19 +110,30 @@ wss.on("connection", (ws, req) => {
     } else if (subject && interval && mode && func) {
       switch (func) {
         case "START":
-          startTimerForRoom({ id: ws.id, subject, interval, mode });
+          if (subject in subjects) {
+            broadcastToRoom(
+              subject,
+              "server",
+              `${ws.id} started the ${mode} timer! ${interval} minutes in this interval.`
+            );
+            startTimerForRoom({ id: ws.id, subject, subjects, interval, mode });
+          }
           break;
         case "PAUSE":
-          pauseTimerForRoom({ id: ws.id, subject });
+          broadcastToRoom(subject, "server", `${ws.id} paused the timer.`);
+          pauseTimerForRoom(subject);
           break;
         case "STOP":
-          stopTimerForRoom({ id: ws.id, subject });
+          broadcastToRoom(subject, "server", `${ws.id} reset the timer.`);
+          stopTimerForRoom(subject);
           break;
         case "RESUME":
-          resumeTimerForRoom({ id: ws.id, subject });
+          broadcastToRoom(subject, "server", `${ws.id} stopped the timer.`);
+          resumeTimerForRoom(subject);
           break;
         case "RESET":
-          resetTimerForRoom({ id: ws.id, subject });
+          broadcastToRoom(subject, "server", `${ws.id} resumed the timer.`);
+          resetTimerForRoom(subject);
           break;
         default:
           break;

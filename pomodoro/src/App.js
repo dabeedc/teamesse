@@ -1,5 +1,4 @@
 import "./App.css";
-import { OfflineClock } from "./clock/OfflineClock";
 import { ColorSampler } from "./components/ColorSampler";
 import LoginPage from "./components/login/LoginPage";
 import SignUpPage from "./components/login/SignUpPage";
@@ -11,13 +10,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Switch, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { setOnline } from "./redux/slices/rooms";
-import { OnlineClock } from "./clock/OnlineClock";
 import { useEffect, useState } from "react";
+import { Clock } from "./clock/Clock";
 
 function App() {
   const [on, setOn] = useState(false);
   const { focusMode } = useSelector((state) => state.timer);
   const { currentUser } = useSelector((state) => state.account);
+  const { clockState } = useSelector((state) => state.rooms);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,7 +30,7 @@ function App() {
         <div className="container">
           <div
             style={
-              focusMode
+              focusMode || (clockState && clockState.running)
                 ? {
                     pointerEvents: "none",
                     filter: "brightness(15%)",
@@ -50,7 +50,9 @@ function App() {
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "center",
-              backdropFilter: focusMode && "brightness(30%)",
+              backdropFilter:
+                (focusMode || (clockState && clockState.running)) &&
+                "brightness(30%)",
               transition: "400ms backdrop-filter linear",
             }}
             className="mainComponent"
@@ -61,10 +63,7 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignUpPage />} />
               <Route path="/userprofile" element={<Profile />} />
-              <Route
-                path="/pomodoro"
-                element={on ? <OnlineClock /> : <OfflineClock />}
-              />
+              <Route path="/pomodoro" element={<Clock />} />
               <Route path="/userstats" element={<UserStats />} />
             </Routes>
           </div>

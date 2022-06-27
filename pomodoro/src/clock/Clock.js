@@ -17,15 +17,15 @@ const FOCUS = "Focusing...";
 const BREAK = "Break time!";
 const CLOCK_SIZE = 400;
 
-export const OnlineClock = () => {
+export const Clock = () => {
   const [mode, setMode] = useState(FOCUS);
   const [initialFocusTime, setInitialFocusTime] = useState(5 * 60);
   const [initialBreakTime, setInitialBreakTime] = useState(5 * 60);
   const [timeLeft, setTimeLeft] = useState(0);
   const [started, setStarted] = useState(false);
   const [inSession, setInSession] = useState(false);
+  const { online } = useSelector((state) => state.rooms);
 
-  const { focusMode } = useSelector((state) => state.timer);
   const { clockState } = useSelector((state) => state.rooms);
   const dispatch = useDispatch();
 
@@ -55,17 +55,9 @@ export const OnlineClock = () => {
     }
   }, [initialFocusTime, initialBreakTime, mode, started, inSession]);
 
-  const getTimeString = (time) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time) - minutes * 60;
-    return `${minutes}:${seconds < 10 ? 0 : ""}${seconds}`;
-  };
-
   return (
     <Box
-      className={`animate ${
-        inSession ? (focusMode ? "focus" : "not-focus") : ""
-      }`}
+      className={`animate ${clockState?.running ? "focus" : "not-focus"}`}
       display="flex"
     >
       <CustomCard
@@ -114,11 +106,7 @@ export const OnlineClock = () => {
             >
               <CircularProgress
                 variant="determinate"
-                value={
-                  (timeLeft /
-                    (mode === BREAK ? initialBreakTime : initialFocusTime)) *
-                  100
-                }
+                value={clockState?.ratio * 100}
                 size={CLOCK_SIZE}
                 sx={{ color: mode === FOCUS ? "primary" : "common.blueAccent" }}
               />
@@ -134,11 +122,10 @@ export const OnlineClock = () => {
                 zIndex: 10,
               }}
             >
-              <Typography variant="h6">{inSession && mode}</Typography>
-              <Typography variant="h2">{getTimeString(timeLeft)}</Typography>
+              <Typography variant="h6">{clockState?.mode}</Typography>
+              <Typography variant="h2">{clockState?.timeLeft}</Typography>
             </Box>
           </Box>
-
           <Box>
             <Box
               sx={{
@@ -188,6 +175,7 @@ export const OnlineClock = () => {
         </Stack>
         <Lobby
           hidden={(mode === FOCUS && started) || clockState?.mode === "focus"}
+          shouldShow={online}
         />
       </CustomCard>
     </Box>

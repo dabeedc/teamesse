@@ -13,6 +13,7 @@ const roomsSlice = createSlice({
     },
     setOnline(state, action) {
       state.online = action.payload;
+      state.clockState = null;
     },
     setClockState(state, action) {
       state.clockState = action.payload;

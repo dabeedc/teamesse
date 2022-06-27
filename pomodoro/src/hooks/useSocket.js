@@ -43,15 +43,14 @@ export const useSocket = () => {
       });
 
       conn.addEventListener("message", (e) => {
-        const { message, sender, subjects, mode, timeLeft, ratio } = JSON.parse(
-          e.data
-        );
+        const { message, sender, subjects, mode, timeLeft, ratio, running } =
+          JSON.parse(e.data);
         if (subjects) {
           setSubjects(subjects);
         } else if (message && sender) {
           setMessages((m) => [...m, { message, sender }]);
-        } else if (mode && timeLeft && ratio) {
-          dispatch(setClockState({ mode, timeLeft, ratio }));
+        } else if (mode && timeLeft && ratio && running) {
+          dispatch(setClockState({ mode, timeLeft, ratio, running }));
         }
       });
 
