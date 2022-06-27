@@ -7,10 +7,22 @@ import { Sidebar } from "./sidebar/Sidebar";
 import { Profile } from "./profile/Profile";
 import { UserStats } from "./usersStats/UserStats";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Switch, Typography } from "@mui/material";
+import { Box } from "@mui/system";
+import { setOnline } from "./redux/slices/rooms";
+import { OnlineClock } from "./clock/OnlineClock";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [on, setOn] = useState(false);
   const { focusMode } = useSelector((state) => state.timer);
+  const { currentUser } = useSelector((state) => state.account);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setOnline(on));
+  }, [on, dispatch]);
 
   return (
     <Router>
@@ -49,10 +61,28 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignUpPage />} />
               <Route path="/userprofile" element={<Profile />} />
-              <Route path="/pomodoro" element={<OfflineClock />} />
+              <Route
+                path="/pomodoro"
+                element={on ? <OnlineClock /> : <OfflineClock />}
+              />
               <Route path="/userstats" element={<UserStats />} />
             </Routes>
           </div>
+          {currentUser && (
+            <Box
+              sx={{
+                position: "fixed",
+                bottom: 10,
+                right: 10,
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <Typography>Go {on ? "offline" : "online"}</Typography>
+              <Switch onChange={() => setOn(!on)} value={on} />
+            </Box>
+          )}
         </div>
       </div>
     </Router>

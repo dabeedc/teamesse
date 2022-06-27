@@ -1,8 +1,8 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSocket } from "../hooks/useSocket";
-import { setOnline, setSelectedRoom } from "../redux/slices/rooms";
+import { setClockState, setSelectedRoom } from "../redux/slices/rooms";
 
 export const Lobby = ({ hidden }) => {
   const [inputMessage, setInputMessage] = useState("");
@@ -11,26 +11,19 @@ export const Lobby = ({ hidden }) => {
   const { currentUser } = useSelector((state) => state.account);
   const dispatch = useDispatch();
 
-  const handleClick = () => {
-    if (currentUser) {
+  useEffect(() => {
+    if (currentUser && online && !socket) {
       if (!socket) {
         connect(currentUser.username);
       } else {
         close();
       }
     }
-  };
-
-  useEffect(() => {
-    if (socket) {
-      dispatch(setOnline(true));
-    } else {
-      dispatch(setOnline(false));
-    }
-  }, [socket, dispatch]);
+  }, [online, currentUser, socket, connect, close]);
 
   useEffect(() => {
     dispatch(setSelectedRoom(null));
+    dispatch(setClockState(null));
   }, [online, dispatch]);
 
   return (
@@ -54,7 +47,7 @@ export const Lobby = ({ hidden }) => {
         }}
       >
         {online &&
-          subjects.map(({ subject, users }, i) => (
+          subjects.map(({ subject, users }) => (
             <Box
               sx={{
                 ":hover": {
@@ -75,15 +68,13 @@ export const Lobby = ({ hidden }) => {
                   dispatch(setSelectedRoom(subject));
                 }
               }}
+              key={subject}
             >
               <Typography fontSize="12px">
                 {subject} ({users.length} studying)
               </Typography>
             </Box>
           ))}
-        <Button onClick={handleClick} disabled={!currentUser}>
-          {online ? "Go Offline" : "Go Online"}
-        </Button>
       </Box>
       {selectedRoom && (
         <Box
