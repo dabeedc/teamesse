@@ -1,19 +1,30 @@
 const { WebSocket, WebSocketServer } = require("ws");
-const axios = require("axios");
 
-// https://www.reddit.com/r/bashonubuntuonwindows/comments/lvyret/connecting_to_a_websocket_server_from_wsl_2/
+const subjectNames = [
+  "math",
+  "compsci",
+  "english",
+  "biology",
+  "chemistry",
+  "polisci",
+];
+
+const subjects = subjectNames.reduce((res, curr) => {
+  res[curr] = [];
+  return res;
+}, {});
+
 const wss = new WebSocketServer({ port: 8080, host: "0.0.0.0" });
-
-const subjects = {
-  math: [],
-  compsci: [],
-  english: [],
-};
 
 const broadcast = (subject, msg) => {
   subjects[subject].forEach((client) => {
     if (client.readyState === WebSocket.OPEN) {
-      client.send(msg);
+      client.send(
+        JSON.stringify({
+          message: msg,
+          users: subjects[subject].map((client) => client.id),
+        })
+      );
     }
   });
 };
@@ -40,10 +51,7 @@ wss.on("connection", (ws, req) => {
     ws.close();
   }
 
-  broadcast(
-    subject,
-    `${ws.id} joined. Active users: ${subjects[subject].length}`
-  );
+  broadcast(subject, `${ws.id} joined`);
 
   ws.on("message", (data) => {
     broadcast(subject, `${ws.id} says: ${data}`);
@@ -53,9 +61,6 @@ wss.on("connection", (ws, req) => {
     subjects[subject] = subjects[subject].filter(
       (client) => client.id !== ws.id
     );
-    broadcast(
-      subject,
-      `${ws.id} left. Active users: ${subjects[subject].length}`
-    );
+    broadcast(subject, `${ws.id} left`);
   });
 });

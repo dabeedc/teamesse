@@ -1,6 +1,8 @@
 const express = require("express");
+
 const auth = require("./routes/auth");
 const stats = require("./routes/stats");
+
 const cors = require("cors");
 const PORT = 3001;
 
