@@ -11,13 +11,12 @@ import { TimeSelect } from "./TimeSelect";
 import { setFocusMode } from "../redux/slices/timer";
 import { useDispatch, useSelector } from "react-redux";
 import "./clock.css";
-import { Lobby } from "./Lobby";
 
 const FOCUS = "Focusing...";
 const BREAK = "Break time!";
 const CLOCK_SIZE = 400;
 
-export const Clock = () => {
+export const OfflineClock = () => {
   const [mode, setMode] = useState(FOCUS);
   const [initialFocusTime, setInitialFocusTime] = useState(5 * 60);
   const [initialBreakTime, setInitialBreakTime] = useState(5 * 60);
@@ -185,9 +184,6 @@ export const Clock = () => {
             </Box>
           </Box>
         </Stack>
-        <Box sx={{ height: "100%" }}>
-          <Lobby />
-        </Box>
       </CustomCard>
     </Box>
   );

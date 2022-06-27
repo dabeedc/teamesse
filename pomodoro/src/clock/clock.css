@@ -18,6 +18,16 @@
   animation-name: move-back;
 }
 
+.hide {
+  animation-name: shrink;
+  pointer-events: none;
+  cursor: default;
+}
+
+.show {
+  animation-name: expand;
+}
+
 @keyframes move {
   0% {
     margin-left: 0px;
@@ -33,5 +43,29 @@
   }
   100% {
     margin-left: 0px;
+  }
+}
+
+@keyframes shrink {
+  0% {
+    opacity: 100%;
+    filter: grayscale(0);
+  }
+
+  100% {
+    opacity: 30%;
+    filter: grayscale(1);
+  }
+}
+
+@keyframes expand {
+  0% {
+    opacity: 30%;
+    filter: grayscale(1);
+  }
+
+  100% {
+    opacity: 100%;
+    filter: grayscale(0);
   }
 }

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useSocket } from "../hooks/useSocket";
 import { setOnline, setSelectedRoom } from "../redux/slices/rooms";
 
-export const Lobby = () => {
+export const Lobby = ({ hidden }) => {
   const [inputMessage, setInputMessage] = useState("");
   const { connect, close, subjects, messages, socket, send } = useSocket();
   const { online, selectedRoom } = useSelector((state) => state.rooms);
@@ -35,15 +35,19 @@ export const Lobby = () => {
 
   return (
     <Box
+      className={`animate ${hidden ? "hide" : "show"}`}
       sx={{
         display: "flex",
         flexDirection: "row",
-        height: "100%",
+        height: "95.5%",
+        borderRadius: "10px",
+        p: 2,
+        m: 2,
+        backgroundColor: "common.fifth",
       }}
     >
       <Box
         sx={{
-          m: 5,
           display: "flex",
           flexDirection: "column",
           alignItems: "flex-start",
@@ -60,6 +64,7 @@ export const Lobby = () => {
                 borderRadius: "5px",
                 py: "2px",
                 px: "5px",
+                mr: 2,
                 backgroundColor: (theme) =>
                   subject === selectedRoom && theme.palette.common.third,
               }}
@@ -86,11 +91,11 @@ export const Lobby = () => {
             height: "100%",
             display: "flex",
             flexDirection: "column",
-            py: 3,
             borderLeft: `1px solid`,
             borderColor: "common.second",
             alignItems: "center",
             width: "300px",
+            mr: -2,
           }}
         >
           <Typography variant="h4">{selectedRoom}</Typography>
@@ -98,7 +103,6 @@ export const Lobby = () => {
             sx={{
               display: "flex",
               flexDirection: "column",
-              mx: 3,
               width: "90%",
             }}
           >
@@ -135,7 +139,7 @@ export const Lobby = () => {
             value={inputMessage}
             InputLabelProps={{
               style: { color: "#fff" },
-              shrink: inputMessage,
+              shrink: !!inputMessage,
             }}
             onChange={(e) => setInputMessage(e.target.value)}
             onKeyDown={(e) => {

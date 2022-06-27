@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setClockState } from "../redux/slices/rooms";
 
 export const useSocket = () => {
   const [socket, setSocket] = useState(null);
@@ -10,6 +11,7 @@ export const useSocket = () => {
 
   const { selectedRoom } = useSelector((state) => state.rooms);
   const { currentUser } = useSelector((state) => state.account);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (socket) {
@@ -41,14 +43,15 @@ export const useSocket = () => {
       });
 
       conn.addEventListener("message", (e) => {
-        const message = JSON.parse(e.data);
-        if ("subjects" in message) {
-          setSubjects(message.subjects);
-        } else if ("message" in message) {
-          setMessages((m) => [
-            ...m,
-            { message: message.message, sender: message.sender },
-          ]);
+        const { message, sender, subjects, mode, timeLeft, ratio } = JSON.parse(
+          e.data
+        );
+        if (subjects) {
+          setSubjects(subjects);
+        } else if (message && sender) {
+          setMessages((m) => [...m, { message, sender }]);
+        } else if (mode && timeLeft && ratio) {
+          dispatch(setClockState({ mode, timeLeft, ratio }));
         }
       });
 
@@ -63,7 +66,7 @@ export const useSocket = () => {
         setSocket(null);
       });
     }
-  }, [isConnecting, socket, currentUser]);
+  }, [isConnecting, socket, currentUser, dispatch]);
 
   const connect = useCallback(() => {
     if (!socket && currentUser && !isConnecting) {
@@ -83,5 +86,13 @@ export const useSocket = () => {
     }
   };
 
-  return { connect, close, send, subjects, socket, messages, error };
+  return {
+    connect,
+    close,
+    send,
+    subjects,
+    socket,
+    messages,
+    error,
+  };
 };

@@ -5,6 +5,7 @@ const roomsSlice = createSlice({
   initialState: {
     selectedRoom: null,
     online: false,
+    clockState: null,
   },
   reducers: {
     setSelectedRoom(state, action) {
@@ -13,8 +14,11 @@ const roomsSlice = createSlice({
     setOnline(state, action) {
       state.online = action.payload;
     },
+    setClockState(state, action) {
+      state.clockState = action.payload;
+    },
   },
 });
 
-export const { setSelectedRoom, setOnline } = roomsSlice.actions;
+export const { setSelectedRoom, setOnline, setClockState } = roomsSlice.actions;
 export default roomsSlice.reducer;

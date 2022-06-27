@@ -1,5 +1,5 @@
 import "./App.css";
-import { Clock } from "./clock/Clock";
+import { OfflineClock } from "./clock/OfflineClock";
 import { ColorSampler } from "./components/ColorSampler";
 import LoginPage from "./components/login/LoginPage";
 import SignUpPage from "./components/login/SignUpPage";
@@ -49,7 +49,7 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignUpPage />} />
               <Route path="/userprofile" element={<Profile />} />
-              <Route path="/pomodoro" element={<Clock />} />
+              <Route path="/pomodoro" element={<OfflineClock />} />
               <Route path="/userstats" element={<UserStats />} />
             </Routes>
           </div>
