@@ -1,13 +1,14 @@
-import { Box, Button } from "@mui/material";
-import React from "react";
+import { useState } from "react";
+import { Box, Button, Typography } from "@mui/material";
 import { useSocket } from "../hooks/useSocket";
 
 export const Lobby = () => {
-  const { connect, close, socket, messages } = useSocket();
+  const [selectedRoom, setSelectedRoom] = useState("");
+  const { connect, close, subjects, socket, messages } = useSocket();
 
   const handleClick = () => {
     if (!socket) {
-      connect("math", "scott");
+      connect("scott");
     } else {
       close();
     }
@@ -22,12 +23,18 @@ export const Lobby = () => {
         alignItems: "flex-start",
       }}
     >
-      Rooms:
-      {socket && "Connected"}
-      {messages.map((msg, i) => (
-        <p key={`${msg}-${i}`}>{msg}</p>
-      ))}
-      <Button onClick={handleClick}>{socket ? "Close" : "Open"}</Button>
+      {socket &&
+        subjects.map(({ subject, users }, i) => (
+          <Box>
+            <Typography>{subject}</Typography>
+            {users.map((user) => (
+              <Typography>{user}</Typography>
+            ))}
+          </Box>
+        ))}
+      <Button onClick={handleClick}>
+        {socket ? "Go Offline" : "Go Online"}
+      </Button>
     </Box>
   );
 };

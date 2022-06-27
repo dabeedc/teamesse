@@ -4,13 +4,12 @@ export const useSocket = () => {
   const [socket, setSocket] = useState(null);
   const [isConnecting, setIsConnecting] = useState(false);
   const [messages, setMessages] = useState([]);
+  const [subjects, setSubjects] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     if (isConnecting) {
-      const conn = new WebSocket(
-        `ws://localhost:8080/${"math"}?username=${"scott"}`
-      );
+      const conn = new WebSocket(`ws://localhost:8080/${"scott"}`);
 
       conn.addEventListener("open", () => {
         setSocket(conn);
@@ -18,7 +17,12 @@ export const useSocket = () => {
       });
 
       conn.addEventListener("message", (e) => {
-        setMessages((m) => [...m, e.data]);
+        const message = JSON.parse(e.data);
+        if ("subjects" in message) {
+          setSubjects(message.subjects);
+        } else if ("message" in message) {
+          setMessages((m) => [...m, message.message]);
+        }
       });
 
       conn.addEventListener("error", () => {
@@ -35,8 +39,8 @@ export const useSocket = () => {
   }, [isConnecting, socket]);
 
   const connect = useCallback(
-    (path, username) => {
-      if (!socket && path && username && !isConnecting) {
+    (username) => {
+      if (!socket && username && !isConnecting) {
         setIsConnecting(true);
       }
     },
@@ -51,5 +55,5 @@ export const useSocket = () => {
     }
   };
 
-  return { connect, close, socket, messages, error };
+  return { connect, close, subjects, socket, messages, error };
 };
