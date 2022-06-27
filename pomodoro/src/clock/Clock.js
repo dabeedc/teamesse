@@ -65,6 +65,7 @@ export const Clock = () => {
       className={`animate ${
         inSession ? (focusMode ? "focus" : "not-focus") : ""
       }`}
+      display="flex"
     >
       <CustomCard
         sx={{
@@ -184,7 +185,9 @@ export const Clock = () => {
             </Box>
           </Box>
         </Stack>
-        <Lobby />
+        <Box sx={{ height: "100%" }}>
+          <Lobby />
+        </Box>
       </CustomCard>
     </Box>
   );

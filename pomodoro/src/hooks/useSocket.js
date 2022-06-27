@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 export const useSocket = () => {
   const [socket, setSocket] = useState(null);
@@ -7,9 +8,32 @@ export const useSocket = () => {
   const [subjects, setSubjects] = useState([]);
   const [error, setError] = useState(null);
 
+  const { selectedRoom } = useSelector((state) => state.rooms);
+  const { currentUser } = useSelector((state) => state.account);
+
   useEffect(() => {
-    if (isConnecting) {
-      const conn = new WebSocket(`ws://localhost:8080/${"scott"}`);
+    if (socket) {
+      setMessages([]);
+      if (selectedRoom) {
+        socket.send(
+          JSON.stringify({
+            connection: true,
+            subject: selectedRoom,
+          })
+        );
+      } else {
+        socket.send(
+          JSON.stringify({
+            disconnect: true,
+          })
+        );
+      }
+    }
+  }, [selectedRoom, socket]);
+
+  useEffect(() => {
+    if (isConnecting && currentUser) {
+      const conn = new WebSocket(`ws://localhost:8080/${currentUser.username}`);
 
       conn.addEventListener("open", () => {
         setSocket(conn);
@@ -21,7 +45,10 @@ export const useSocket = () => {
         if ("subjects" in message) {
           setSubjects(message.subjects);
         } else if ("message" in message) {
-          setMessages((m) => [...m, message.message]);
+          setMessages((m) => [
+            ...m,
+            { message: message.message, sender: message.sender },
+          ]);
         }
       });
 
@@ -36,16 +63,17 @@ export const useSocket = () => {
         setSocket(null);
       });
     }
-  }, [isConnecting, socket]);
+  }, [isConnecting, socket, currentUser]);
 
-  const connect = useCallback(
-    (username) => {
-      if (!socket && username && !isConnecting) {
-        setIsConnecting(true);
-      }
-    },
-    [socket, isConnecting]
-  );
+  const connect = useCallback(() => {
+    if (!socket && currentUser && !isConnecting) {
+      setIsConnecting(true);
+    }
+  }, [socket, isConnecting, currentUser]);
+
+  const send = (msg) => {
+    socket.send(JSON.stringify({ subject: selectedRoom, message: msg }));
+  };
 
   const close = () => {
     if (socket && socket.readyState === 1) {
@@ -55,5 +83,5 @@ export const useSocket = () => {
     }
   };
 
-  return { connect, close, subjects, socket, messages, error };
+  return { connect, close, send, subjects, socket, messages, error };
 };
