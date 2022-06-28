@@ -5,7 +5,7 @@ import {
   Typography,
   Stack,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CustomCard } from "../components/CustomCard";
 import { TimeSelect } from "./TimeSelect";
 import { useSelector } from "react-redux";
@@ -32,6 +32,16 @@ export const Clock = () => {
     send,
     socket,
   } = useSocket();
+
+  useEffect(() => {
+    if (clockState?.breakInterval) {
+      setBreakInterval(clockState.breakInterval);
+    }
+
+    if (clockState?.focusInterval) {
+      setFocusInterval(clockState.focusInterval);
+    }
+  }, [clockState?.breakInterval, clockState?.focusInterval]);
 
   const getButtonText = (state) => {
     switch (state) {

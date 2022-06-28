@@ -74,13 +74,25 @@ export const useSocket = () => {
           running,
           type,
           state,
+          focusInterval,
+          breakInterval,
         } = JSON.parse(e.data);
         if (subjects) {
           setSubjects(subjects);
         } else if (message && sender) {
           setMessages((m) => [...m, { message, sender }]);
         } else if (type && type === "timer") {
-          dispatch(setClockState({ mode, timeLeft, ratio, running, state }));
+          dispatch(
+            setClockState({
+              mode,
+              timeLeft,
+              ratio,
+              running,
+              state,
+              focusInterval,
+              breakInterval,
+            })
+          );
         }
       });
 

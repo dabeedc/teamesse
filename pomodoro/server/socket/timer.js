@@ -35,6 +35,7 @@ const updateRoom = (subject, subjects) => {
       ratio:
         timer.getTotalTimeValues().seconds /
         (mode === "focus" ? focusInterval : breakInterval),
+      focusInterval,
       breakInterval,
       running,
       state,
@@ -55,6 +56,8 @@ const updateClient = (ws, subject) => {
           timer.getTotalTimeValues().seconds /
           (mode === "focus" ? focusInterval : breakInterval),
         running,
+        focusInterval,
+        breakInterval,
         state,
       })
     );
