@@ -178,4 +178,5 @@ module.exports = {
   stopTimerForRoom,
   resumeTimerForRoom,
   updateClient,
+  timers,
 };

@@ -6,6 +6,7 @@ const {
   stopTimerForRoom,
   resumeTimerForRoom,
   updateClient,
+  timers,
 } = require("./timer");
 
 const subjectNames = [
@@ -46,6 +47,10 @@ const broadcastRoomUpdate = () => {
         subjects: Object.entries(subjects).map(([subject, clients]) => ({
           subject,
           users: clients.map((client) => client.id),
+          timer: subject in timers && {
+            mode: timers[subject].mode,
+            state: timers[subject].state,
+          },
         })),
       })
     )
@@ -86,6 +91,10 @@ wss.on("connection", (ws, req) => {
       subjects: Object.entries(subjects).map(([subject, clients]) => ({
         subject,
         users: clients.map((client) => client.id),
+        timer: subject in timers && {
+          mode: timers[subject].mode,
+          state: timers[subject].state,
+        },
       })),
     })
   );
@@ -136,6 +145,7 @@ wss.on("connection", (ws, req) => {
                 paused,
               });
             }
+
             break;
           case "PAUSE":
             broadcastToRoom(subject, "server", `${ws.id} paused the timer.`);
@@ -156,6 +166,7 @@ wss.on("connection", (ws, req) => {
           default:
             break;
         }
+        broadcastRoomUpdate();
         break;
       default:
         break;

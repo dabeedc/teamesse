@@ -9,6 +9,9 @@ const roomsSlice = createSlice({
   },
   reducers: {
     setSelectedRoom(state, action) {
+      if (action.payload === null) {
+        state.clockState = null;
+      }
       state.selectedRoom = action.payload;
     },
     setOnline(state, action) {

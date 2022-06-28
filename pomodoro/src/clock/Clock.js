@@ -20,7 +20,7 @@ export const Clock = () => {
   const [focusInterval, setFocusInterval] = useState(5 * 60);
   const [breakInterval, setBreakInterval] = useState(5 * 60);
 
-  const { clockState } = useSelector((state) => state.rooms);
+  const { clockState, selectedRoom } = useSelector((state) => state.rooms);
 
   const {
     startClock,
@@ -62,122 +62,137 @@ export const Clock = () => {
           alignItems: "start",
         }}
       >
-        <Stack alignItems="center">
-          <Box
-            sx={{
-              mt: 5,
-              display: "flex",
-              flexDirection: "row",
-              gap: 5,
-              div: { width: "200px" },
-            }}
-          >
-            <TimeSelect
-              title="Interval"
-              initialTime={focusInterval}
-              setInitialTime={setFocusInterval}
-              disabled={clockState?.running || clockState?.state === "paused"}
-            />
-            <TimeSelect
-              title="Break"
-              initialTime={breakInterval}
-              setInitialTime={setBreakInterval}
-              disabled={clockState?.running || clockState?.state === "paused"}
-            />
-          </Box>
-          <Box
-            sx={{
-              position: "relative",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              m: 5,
-            }}
-          >
+        {selectedRoom && clockState ? (
+          <Stack alignItems="center">
             <Box
               sx={{
-                position: "absolute",
+                mt: 5,
+                display: "flex",
+                flexDirection: "row",
+                gap: 5,
+                div: { width: "200px" },
               }}
             >
-              <CircularProgress
-                variant="determinate"
-                value={clockState?.ratio * 100}
-                size={CLOCK_SIZE}
-                sx={{
-                  color:
-                    clockState?.mode === "break"
-                      ? "common.blueAccent"
-                      : "primary",
-                }}
+              <TimeSelect
+                title="Interval"
+                initialTime={focusInterval}
+                setInitialTime={setFocusInterval}
+                disabled={clockState?.running || clockState?.state === "paused"}
+              />
+              <TimeSelect
+                title="Break"
+                initialTime={breakInterval}
+                setInitialTime={setBreakInterval}
+                disabled={clockState?.running || clockState?.state === "paused"}
               />
             </Box>
             <Box
               sx={{
-                width: CLOCK_SIZE,
-                height: CLOCK_SIZE,
+                position: "relative",
                 display: "flex",
-                flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
-                zIndex: 10,
+                m: 5,
               }}
             >
-              <Typography variant="h6">{clockState?.mode}</Typography>
-              <Typography variant="h2">{clockState?.timeLeft}</Typography>
-            </Box>
-          </Box>
-          <Box>
-            <Box
-              sx={{
-                my: 3,
-                button: {
-                  width: "100px",
-                  margin: 2,
-                  border: "1px solid",
-                },
-              }}
-            >
-              <Button
-                onClick={() => {
-                  switch (clockState?.state) {
-                    case "running":
-                      return pauseClock();
-                    case "paused":
-                      return resumeClock();
-                    case "stopped":
-                    default:
-                      return startClock({
-                        mode: clockState?.mode ?? "focus",
-                        focusInterval,
-                        breakInterval,
-                      });
-                  }
+              <Box
+                sx={{
+                  position: "absolute",
                 }}
               >
-                {getButtonText(clockState?.state)}
-              </Button>
-              <Button
-                onClick={() => {
-                  startClock({
-                    mode: clockState?.mode === "focus" ? "break" : "focus",
-                    breakInterval,
-                    focusInterval,
-                    paused: true,
-                  });
+                <CircularProgress
+                  variant="determinate"
+                  value={clockState?.ratio * 100}
+                  size={CLOCK_SIZE}
+                  sx={{
+                    color:
+                      clockState?.mode === "break"
+                        ? "common.blueAccent"
+                        : "primary",
+                  }}
+                />
+              </Box>
+              <Box
+                sx={{
+                  width: CLOCK_SIZE,
+                  height: CLOCK_SIZE,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  zIndex: 10,
                 }}
-                disabled={clockState?.running}
               >
-                Skip
-              </Button>
-              <Button
-                onClick={() => resetClock()}
-                disabled={clockState?.running}
-              >
-                Reset
-              </Button>
+                <Typography variant="h6">{clockState?.mode}</Typography>
+                <Typography variant="h2">{clockState?.timeLeft}</Typography>
+              </Box>
             </Box>
+            <Box>
+              <Box
+                sx={{
+                  my: 3,
+                  button: {
+                    width: "100px",
+                    margin: 2,
+                    border: "1px solid",
+                  },
+                }}
+              >
+                <Button
+                  onClick={() => {
+                    switch (clockState?.state) {
+                      case "running":
+                        return pauseClock();
+                      case "paused":
+                        return resumeClock();
+                      case "stopped":
+                      default:
+                        return startClock({
+                          mode: clockState?.mode ?? "focus",
+                          focusInterval,
+                          breakInterval,
+                        });
+                    }
+                  }}
+                >
+                  {getButtonText(clockState?.state)}
+                </Button>
+                <Button
+                  onClick={() => {
+                    startClock({
+                      mode: clockState?.mode === "focus" ? "break" : "focus",
+                      breakInterval,
+                      focusInterval,
+                      paused: true,
+                    });
+                  }}
+                  disabled={clockState?.running}
+                >
+                  Skip
+                </Button>
+                <Button
+                  onClick={() => resetClock()}
+                  disabled={clockState?.running}
+                >
+                  Reset
+                </Button>
+              </Box>
+            </Box>
+          </Stack>
+        ) : (
+          <Box
+            sx={{
+              height: "675px",
+              width: "300px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Typography>Select a room to get started</Typography>
           </Box>
-        </Stack>
+        )}
         <Lobby
           hidden={clockState?.running && clockState?.mode === "focus"}
           subjects={subjects}
