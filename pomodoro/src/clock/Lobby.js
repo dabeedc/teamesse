@@ -80,7 +80,7 @@ export const Lobby = ({ hidden, subjects, messages, send, loading }) => {
                 </Typography>
                 <List dense={true} sx={{ m: -0.5 }}>
                   {users.map((user) => (
-                    <ListItem sx={{ "*": { fontSize: "12px" } }}>
+                    <ListItem sx={{ "*": { fontSize: "12px", m: 0, pl: 0.5 } }}>
                       <ListItemText primary={user} />
                     </ListItem>
                   ))}
