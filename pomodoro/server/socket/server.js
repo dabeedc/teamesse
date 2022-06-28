@@ -82,6 +82,80 @@ const disconnectFromRoom = (ws) => {
   }
 };
 
+const handleMessage = ({ ws, data }) => {
+  const message = JSON.parse(data);
+  const { type, subject } = message;
+
+  switch (type) {
+    case "connection":
+      try {
+        disconnectFromRoom(ws);
+        connectToRoom(subject, ws);
+        broadcastRoomUpdate();
+        updateClient(ws, subject);
+      } catch (err) {
+        console.error(err);
+        ws.close();
+      }
+      break;
+    case "disconnect":
+      disconnectFromRoom(ws);
+      broadcastRoomUpdate();
+      break;
+    case "message":
+      const { message: msg } = message;
+      broadcastToRoom(subject, ws.id, msg);
+      break;
+    case "timer":
+      const { func, mode, focusInterval, breakInterval, paused } = message;
+      switch (func) {
+        case "START":
+          if (subject in subjects) {
+            broadcastToRoom(
+              subject,
+              "server",
+              `${ws.id} started the ${mode} timer! ${
+                mode === "focus" ? focusInterval / 60 : breakInterval / 60
+              } minutes in this interval.`
+            );
+            startTimerForRoom({
+              id: ws.id,
+              subject,
+              subjects,
+              focusInterval,
+              breakInterval,
+              mode,
+              paused,
+            });
+          }
+
+          break;
+        case "PAUSE":
+          broadcastToRoom(subject, "server", `${ws.id} paused the timer.`);
+          pauseTimerForRoom({ subject, subjects });
+          break;
+        case "STOP":
+          broadcastToRoom(subject, "server", `${ws.id} stopped the timer.`);
+          stopTimerForRoom({ subject, subjects });
+          break;
+        case "RESUME":
+          broadcastToRoom(subject, "server", `${ws.id} resumed the timer.`);
+          resumeTimerForRoom({ subject, subjects });
+          break;
+        case "RESET":
+          broadcastToRoom(subject, "server", `${ws.id} reset the timer.`);
+          resetTimerForRoom({ subject, subjects });
+          break;
+        default:
+          break;
+      }
+      broadcastRoomUpdate();
+      break;
+    default:
+      break;
+  }
+};
+
 wss.on("connection", (ws, req) => {
   const username = getUsername(req.url);
   ws.id = username;
@@ -100,77 +174,7 @@ wss.on("connection", (ws, req) => {
   );
 
   ws.on("message", (data) => {
-    const message = JSON.parse(data);
-    const { type, subject } = message;
-
-    switch (type) {
-      case "connection":
-        try {
-          disconnectFromRoom(ws);
-          connectToRoom(subject, ws);
-          broadcastRoomUpdate();
-          updateClient(ws, subject);
-        } catch (err) {
-          console.error(err);
-          ws.close();
-        }
-        break;
-      case "disconnect":
-        disconnectFromRoom(ws);
-        broadcastRoomUpdate();
-        break;
-      case "message":
-        const { message: msg } = message;
-        broadcastToRoom(subject, ws.id, msg);
-        break;
-      case "timer":
-        const { func, mode, focusInterval, breakInterval, paused } = message;
-        switch (func) {
-          case "START":
-            if (subject in subjects) {
-              broadcastToRoom(
-                subject,
-                "server",
-                `${ws.id} started the ${mode} timer! ${
-                  mode === "focus" ? focusInterval / 60 : breakInterval / 60
-                } minutes in this interval.`
-              );
-              startTimerForRoom({
-                id: ws.id,
-                subject,
-                subjects,
-                focusInterval,
-                breakInterval,
-                mode,
-                paused,
-              });
-            }
-
-            break;
-          case "PAUSE":
-            broadcastToRoom(subject, "server", `${ws.id} paused the timer.`);
-            pauseTimerForRoom({ subject, subjects });
-            break;
-          case "STOP":
-            broadcastToRoom(subject, "server", `${ws.id} stopped the timer.`);
-            stopTimerForRoom({ subject, subjects });
-            break;
-          case "RESUME":
-            broadcastToRoom(subject, "server", `${ws.id} resumed the timer.`);
-            resumeTimerForRoom({ subject, subjects });
-            break;
-          case "RESET":
-            broadcastToRoom(subject, "server", `${ws.id} reset the timer.`);
-            resetTimerForRoom({ subject, subjects });
-            break;
-          default:
-            break;
-        }
-        broadcastRoomUpdate();
-        break;
-      default:
-        break;
-    }
+    handleMessage({ ws, data });
   });
 
   ws.on("close", () => {
