@@ -57,7 +57,11 @@ export const Clock = () => {
 
   return (
     <Box
-      className={`animate ${clockState?.running ? "focus" : "not-focus"}`}
+      className={`animate ${
+        clockState?.mode === "focus" && clockState?.running
+          ? "focus"
+          : "not-focus"
+      }`}
       display="flex"
     >
       <CustomCard
@@ -108,7 +112,12 @@ export const Clock = () => {
                 variant="determinate"
                 value={clockState?.ratio * 100}
                 size={CLOCK_SIZE}
-                sx={{ color: mode === FOCUS ? "primary" : "common.blueAccent" }}
+                sx={{
+                  color:
+                    clockState?.mode === "break"
+                      ? "common.blueAccent"
+                      : "primary",
+                }}
               />
             </Box>
             <Box
@@ -174,7 +183,7 @@ export const Clock = () => {
           </Box>
         </Stack>
         <Lobby
-          hidden={(mode === FOCUS && started) || clockState?.mode === "focus"}
+          hidden={clockState?.running && clockState?.mode === "focus"}
           shouldShow={online}
         />
       </CustomCard>

@@ -30,7 +30,7 @@ function App() {
         <div className="container">
           <div
             style={
-              focusMode || (clockState && clockState.running)
+              focusMode || (clockState?.mode === "focus" && clockState?.running)
                 ? {
                     pointerEvents: "none",
                     filter: "brightness(15%)",
@@ -51,7 +51,8 @@ function App() {
               alignItems: "center",
               justifyContent: "center",
               backdropFilter:
-                (focusMode || (clockState && clockState.running)) &&
+                (focusMode ||
+                  (clockState?.mode === "focus" && clockState?.running)) &&
                 "brightness(30%)",
               transition: "400ms backdrop-filter linear",
             }}

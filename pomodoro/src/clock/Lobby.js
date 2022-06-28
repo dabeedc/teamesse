@@ -1,34 +1,15 @@
 import { Box, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSocket } from "../hooks/useSocket";
-import { setClockState, setSelectedRoom } from "../redux/slices/rooms";
+import { setSelectedRoom } from "../redux/slices/rooms";
 
 export const Lobby = ({ hidden }) => {
   const [inputMessage, setInputMessage] = useState("");
-  const { connect, close, subjects, messages, socket, send } = useSocket();
+  const { subjects, messages, send } = useSocket();
   const { online, selectedRoom } = useSelector((state) => state.rooms);
   const { currentUser } = useSelector((state) => state.account);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (currentUser && online && !socket) {
-      if (!socket) {
-        connect(currentUser.username);
-      } else {
-        close();
-      }
-    }
-  }, [online, currentUser, socket, connect, close]);
-
-  useEffect(() => {
-    dispatch(setSelectedRoom(null));
-    dispatch(setClockState(null));
-  }, [online, dispatch]);
-
-  useEffect(() => {
-    console.log(online);
-  }, [online]);
 
   return (
     online && (
