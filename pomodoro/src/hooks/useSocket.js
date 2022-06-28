@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setClockState } from "../redux/slices/rooms";
+import { setClockState, setSelectedRoom } from "../redux/slices/rooms";
 
 export const useSocket = () => {
   const [socket, setSocket] = useState(null);
@@ -16,6 +16,7 @@ export const useSocket = () => {
   useEffect(() => {
     const reset = () => {
       dispatch(setClockState(null));
+      dispatch(setSelectedRoom(null));
       setMessages([]);
       setSubjects([]);
       socket.close();
@@ -110,7 +111,7 @@ export const useSocket = () => {
         breakInterval,
         subject: selectedRoom,
         func: "START",
-        paused
+        paused,
       })
     );
   };

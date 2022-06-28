@@ -27,15 +27,48 @@ const sendToRoom = (subject, subjects, msg) => {
 
 const updateRoom = (subject, subjects) => {
   if (subject in timers) {
-    const { mode, timer, interval, running, state } = timers[subject];
+    const { mode, timer, focusInterval, breakInterval, running, state } =
+      timers[subject];
     sendToRoom(subject, subjects, {
       mode,
-      interval,
       timeLeft: timer.getTimeValues().toString(),
-      ratio: timer.getTotalTimeValues().seconds / interval,
+      ratio:
+        timer.getTotalTimeValues().seconds /
+        (mode === "focus" ? focusInterval : breakInterval),
+      breakInterval,
       running,
       state,
     });
+  }
+};
+
+const updateClient = (ws, subject) => {
+  if (subject in timers) {
+    const { mode, timer, focusInterval, breakInterval, running, state } =
+      timers[subject];
+    ws.send(
+      JSON.stringify({
+        type: "timer",
+        mode,
+        timeLeft: timer.getTimeValues().toString(),
+        ratio:
+          timer.getTotalTimeValues().seconds /
+          (mode === "focus" ? focusInterval : breakInterval),
+        running,
+        state,
+      })
+    );
+  } else {
+    ws.send(
+      JSON.stringify({
+        type: "timer",
+        mode: "focus",
+        timeLeft: formatAsTimeString(0),
+        ratio: 1,
+        running: false,
+        state: "stopped",
+      })
+    );
   }
 };
 
@@ -43,13 +76,14 @@ const startTimerForRoom = ({
   id,
   subject,
   subjects,
-  interval,
+  focusInterval,
+  breakInterval,
   mode,
   paused,
 }) => {
   const timer = new Timer({
     countdown: true,
-    startValues: { seconds: interval },
+    startValues: { seconds: mode === "focus" ? focusInterval : breakInterval },
   });
 
   timer.addEventListener("secondsUpdated", () => {
@@ -62,7 +96,8 @@ const startTimerForRoom = ({
       id,
       subject,
       subjects,
-      interval,
+      focusInterval,
+      breakInterval,
       mode: mode === "focus" ? "break" : "focus",
     });
   });
@@ -71,16 +106,18 @@ const startTimerForRoom = ({
     timers[subject] = {
       mode,
       timer,
-      interval,
+      focusInterval,
+      breakInterval,
       running: false,
       state: "stopped",
     };
   } else {
-    timer.start({ countdown: true, startValues: { seconds: interval } });
+    timer.start();
     timers[subject] = {
       mode,
       timer,
-      interval,
+      focusInterval,
+      breakInterval,
       running: true,
       state: "running",
     };
@@ -110,10 +147,12 @@ const resetTimerForRoom = ({ subject, subjects }) => {
 
 const stopTimerForRoom = ({ subject, subjects }) => {
   if (subject in timers) {
-    const { timer, interval, mode } = timers[subject];
+    const { timer, focusInterval, breakInterval, mode } = timers[subject];
     sendToRoom(subject, subjects, {
       mode,
-      timeLeft: formatAsTimeString(interval),
+      timeLeft: formatAsTimeString(
+        mode === "focus" ? focusInterval : breakInterval
+      ),
       ratio: 1,
       running: false,
       state: "stopped",
@@ -138,4 +177,5 @@ module.exports = {
   resetTimerForRoom,
   stopTimerForRoom,
   resumeTimerForRoom,
+  updateClient,
 };

@@ -5,6 +5,7 @@ const {
   resetTimerForRoom,
   stopTimerForRoom,
   resumeTimerForRoom,
+  updateClient,
 } = require("./timer");
 
 const subjectNames = [
@@ -99,18 +100,19 @@ wss.on("connection", (ws, req) => {
           disconnectFromRoom(ws);
           connectToRoom(subject, ws);
           broadcastRoomUpdate();
+          updateClient(ws, subject);
         } catch (err) {
           console.error(err);
           ws.close();
         }
         break;
-      case "message":
-        const { message: msg } = message;
-        broadcastToRoom(subject, ws.id, msg);
-        break;
       case "disconnect":
         disconnectFromRoom(ws);
         broadcastRoomUpdate();
+        break;
+      case "message":
+        const { message: msg } = message;
+        broadcastToRoom(subject, ws.id, msg);
         break;
       case "timer":
         const { func, mode, focusInterval, breakInterval, paused } = message;
@@ -128,7 +130,8 @@ wss.on("connection", (ws, req) => {
                 id: ws.id,
                 subject,
                 subjects,
-                interval: mode === "focus" ? focusInterval : breakInterval,
+                focusInterval,
+                breakInterval,
                 mode,
                 paused,
               });

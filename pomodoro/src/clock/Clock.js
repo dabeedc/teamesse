@@ -26,11 +26,11 @@ export const Clock = () => {
     startClock,
     pauseClock,
     resumeClock,
-    stopClock,
     resetClock,
     subjects,
     messages,
     send,
+    socket,
   } = useSocket();
 
   const getButtonText = (state) => {
@@ -147,7 +147,7 @@ export const Clock = () => {
                     case "stopped":
                     default:
                       return startClock({
-                        mode: "focus",
+                        mode: clockState?.mode ?? "focus",
                         focusInterval,
                         breakInterval,
                       });
@@ -183,6 +183,7 @@ export const Clock = () => {
           subjects={subjects}
           messages={messages}
           send={send}
+          loading={!socket}
         />
       </CustomCard>
     </Box>

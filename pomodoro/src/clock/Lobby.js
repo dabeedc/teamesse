@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedRoom } from "../redux/slices/rooms";
 
-export const Lobby = ({ hidden, subjects, messages, send }) => {
+export const Lobby = ({ hidden, subjects, messages, send, loading }) => {
   const [inputMessage, setInputMessage] = useState("");
   const { online, selectedRoom } = useSelector((state) => state.rooms);
   const { currentUser } = useSelector((state) => state.account);
