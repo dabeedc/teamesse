@@ -5,55 +5,46 @@ import {
   Typography,
   Stack,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CustomCard } from "../components/CustomCard";
 import { TimeSelect } from "./TimeSelect";
-import { setFocusMode } from "../redux/slices/timer";
-import { useDispatch, useSelector } from "react-redux";
-import "./clock.css";
+import { useSelector } from "react-redux";
 import { Lobby } from "./Lobby";
+import { useSocket } from "../hooks/useSocket";
 
-const FOCUS = "Focusing...";
-const BREAK = "Break time!";
+import "./clock.css";
+
 const CLOCK_SIZE = 400;
 
 export const Clock = () => {
-  const [mode, setMode] = useState(FOCUS);
-  const [initialFocusTime, setInitialFocusTime] = useState(5 * 60);
-  const [initialBreakTime, setInitialBreakTime] = useState(5 * 60);
-  const [timeLeft, setTimeLeft] = useState(0);
-  const [started, setStarted] = useState(false);
-  const [inSession, setInSession] = useState(false);
-  const { online } = useSelector((state) => state.rooms);
+  const [focusInterval, setFocusInterval] = useState(5 * 60);
+  const [breakInterval, setBreakInterval] = useState(5 * 60);
 
   const { clockState } = useSelector((state) => state.rooms);
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(setFocusMode(started));
-  }, [started, dispatch]);
+  const {
+    startClock,
+    pauseClock,
+    resumeClock,
+    stopClock,
+    resetClock,
+    subjects,
+    messages,
+    send,
+  } = useSocket();
 
-  useEffect(() => {
-    if (started) {
-      setTimeout(() => {
-        if (timeLeft > 0.01) {
-          setTimeLeft(timeLeft - 0.1);
-        } else {
-          setStarted(false);
-        }
-      }, 100);
+  const getButtonText = (state) => {
+    switch (state) {
+      case "stopped":
+        return "Start";
+      case "paused":
+        return "Resume";
+      case "running":
+        return "Pause";
+      default:
+        return "Start";
     }
-  }, [started, timeLeft]);
-
-  useEffect(() => {
-    if (!started && !inSession) {
-      if (mode === FOCUS) {
-        setTimeLeft(initialFocusTime);
-      } else {
-        setTimeLeft(initialBreakTime);
-      }
-    }
-  }, [initialFocusTime, initialBreakTime, mode, started, inSession]);
+  };
 
   return (
     <Box
@@ -83,15 +74,15 @@ export const Clock = () => {
           >
             <TimeSelect
               title="Interval"
-              initialTime={initialFocusTime}
-              setInitialTime={setInitialFocusTime}
-              inSession={inSession}
+              initialTime={focusInterval}
+              setInitialTime={setFocusInterval}
+              disabled={clockState?.running || clockState?.state === "paused"}
             />
             <TimeSelect
               title="Break"
-              initialTime={initialBreakTime}
-              setInitialTime={setInitialBreakTime}
-              inSession={inSession}
+              initialTime={breakInterval}
+              setInitialTime={setBreakInterval}
+              disabled={clockState?.running || clockState?.state === "paused"}
             />
           </Box>
           <Box
@@ -148,34 +139,39 @@ export const Clock = () => {
             >
               <Button
                 onClick={() => {
-                  setStarted(!started);
-                  if (!inSession) {
-                    setInSession(true);
+                  switch (clockState?.state) {
+                    case "running":
+                      return pauseClock();
+                    case "paused":
+                      return resumeClock();
+                    case "stopped":
+                    default:
+                      return startClock({
+                        mode: "focus",
+                        focusInterval,
+                        breakInterval,
+                      });
                   }
                 }}
               >
-                {!started ? "Start" : "Pause"}
+                {getButtonText(clockState?.state)}
               </Button>
               <Button
                 onClick={() => {
-                  setInSession(false);
-                  setStarted(false);
-                  setTimeLeft(0);
-                  setTimeLeft(
-                    mode === BREAK ? initialFocusTime : initialBreakTime
-                  );
-                  setMode(mode === BREAK ? FOCUS : BREAK);
+                  startClock({
+                    mode: clockState?.mode === "focus" ? "break" : "focus",
+                    breakInterval,
+                    focusInterval,
+                    paused: true,
+                  });
                 }}
-                disabled={started}
+                disabled={clockState?.running}
               >
                 Skip
               </Button>
               <Button
-                onClick={() => {
-                  setInSession(false);
-                  setStarted(false);
-                }}
-                disabled={started}
+                onClick={() => resetClock()}
+                disabled={clockState?.running}
               >
                 Reset
               </Button>
@@ -184,7 +180,9 @@ export const Clock = () => {
         </Stack>
         <Lobby
           hidden={clockState?.running && clockState?.mode === "focus"}
-          shouldShow={online}
+          subjects={subjects}
+          messages={messages}
+          send={send}
         />
       </CustomCard>
     </Box>

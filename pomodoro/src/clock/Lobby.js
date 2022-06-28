@@ -1,15 +1,20 @@
 import { Box, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useSocket } from "../hooks/useSocket";
 import { setSelectedRoom } from "../redux/slices/rooms";
 
-export const Lobby = ({ hidden }) => {
+export const Lobby = ({ hidden, subjects, messages, send }) => {
   const [inputMessage, setInputMessage] = useState("");
-  const { subjects, messages, send } = useSocket();
   const { online, selectedRoom } = useSelector((state) => state.rooms);
   const { currentUser } = useSelector((state) => state.account);
   const dispatch = useDispatch();
+
+  const ref = useRef(null);
+
+  useEffect(() => {
+    // https://bobbyhadz.com/blog/react-scroll-to-bottom
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   return (
     online && (
@@ -66,6 +71,7 @@ export const Lobby = ({ hidden }) => {
           <Box
             sx={{
               height: "100%",
+              maxHeight: "630px",
               display: "flex",
               flexDirection: "column",
               borderLeft: `1px solid`,
@@ -73,6 +79,7 @@ export const Lobby = ({ hidden }) => {
               alignItems: "center",
               width: "300px",
               mr: -2,
+              overflowY: "scroll",
             }}
           >
             <Typography variant="h4">{selectedRoom}</Typography>
@@ -109,13 +116,17 @@ export const Lobby = ({ hidden }) => {
                 )
               )}
             </Box>
-            <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{ flexGrow: 1 }} ref={ref} />
             <TextField
               label="Message..."
               sx={{
+                mt: 2,
                 width: "90%",
                 backgroundColor: "common.third",
                 borderRadius: "5px",
+                position: "sticky",
+                bottom: 0,
+                mb: "1px",
               }}
               size="small"
               value={inputMessage}

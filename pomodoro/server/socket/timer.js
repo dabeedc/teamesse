@@ -13,29 +13,44 @@ const formatAsTimeString = (secs) => {
 };
 
 const sendToRoom = (subject, subjects, msg) => {
-  subjects[subject].forEach((client) => {
-    client.send(
-      JSON.stringify({
-        type: "timer",
-        ...msg,
-      })
-    );
-  });
+  if (subjects && subject in subjects) {
+    subjects[subject].forEach((client) => {
+      client.send(
+        JSON.stringify({
+          type: "timer",
+          ...msg,
+        })
+      );
+    });
+  }
 };
 
 const updateRoom = (subject, subjects) => {
-  const { mode, timer, interval, running } = timers[subject];
-  sendToRoom(subject, subjects, {
-    mode,
-    interval,
-    timeLeft: timer.getTimeValues().toString(),
-    ratio: timer.getTotalTimeValues().seconds / interval,
-    running,
-  });
+  if (subject in timers) {
+    const { mode, timer, interval, running, state } = timers[subject];
+    sendToRoom(subject, subjects, {
+      mode,
+      interval,
+      timeLeft: timer.getTimeValues().toString(),
+      ratio: timer.getTotalTimeValues().seconds / interval,
+      running,
+      state,
+    });
+  }
 };
 
-const startTimerForRoom = ({ id, subject, subjects, interval, mode }) => {
-  const timer = new Timer();
+const startTimerForRoom = ({
+  id,
+  subject,
+  subjects,
+  interval,
+  mode,
+  paused,
+}) => {
+  const timer = new Timer({
+    countdown: true,
+    startValues: { seconds: interval },
+  });
 
   timer.addEventListener("secondsUpdated", () => {
     updateRoom(subject, subjects);
@@ -52,20 +67,33 @@ const startTimerForRoom = ({ id, subject, subjects, interval, mode }) => {
     });
   });
 
-  timer.start({ countdown: true, startValues: { seconds: interval } });
+  if (paused) {
+    timers[subject] = {
+      mode,
+      timer,
+      interval,
+      running: false,
+      state: "stopped",
+    };
+  } else {
+    timer.start({ countdown: true, startValues: { seconds: interval } });
+    timers[subject] = {
+      mode,
+      timer,
+      interval,
+      running: true,
+      state: "running",
+    };
+  }
 
-  timers[subject] = {
-    mode,
-    timer,
-    interval,
-    running: true,
-  };
+  updateRoom(subject, subjects);
 };
 
 const pauseTimerForRoom = ({ subject, subjects }) => {
   if (subject in timers) {
     timers[subject].timer.pause();
     timers[subject].running = false;
+    timers[subject].state = "paused";
     updateRoom(subject, subjects);
   }
 };
@@ -73,7 +101,9 @@ const pauseTimerForRoom = ({ subject, subjects }) => {
 const resetTimerForRoom = ({ subject, subjects }) => {
   if (subject in timers) {
     timers[subject].timer.reset();
+    timers[subject].timer.pause();
     timers[subject].running = false;
+    timers[subject].state = "stopped";
     updateRoom(subject, subjects);
   }
 };
@@ -86,6 +116,7 @@ const stopTimerForRoom = ({ subject, subjects }) => {
       timeLeft: formatAsTimeString(interval),
       ratio: 1,
       running: false,
+      state: "stopped",
     });
     timer.stop();
     delete timers[subject];
@@ -96,6 +127,7 @@ const resumeTimerForRoom = ({ subject, subjects }) => {
   if (subject in timers) {
     timers[subject].timer.start();
     timers[subject].running = true;
+    timers[subject].state = "running";
     updateRoom(subject, subjects);
   }
 };

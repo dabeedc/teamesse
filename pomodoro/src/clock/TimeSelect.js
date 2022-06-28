@@ -4,7 +4,7 @@ export const TimeSelect = ({
   title,
   initialTime,
   setInitialTime,
-  inSession,
+  disabled,
 }) => (
   <FormControl>
     <InputLabel sx={{ color: "white" }} id="interval-picker">
@@ -15,7 +15,7 @@ export const TimeSelect = ({
       value={initialTime}
       label="Age"
       onChange={(e) => setInitialTime(e.target.value)}
-      disabled={inSession}
+      disabled={disabled}
     >
       {Array.from({ length: 32 }, (_, i) => i + 1).map((interval) => {
         return (

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setClockState } from "../redux/slices/rooms";
 
@@ -72,13 +72,14 @@ export const useSocket = () => {
           ratio,
           running,
           type,
+          state,
         } = JSON.parse(e.data);
         if (subjects) {
           setSubjects(subjects);
         } else if (message && sender) {
           setMessages((m) => [...m, { message, sender }]);
         } else if (type && type === "timer") {
-          dispatch(setClockState({ mode, timeLeft, ratio, running }));
+          dispatch(setClockState({ mode, timeLeft, ratio, running, state }));
         }
       });
 
@@ -94,30 +95,73 @@ export const useSocket = () => {
     }
   }, [isConnecting, socket, currentUser, dispatch]);
 
-  const connect = useCallback(() => {
-    if (!socket && currentUser && !isConnecting) {
-      setIsConnecting(true);
-    }
-  }, [socket, isConnecting, currentUser]);
-
   const send = (msg) => {
-    socket.send(
+    socket?.send(
       JSON.stringify({ type: "message", subject: selectedRoom, message: msg })
     );
   };
 
-  const close = () => {
-    if (socket && socket.readyState === 1) {
-      setMessages([]);
-      socket.close();
-      setSocket(null);
-    }
+  const startClock = ({ mode, focusInterval, breakInterval, paused }) => {
+    socket?.send(
+      JSON.stringify({
+        type: "timer",
+        mode,
+        focusInterval,
+        breakInterval,
+        subject: selectedRoom,
+        func: "START",
+        paused
+      })
+    );
+  };
+
+  const pauseClock = () => {
+    socket?.send(
+      JSON.stringify({
+        type: "timer",
+        subject: selectedRoom,
+        func: "PAUSE",
+      })
+    );
+  };
+
+  const resumeClock = () => {
+    socket?.send(
+      JSON.stringify({
+        type: "timer",
+        subject: selectedRoom,
+        func: "RESUME",
+      })
+    );
+  };
+
+  const stopClock = () => {
+    socket?.send(
+      JSON.stringify({
+        type: "timer",
+        subject: selectedRoom,
+        func: "STOP",
+      })
+    );
+  };
+
+  const resetClock = () => {
+    socket?.send(
+      JSON.stringify({
+        type: "timer",
+        subject: selectedRoom,
+        func: "RESET",
+      })
+    );
   };
 
   return {
-    connect,
-    close,
     send,
+    startClock,
+    pauseClock,
+    resumeClock,
+    stopClock,
+    resetClock,
     subjects,
     socket,
     messages,

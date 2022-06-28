@@ -113,7 +113,7 @@ wss.on("connection", (ws, req) => {
         broadcastRoomUpdate();
         break;
       case "timer":
-        const { func, mode, focusInterval, breakInterval } = message;
+        const { func, mode, focusInterval, breakInterval, paused } = message;
         switch (func) {
           case "START":
             if (subject in subjects) {
@@ -121,7 +121,7 @@ wss.on("connection", (ws, req) => {
                 subject,
                 "server",
                 `${ws.id} started the ${mode} timer! ${
-                  mode === "focus" ? focusInterval : breakInterval
+                  mode === "focus" ? focusInterval / 60 : breakInterval / 60
                 } minutes in this interval.`
               );
               startTimerForRoom({
@@ -130,6 +130,7 @@ wss.on("connection", (ws, req) => {
                 subjects,
                 interval: mode === "focus" ? focusInterval : breakInterval,
                 mode,
+                paused,
               });
             }
             break;
