@@ -82,6 +82,23 @@ const disconnectFromRoom = (ws) => {
   }
 };
 
+const getBroadcastMsg = () => {
+  return JSON.stringify({
+    subjects: Object.entries(subjects).map(([subject, clients]) => ({
+      subject,
+      users: clients.map((client) => client.id),
+      timer: subject in timers && {
+        mode: timers[subject].mode,
+        state: timers[subject].state,
+      },
+    })),
+  });
+};
+
+const broadcastToAll = () => {
+  wss.clients.forEach((client) => client.send(getBroadcastMsg()));
+};
+
 const handleMessage = ({ ws, data }) => {
   const message = JSON.parse(data);
   const { type, subject } = message;
@@ -126,6 +143,7 @@ const handleMessage = ({ ws, data }) => {
               breakInterval,
               mode,
               paused,
+              broadcastToAll,
             });
           }
 
@@ -160,18 +178,7 @@ wss.on("connection", (ws, req) => {
   const username = getUsername(req.url);
   ws.id = username;
 
-  ws.send(
-    JSON.stringify({
-      subjects: Object.entries(subjects).map(([subject, clients]) => ({
-        subject,
-        users: clients.map((client) => client.id),
-        timer: subject in timers && {
-          mode: timers[subject].mode,
-          state: timers[subject].state,
-        },
-      })),
-    })
-  );
+  ws.send(getBroadcastMsg());
 
   ws.on("message", (data) => {
     handleMessage({ ws, data });

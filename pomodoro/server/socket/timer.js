@@ -83,6 +83,7 @@ const startTimerForRoom = ({
   breakInterval,
   mode,
   paused,
+  broadcastToAll,
 }) => {
   const timer = new Timer({
     countdown: true,
@@ -103,6 +104,7 @@ const startTimerForRoom = ({
       breakInterval,
       mode: mode === "focus" ? "break" : "focus",
     });
+    broadcastToAll();
   });
 
   if (paused) {
