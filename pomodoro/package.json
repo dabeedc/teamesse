@@ -25,7 +25,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postinstall": "cd server && yarn",
+    "empty": "rm -f yarn.lock && rm -f package-lock.json && rm -rf -f node_modules",
+    "clean": "yarn empty && cd server && yarn empty "
   },
   "eslintConfig": {
     "extends": [
