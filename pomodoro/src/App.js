@@ -1,5 +1,4 @@
 import "./App.css";
-import { Clock } from "./clock/Clock";
 import { ColorSampler } from "./components/ColorSampler";
 import LoginPage from "./components/login/LoginPage";
 import SignUpPage from "./components/login/SignUpPage";
@@ -7,10 +6,23 @@ import { Sidebar } from "./sidebar/Sidebar";
 import { Profile } from "./profile/Profile";
 import { UserStats } from "./usersStats/UserStats";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Switch, Typography } from "@mui/material";
+import { Box } from "@mui/system";
+import { setOnline } from "./redux/slices/rooms";
+import { useEffect, useState } from "react";
+import { Clock } from "./clock/Clock";
 
 function App() {
+  const [on, setOn] = useState(false);
   const { focusMode } = useSelector((state) => state.timer);
+  const { currentUser } = useSelector((state) => state.account);
+  const { clockState } = useSelector((state) => state.rooms);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setOnline(on));
+  }, [on, dispatch]);
 
   return (
     <Router>
@@ -18,7 +30,7 @@ function App() {
         <div className="container">
           <div
             style={
-              focusMode
+              focusMode || (clockState?.mode === "focus" && clockState?.running)
                 ? {
                     pointerEvents: "none",
                     filter: "brightness(15%)",
@@ -38,7 +50,10 @@ function App() {
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "center",
-              backdropFilter: focusMode && "brightness(30%)",
+              backdropFilter:
+                (focusMode ||
+                  (clockState?.mode === "focus" && clockState?.running)) &&
+                "brightness(30%)",
               transition: "400ms backdrop-filter linear",
             }}
             className="mainComponent"
@@ -53,6 +68,21 @@ function App() {
               <Route path="/userstats" element={<UserStats />} />
             </Routes>
           </div>
+          {currentUser && (
+            <Box
+              sx={{
+                position: "fixed",
+                bottom: 10,
+                right: 10,
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <Typography>Go {on ? "offline" : "online"}</Typography>
+              <Switch onChange={() => setOn(!on)} value={on} />
+            </Box>
+          )}
         </div>
       </div>
     </Router>

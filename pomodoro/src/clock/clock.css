@@ -3,6 +3,22 @@
   --margin: -300px;
 }
 
+::-webkit-scrollbar {
+  width: 0.35rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 0.25rem;
+  background-color: #2d142c;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 0.25rem;
+  background-color: #C72C41;
+}
+
 .animate {
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
@@ -16,6 +32,16 @@
 
 .not-focus {
   animation-name: move-back;
+}
+
+.hide {
+  animation-name: shrink;
+  pointer-events: none;
+  cursor: default;
+}
+
+.show {
+  animation-name: expand;
 }
 
 @keyframes move {
@@ -33,5 +59,29 @@
   }
   100% {
     margin-left: 0px;
+  }
+}
+
+@keyframes shrink {
+  0% {
+    opacity: 100%;
+    filter: grayscale(0);
+  }
+
+  100% {
+    opacity: 30%;
+    filter: grayscale(1);
+  }
+}
+
+@keyframes expand {
+  0% {
+    opacity: 30%;
+    filter: grayscale(1);
+  }
+
+  100% {
+    opacity: 100%;
+    filter: grayscale(0);
   }
 }

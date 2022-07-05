@@ -8,13 +8,6 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { reducer } from "./redux/index";
 
-import { BrowserRouter as Router, Switch, Routes, Route } from 'react-router-dom';
-import LoginPage from "./components/login/LoginPage";
-import SignUpPage from "./components/login/SignUpPage";
-import { Profile } from "./profile/Profile";
-import { Clock } from "./clock/Clock";
-import { ColorSampler } from "./components/ColorSampler";
-
 const theme = createTheme({
   palette: {
     background: {
