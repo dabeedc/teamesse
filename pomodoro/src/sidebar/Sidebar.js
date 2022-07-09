@@ -126,6 +126,16 @@ export const Sidebar = () => {
             Settings
           </Button>
         </Box>
+        {!currentUser && 
+        <Button
+          variant="contained"
+          sx={{ backgroundColor: "common.fourth" }}
+          onClick={() => {
+            navigate("/signup");
+          }}
+        >
+          Sign Up
+        </Button> }  
       </Box>
     </>
   );
