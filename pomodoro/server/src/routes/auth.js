@@ -28,9 +28,10 @@ router.post("/login", (req, res) => {
   res.status(200).send(userDetails);
 });
 
-// TODO
-router.post("/signup", (_, res) => {
-  res.status(501).send({ message: "/signup not yet implemented." });
+router.post("/signup", (req, res) => {
+  const user = req.body;
+  const {password: password, ...userDetails} = user; // filters out the password. don't want to send it with the rest of the user details
+  res.status(200).send(userDetails);
 });
 
 // TODO

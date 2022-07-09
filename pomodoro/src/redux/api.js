@@ -22,6 +22,21 @@ export const login = async (username, password) => {
   return json;
 };
 
+export const signup = async (userDetails) => {
+  const res = await fetch(`${BASE_URL}/auth/signup`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userDetails),
+  });
+
+  if (!res.ok) throw getErrorMessage(res);
+
+  const json = await res.json();
+  return json;
+}
+
 export const getUserStats = async () => {
   const res = await fetch(`${BASE_URL}/stats`, {
     method: "GET",

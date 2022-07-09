@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { login, getUserStats } from "../api";
+import { login, signup, getUserStats } from "../api";
 
 const accountSlice = createSlice({
   name: "account",
@@ -35,6 +35,13 @@ const accountSlice = createSlice({
       })
       .addCase(userStats.rejected, (state, action) => {
         state.loading = false;
+      })
+      .addCase(userSignup.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(userSignup.fulfilled, (state, action) => {
+        state.currentUser = action.payload;
+        state.loading = false;
       });
   },
 });
@@ -44,6 +51,17 @@ export const userLogin = createAsyncThunk(
   async ({ username, password }, { rejectWithValue }) => {
     try {
       return await login(username, password);
+    } catch (err) {
+      throw rejectWithValue(err);
+    }
+  }
+);
+
+export const userSignup = createAsyncThunk(
+  "account/signup",
+  async (userDetails, { rejectWithValue }) => {
+    try {
+      return await signup(userDetails);
     } catch (err) {
       throw rejectWithValue(err);
     }
