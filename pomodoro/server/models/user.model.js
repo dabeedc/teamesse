@@ -4,15 +4,33 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
     {
-        title: {
+        username: {
             type: String,
         },
-        ingredients: {
+        name: {
             type: String,
         },
-        instructions: {
+        email: {
             type: String,
         },
+        occupation: {
+            type: String,
+        },
+        employer: {
+            type: String,
+        },
+        descrption: {
+            type: String,
+        },
+        avatar: {
+            type: String,
+        },
+        pomodoros: {
+            type: Number,
+        },
+        totalTime: {
+            type: Number,
+        }
     },
     {
         timestamps: true,
