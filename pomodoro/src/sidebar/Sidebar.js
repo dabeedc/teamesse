@@ -70,6 +70,9 @@ export const Sidebar = () => {
           <Button
             variant="contained"
             sx={{ backgroundColor: "common.fourth", width: "200px" }}
+            onClick={() => {
+              navigate("/explore");
+            }}
           >
             Explore
           </Button>

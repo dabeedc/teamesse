@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 import { userStats } from "../redux/slices/account";
 import { useDispatch } from "react-redux";
 
-export const UserStats = () => {
+export const ExploreStats = () => {
   const { currentUser, stats } = useSelector((state) => state.account);
   const dispatch = useDispatch();
 
