@@ -16,9 +16,11 @@
     "axios": "^0.27.2",
     "concurrently": "^7.2.2",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
     "easytimer.js": "^4.5.3",
     "express": "^4.18.1",
     "express-ws": "^5.0.2",
+    "mongoose": "^6.4.4",
     "socket.io": "^4.5.1",
     "uuid": "^8.3.2",
     "ws": "^8.8.0"
