@@ -4,46 +4,31 @@
 // https://mui.com/material-ui/react-card/#basic-card
 // https://mui.com/material-ui/react-grid/
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ResponsiveCalendar } from "@nivo/calendar";
 import { Box, Stack } from "@mui/material";
 import { useSelector } from "react-redux";
 import { userStats } from "../redux/slices/account";
 import { useDispatch } from "react-redux";
 
-export let pomodoroData = [
-  {
-    day: "2022-08-14",
-    value: 58,
-  },
-  {
-    day: "2022-05-08",
-    value: 380,
-  },
-  {
-    day: "2022-01-09",
-    value: 95,
-  },
-  {
-    day: "2023-01-02",
-    value: 227,
-  },
-];
-
-const { currentUser, stats } = useSelector((state) => state.account);
-const dispatch = useDispatch();
-
-useEffect(() => {
-  dispatch(userStats());
-}, []);
-
-
 export const StatsMap = () => {
-  const { currentUser, stats } = useSelector((state) => state.account);
-  const dispatch = useDispatch();
+  const [pomodoroData, setPomodoroData] = useState([]);
+  // const { currentUser, stats } = useSelector((state) => state.account);
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(userStats());
+  // }, []);
 
   useEffect(() => {
-    dispatch(userStats());
+    (async () => {
+      let pomodoroRes = await fetch(
+        "http://localhost:3001/stats/stats/62cd0b463b463fa6bfc6f822"
+      );
+      let pomodoroList = await pomodoroRes.json();
+      // console.log(pomodoroList);
+      setPomodoroData(pomodoroList);
+    })();
   }, []);
 
   return (
