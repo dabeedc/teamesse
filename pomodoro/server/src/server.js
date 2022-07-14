@@ -8,7 +8,6 @@ const PORT = 3001;
 
 const mongoose = require("mongoose");
 require("dotenv").config();
-const uri = process.env.ATLAS_URI;
 
 const app = express();
 
@@ -20,15 +19,17 @@ app.use(cors());
 app.use("/auth", auth);
 app.use("/stats", stats);
 
-/** Start server */
-app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`);
-});
-/** Mongo Connection */
-mongoose.connect(uri);
+mongoose.connect(`${process.env.ATLAS_URI}`);
 
 const connection = mongoose.connection;
 
 connection.once("open", () => {
-    console.log("MongoDB database connection established successfully");
+  console.log("MongoDB database connection established successfully");
 });
+
+/** Start server */
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
+});
+
+/** Mongo Connection */
