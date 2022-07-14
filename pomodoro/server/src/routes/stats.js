@@ -3,6 +3,8 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
 // https://www.geeksforgeeks.org/object-entries-javascript/
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
+// https://stackoverflow.com/questions/16507866/how-to-iterate-over-objects-property-value-pairs
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round
 
 const allUsersStats = require("../data/usersStats.json");
 
@@ -30,7 +32,7 @@ function buildDate(key) {
   return returnDate
 }
 
-router.get("/stats/:userId", async function (req, res, next) {
+router.get("/pomodoro/:userId", async function (req, res, next) {
   const foundUser = await User.findById(req.params.userId);
   if (!foundUser) return res.status(404).send({ message: "user not found" });
   userPomodorosArr = foundUser["pomodoros"];
@@ -62,15 +64,57 @@ router.get("/:userId", async function (req, res, next) {
 
   if (!foundUser) return res.status(404).send({ message: "user not found" });
   userPomodorosArr = foundUser["pomodoros"];
-
+  
   let accumulatedPomodoros = 0;
   for (let p = 0; p < userPomodorosArr.length; p++) {
     accumulatedPomodoros += userPomodorosArr[p]["duration"]
   }
   accumulatedPomodoros = accumulatedPomodoros / 60;
   accumulatedPomodoros = accumulatedPomodoros.toString()
-  // console.log("print here", accumulatedPomodoros);
-  return res.send({ value: accumulatedPomodoros });
+  return res.send({ time: accumulatedPomodoros });
+});
+
+router.get("/pomodoroSession/:userId", async function (req, res, next) {
+  const foundUser = await User.findById(req.params.userId);
+
+  if (!foundUser) return res.status(404).send({ message: "user not found" });
+  userPomodorosArr = foundUser["pomodoros"];
+  
+  let accumulatedPomodoroSessions = 0;
+  for (let p = 0; p < userPomodorosArr.length; p++) {
+    accumulatedPomodoroSessions += 1
+  }
+  accumulatedPomodoroSessions = accumulatedPomodoroSessions.toString()
+  return res.send({ session: accumulatedPomodoroSessions });
+});
+
+router.get("/pomodoroAverageSession/:userId", async function (req, res, next) {
+  const foundUser = await User.findById(req.params.userId);
+
+  if (!foundUser) return res.status(404).send({ message: "user not found" });
+  userPomodorosArr = foundUser["pomodoros"];
+  
+  let avgPomodoroSession = 0;
+  let pomodoroMap = new Map();
+  let dateCount = 0; 
+  let totalDuration = 0;
+  for (let p = 0; p < userPomodorosArr.length; p++) {
+    let dateCompletedKey = userPomodorosArr[p]["dateCompleted"];
+    let pomodoroDuration = userPomodorosArr[p]["duration"];
+    if (pomodoroMap.has(dateCompletedKey)) {
+      totalDuration = totalDuration + pomodoroDuration
+    } else {
+      dateCount++;
+      totalDuration = totalDuration + pomodoroDuration
+    }
+  }
+
+  // console.log(dateCount);
+  totalDuration = totalDuration / 60;
+  avgPomodoroSession = Math.round(totalDuration / dateCount); 
+  // console.log(avgPomodoroSession);
+  avgPomodoroSession = avgPomodoroSession.toString()
+  return res.send({ time: avgPomodoroSession });
 });
 
 module.exports = router;

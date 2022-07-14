@@ -7,16 +7,16 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
-export const PomodoroCard = () => {
-  const [pomodoroTotalTime, setPomodoroTotalTime] = useState({});
+export const PomodoroSessionCard = () => {
+  const [pomodoroTotalSessions, setPomodoroTotalSessions] = useState({});
 
   useEffect(() => {
     (async () => {
-      let pomodoroTimeRes = await fetch(
-        "http://localhost:3001/stats/62cd0b463b463fa6bfc6f822"
+      let pomodoroSessionRes = await fetch(
+        "http://localhost:3001/stats/pomodoroSession/62cd0b463b463fa6bfc6f822"
       );
-      let pomodoroTime = await pomodoroTimeRes.json();
-      setPomodoroTotalTime(pomodoroTime);
+      let pomodoroSession = await pomodoroSessionRes.json();
+      setPomodoroTotalSessions(pomodoroSession);
     })();
   }, []);
 
@@ -36,12 +36,11 @@ export const PomodoroCard = () => {
         <Typography
           sx={{ color: "#ffffff", mb: 20.0 }}
         >
-          Total Pomodoro Session Time:
+          Total Pomodoro Sessions: 
           <br></br>
           <br></br>
           <br></br>
-          
-          {pomodoroTotalTime.time} minutes
+          {pomodoroTotalSessions.session} sessions
         </Typography>
       </CardContent>
     </Card>

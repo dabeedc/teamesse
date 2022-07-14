@@ -23,10 +23,9 @@ export const StatsMap = () => {
   useEffect(() => {
     (async () => {
       let pomodoroRes = await fetch(
-        "http://localhost:3001/stats/stats/62cd0b463b463fa6bfc6f822"
+        "http://localhost:3001/stats/pomodoro/62cd0b463b463fa6bfc6f822"
       );
       let pomodoroList = await pomodoroRes.json();
-      // console.log(pomodoroList);
       setPomodoroData(pomodoroList);
     })();
   }, []);

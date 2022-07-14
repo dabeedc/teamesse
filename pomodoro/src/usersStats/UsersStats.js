@@ -7,6 +7,8 @@
 import React from "react";
 import { StatsMap } from "./StatsMap";
 import { PomodoroCard } from "./PomodoroCard";
+import { PomodoroSessionCard } from "./PomodoroSessionCard";
+import { PomodoroAverageSessionCard } from "./PomodoroAverageSessionCard";
 import { Box } from "@mui/material";
 
 export const UserStats = () => {
@@ -26,9 +28,9 @@ export const UserStats = () => {
           justifyContent: "center",
         }}
       >
+        <PomodoroSessionCard />
         <PomodoroCard />
-        <PomodoroCard />
-        <PomodoroCard />
+        <PomodoroAverageSessionCard />
       </div>
       <div
         style={{
