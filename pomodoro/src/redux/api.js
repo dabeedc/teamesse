@@ -49,3 +49,14 @@ export const getUserStats = async () => {
   const json = await res.json();
   return json;
 };
+
+export const updateUser = async (user) => {
+  const response = await fetch(`${BASE_URL}/stats/update/${user._id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(user)
+  });
+  return response.json();
+}

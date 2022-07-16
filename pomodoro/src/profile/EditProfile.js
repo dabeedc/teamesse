@@ -20,10 +20,37 @@ import {
   Grid,
 } from "@mui/material";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateUserAsync } from "../redux/slices/account";
 
-export const Profile = () => {
+
+export const EditProfile = () => {
   const { currentUser } = useSelector((state) => state.account);
+
+  const [newDescription, setDescription] = useState(currentUser?.description);
+  const [newUsername, setUsername] = useState(currentUser?.username);
+  const [newName, setName] = useState(currentUser?.name);
+  const [newEmail, setEmail] = useState(currentUser?.email);
+  const [newOccupation, setOccupation] = useState(currentUser?.occupation);
+  const [newEmployer, setEmployer] = useState(currentUser?.employer);
+  const dispatch = useDispatch();
+
   let navigate = useNavigate();
+
+  const updateUserProfile = () => {
+    let userToUpdate = {
+      _id: "62cd0b463b463fa6bfc6f79f",
+      username: newUsername,
+      name: newName,
+      email: newEmail,
+      occupation: newOccupation,
+      employer: newEmployer,
+      description: newDescription,
+    } 
+    console.log(userToUpdate);
+    dispatch(updateUserAsync(userToUpdate));
+  }
 
   return (
     <>
@@ -80,11 +107,14 @@ export const Profile = () => {
               multiline
               rows={23}
               label="Description"
-              value={currentUser?.description}
+              defaultValue={currentUser?.description}
               variant="filled"
               InputLabelProps={{
                 style: { color: "#fff" },
                 shrink: currentUser?.description,
+              }}
+              onChange={(e) => {
+                setDescription(e.target.value)
               }}
             />
           </Grid>
@@ -93,17 +123,18 @@ export const Profile = () => {
               variant="contained"
               sx={{ backgroundColor: "common.third" }}
               onClick={() => {
-                navigate("/editProfile");
+                updateUserProfile();
+                navigate("/userprofile");
               }}
             >
-              Edit Profile
+              Save Profile
             </Button>
             &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
             <Button
               variant="contained"
               sx={{ backgroundColor: "common.third" }}
             >
-              Toggle Visibility
+              Delete Account
             </Button>
             <br></br>
             <br></br>
@@ -114,10 +145,13 @@ export const Profile = () => {
                 width: "90%",
                 backgroundColor: "common.third",
               }}
-              value={currentUser?.username}
+              defaultValue={currentUser?.username}
               InputLabelProps={{
                 style: { color: "#fff" },
                 shrink: currentUser?.username,
+              }}
+              onChange={(e) => {
+                setUsername(e.target.value)
               }}
             />
             <br></br>
@@ -129,10 +163,13 @@ export const Profile = () => {
                 width: "90%",
                 backgroundColor: "common.third",
               }}
-              value={currentUser?.name}
+              defaultValue={currentUser?.name}
               InputLabelProps={{
                 style: { color: "#fff" },
                 shrink: currentUser?.name,
+              }}
+              onChange={(e) => {
+                setName(e.target.value)
               }}
             />
             <br></br>
@@ -144,10 +181,13 @@ export const Profile = () => {
                 width: "90%",
                 backgroundColor: "common.third",
               }}
-              value={currentUser?.email}
+              defaultValue={currentUser?.email}
               InputLabelProps={{
                 style: { color: "#fff" },
                 shrink: currentUser?.email,
+              }}
+              onChange={(e) => {
+                setEmail(e.target.value)
               }}
             />
             <br></br>
@@ -159,10 +199,13 @@ export const Profile = () => {
                 width: "90%",
                 backgroundColor: "common.third",
               }}
-              value={currentUser?.occupation}
+              defaultValue={currentUser?.occupation}
               InputLabelProps={{
                 style: { color: "#fff" },
                 shrink: currentUser?.occupation,
+              }}
+              onChange={(e) => {
+                setOccupation(e.target.value)
               }}
             />
             <br></br>
@@ -174,10 +217,13 @@ export const Profile = () => {
                 width: "90%",
                 backgroundColor: "common.third",
               }}
-              value={currentUser?.employer}
+              defaultValue={currentUser?.employer}
               InputLabelProps={{
                 style: { color: "#fff" },
                 shrink: currentUser?.employer,
+              }}
+              onChange={(e) => {
+                setEmployer(e.target.value)
               }}
             />
             <br></br>
