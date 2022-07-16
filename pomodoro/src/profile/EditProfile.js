@@ -21,7 +21,7 @@ import {
 } from "@mui/material";
 import { useSelector } from "react-redux";
 
-export const Profile = () => {
+export const EditProfile = () => {
   const { currentUser } = useSelector((state) => state.account);
   let navigate = useNavigate();
 
@@ -93,10 +93,10 @@ export const Profile = () => {
               variant="contained"
               sx={{ backgroundColor: "common.third" }}
               onClick={() => {
-                navigate("/editProfile");
+                navigate("/userprofile");
               }}
             >
-              Edit Profile
+              Save Profile
             </Button>
             &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
             <Button
