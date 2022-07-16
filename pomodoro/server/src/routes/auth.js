@@ -1,5 +1,5 @@
 const allUsers = require("../data/users.json");
-
+const User = require("../../models/user.model.js");
 const { v4: uuid } = require("uuid");
 const { Router } = require("express");
 const router = Router();
@@ -28,10 +28,17 @@ router.post("/login", (req, res) => {
   res.status(200).send(userDetails);
 });
 
-router.post("/signup", (req, res) => {
-  const user = req.body;
-  const {password: password, ...userDetails} = user; // filters out the password. don't want to send it with the rest of the user details
-  res.status(200).send(userDetails);
+router.post("/signup", async (req, res) => {
+  try {
+	const user = new User({
+		...req.body
+	})
+	await user.save();
+	const {password: password, ...userDetails} = user; // filters out the password. don't want to send it with the rest of the user details
+	res.status(200).send(userDetails);
+  } catch(e) { 
+	res.status(500);
+  }
 });
 
 // TODO
