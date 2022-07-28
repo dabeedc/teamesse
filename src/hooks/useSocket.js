@@ -112,7 +112,7 @@ export const useSocket = () => {
         reset();
       });
     }
-  }, [isConnecting, socket, currentUser, dispatch]);
+  }, [isConnecting, socket, currentUser, dispatch, port]);
 
   const send = (msg) => {
     socket?.send(

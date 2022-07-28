@@ -1,4 +1,4 @@
-const BASE_URL = process.env.MODE === "DEV" ? "http://localhost:3001" : "";
+import { getBaseUrl } from "../utils";
 
 const getErrorMessage = (res) => {
   return {
@@ -8,7 +8,7 @@ const getErrorMessage = (res) => {
 };
 
 export const login = async (username, password) => {
-  const res = await fetch(`${BASE_URL}/auth/login`, {
+  const res = await fetch(`${getBaseUrl()}/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -23,7 +23,7 @@ export const login = async (username, password) => {
 };
 
 export const signup = async (userDetails) => {
-  const res = await fetch(`${BASE_URL}/auth/signup`, {
+  const res = await fetch(`${getBaseUrl()}/auth/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -38,7 +38,7 @@ export const signup = async (userDetails) => {
 };
 
 export const getUserStats = async () => {
-  const res = await fetch(`${BASE_URL}/stats`, {
+  const res = await fetch(`${getBaseUrl()}/stats`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -51,7 +51,7 @@ export const getUserStats = async () => {
 };
 
 export const updateUser = async (user) => {
-  const response = await fetch(`${BASE_URL}/stats/update/${user._id}`, {
+  const response = await fetch(`${getBaseUrl()}/stats/update/${user._id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -62,6 +62,6 @@ export const updateUser = async (user) => {
 };
 
 export const getPort = async () => {
-  const response = await fetch(`${BASE_URL}/port`);
+  const response = await fetch(`${getBaseUrl()}/port`);
   return response.json();
 };

@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import { getBaseUrl } from "../utils";
 
 export const PomodoroSessionCard = () => {
   const [pomodoroTotalSessions, setPomodoroTotalSessions] = useState({});
@@ -13,7 +14,7 @@ export const PomodoroSessionCard = () => {
   useEffect(() => {
     (async () => {
       let pomodoroSessionRes = await fetch(
-        "http://localhost:3001/stats/pomodoroSession/62cd0b463b463fa6bfc6f822"
+        `${getBaseUrl()}/stats/pomodoroSession/62cd0b463b463fa6bfc6f822`
       );
       let pomodoroSession = await pomodoroSessionRes.json();
       setPomodoroTotalSessions(pomodoroSession);
@@ -33,10 +34,8 @@ export const PomodoroSessionCard = () => {
       }}
     >
       <CardContent>
-        <Typography
-          sx={{ color: "#ffffff", mb: 20.0 }}
-        >
-          Total Pomodoro Sessions: 
+        <Typography sx={{ color: "#ffffff", mb: 20.0 }}>
+          Total Pomodoro Sessions:
           <br></br>
           <br></br>
           <br></br>

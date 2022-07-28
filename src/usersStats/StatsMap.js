@@ -10,6 +10,7 @@ import { Box, Stack } from "@mui/material";
 import { useSelector } from "react-redux";
 import { userStats } from "../redux/slices/account";
 import { useDispatch } from "react-redux";
+import { getBaseUrl } from "../utils";
 
 export const StatsMap = () => {
   const [pomodoroData, setPomodoroData] = useState([]);
@@ -23,7 +24,7 @@ export const StatsMap = () => {
   useEffect(() => {
     (async () => {
       let pomodoroRes = await fetch(
-        "http://localhost:3001/stats/pomodoro/62cd0b463b463fa6bfc6f822"
+        `${getBaseUrl()}/stats/pomodoro/62cd0b463b463fa6bfc6f822`
       );
       let pomodoroList = await pomodoroRes.json();
       setPomodoroData(pomodoroList);
