@@ -6,7 +6,7 @@ const { wss } = require("../socket/server");
 const path = require("path");
 
 const cors = require("cors");
-const PORT = process.env.PORT ?? 3001;
+const PORT = process.env.PORT || 3001;
 
 const mongoose = require("mongoose");
 require("dotenv").config();
@@ -38,7 +38,7 @@ connection.once("open", () => {
 });
 
 /** Start server */
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server started on port ${PORT}`);
 });
 
