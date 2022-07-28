@@ -51,9 +51,9 @@ export const useSocket = () => {
       const conn = new WebSocket(
         `${
           process.env.MODE === "DEV"
-            ? "ws://localhost"
+            ? `ws://localhost:${port}`
             : "wss://teamesse-pomodoro.herokuapp.com"
-        }:${port}/${currentUser.username}`
+        }/${currentUser.username}`
       );
 
       const reset = () => {
