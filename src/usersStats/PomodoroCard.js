@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import { getBaseUrl } from "../utils";
 
 export const PomodoroCard = () => {
   const [pomodoroTotalTime, setPomodoroTotalTime] = useState({});
@@ -13,7 +14,7 @@ export const PomodoroCard = () => {
   useEffect(() => {
     (async () => {
       let pomodoroTimeRes = await fetch(
-        "http://localhost:3001/stats/62cd0b463b463fa6bfc6f822"
+        `${getBaseUrl()}/stats/62cd0b463b463fa6bfc6f822`
       );
       let pomodoroTime = await pomodoroTimeRes.json();
       setPomodoroTotalTime(pomodoroTime);
@@ -33,14 +34,11 @@ export const PomodoroCard = () => {
       }}
     >
       <CardContent>
-        <Typography
-          sx={{ color: "#ffffff", mb: 20.0 }}
-        >
+        <Typography sx={{ color: "#ffffff", mb: 20.0 }}>
           Total Pomodoro Session Time:
           <br></br>
           <br></br>
           <br></br>
-          
           {pomodoroTotalTime.time} minutes
         </Typography>
       </CardContent>
