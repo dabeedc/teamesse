@@ -26,7 +26,7 @@ const subjects = subjectNames.reduce((res, curr) => {
 
 // const wss = new WebSocketServer({ port: 8080, host: "0.0.0.0" });
 
-const wss = new WebSocketServer({ noServer: true });
+const wss = new Server({ noServer: true });
 
 const broadcastToRoom = (subject, id, msg) => {
   subjects[subject].forEach((client) => {

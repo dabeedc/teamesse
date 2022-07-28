@@ -14,6 +14,7 @@ import { Box } from "@mui/system";
 import { setOnline } from "./redux/slices/rooms";
 import { useEffect, useState } from "react";
 import { Clock } from "./clock/Clock";
+import { fetchPort } from "./redux/slices/account";
 
 function App() {
   const [on, setOn] = useState(false);
@@ -25,6 +26,10 @@ function App() {
   useEffect(() => {
     dispatch(setOnline(on));
   }, [on, dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchPort());
+  }, [dispatch]);
 
   return (
     <Router>

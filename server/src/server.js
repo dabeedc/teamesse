@@ -25,7 +25,7 @@ app.get("/port", (_, res) => res.status(200).send({ port: PORT }));
 
 // https://stackoverflow.com/questions/59850705/how-to-deploy-react-application-to-heroku
 app.use(express.static(path.join(__dirname, "../build")));
-app.get("/", (_, res) =>
+app.get("/*", (_, res) =>
   res.sendFile(path.resolve(__dirname, "../build", "index.html"))
 );
 
