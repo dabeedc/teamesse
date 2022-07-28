@@ -49,7 +49,11 @@ export const useSocket = () => {
   useEffect(() => {
     if (isConnecting && currentUser) {
       const conn = new WebSocket(
-        `ws://localhost:${port}/${currentUser.username}`
+        `ws://${
+          process.env.MODE === "DEV"
+            ? "localhost"
+            : "teamesse-pomodoro.herokuapp.com"
+        }:${port}/${currentUser.username}`
       );
 
       const reset = () => {
