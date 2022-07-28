@@ -62,11 +62,6 @@ export const updateUser = async (user) => {
 };
 
 export const getPort = async () => {
-  const response = await fetch(`${BASE_URL}/port`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetch(`${BASE_URL}/port`);
   return response.json();
 };
