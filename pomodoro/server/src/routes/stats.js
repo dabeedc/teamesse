@@ -13,7 +13,7 @@ const User = require("../../models/user.model");
 const { Router } = require("express");
 const router = Router();
 
-router.get("/", (req, res) => {
+router.get("/", (res) => {
   res.send(allUsersStats);
 });
 
@@ -28,19 +28,18 @@ function buildDate(key) {
   }
   let year = new Date(key).getFullYear()
 
-  let returnDate = `${year}-${month}-${day}`
-  return returnDate
+  return `${year}-${month}-${day}`
 }
 
-router.get("/pomodoro/:userId", async function (req, res, next) {
+router.get("/pomodoro/:userId", async function (req, res) {
   const foundUser = await User.findById(req.params.userId);
   if (!foundUser) return res.status(404).send({ message: "user not found" });
-  userPomodorosArr = foundUser["pomodoros"];
+  let userPomodorosArr = foundUser["pomodoros"];
 
   let pomodoroMap = new Map();
-  for (let p = 0; p < userPomodorosArr.length; p++) {
-    let dateCompletedKey = userPomodorosArr[p]["dateCompleted"];
-    let pomodoroDuration = userPomodorosArr[p]["duration"];
+  for (const element of userPomodorosArr) {
+    let dateCompletedKey = element["dateCompleted"];
+    let pomodoroDuration = element["duration"];
     if (pomodoroMap.has(dateCompletedKey)) {
       let newDuration = pomodoroMap[dateCompletedKey] + pomodoroDuration;
       pomodoroMap.set(dateCompletedKey, newDuration);
@@ -50,12 +49,10 @@ router.get("/pomodoro/:userId", async function (req, res, next) {
   }
   let pomodoroObj = Object.fromEntries(pomodoroMap);
   let pomodoroList = Object.keys(pomodoroObj).map((key) => ({
-    value: pomodoroObj[key],
+    value: pomodoroObj[key]/60,
     day: buildDate(key)
   }));
 
-  
-  // console.log("print here", pomodoroList);
   return res.send(pomodoroList);
 });
 
@@ -63,11 +60,11 @@ router.get("/:userId", async function (req, res, next) {
   const foundUser = await User.findById(req.params.userId);
 
   if (!foundUser) return res.status(404).send({ message: "user not found" });
-  userPomodorosArr = foundUser["pomodoros"];
+  let userPomodorosArr = foundUser["pomodoros"];
   
   let accumulatedPomodoros = 0;
-  for (let p = 0; p < userPomodorosArr.length; p++) {
-    accumulatedPomodoros += userPomodorosArr[p]["duration"]
+  for (const element of userPomodorosArr) {
+    accumulatedPomodoros += element["duration"]
   }
   accumulatedPomodoros = accumulatedPomodoros / 60;
   accumulatedPomodoros = accumulatedPomodoros.toString()
@@ -78,29 +75,29 @@ router.get("/pomodoroSession/:userId", async function (req, res, next) {
   const foundUser = await User.findById(req.params.userId);
 
   if (!foundUser) return res.status(404).send({ message: "user not found" });
-  userPomodorosArr = foundUser["pomodoros"];
+  let userPomodorosArr = foundUser["pomodoros"];
   
   let accumulatedPomodoroSessions = 0;
-  for (let p = 0; p < userPomodorosArr.length; p++) {
+  for (const element of userPomodorosArr) {
     accumulatedPomodoroSessions += 1
   }
   accumulatedPomodoroSessions = accumulatedPomodoroSessions.toString()
   return res.send({ session: accumulatedPomodoroSessions });
 });
 
-router.get("/pomodoroAverageSession/:userId", async function (req, res, next) {
+router.get("/pomodoroAverageSession/:userId", async function (req, res) {
   const foundUser = await User.findById(req.params.userId);
 
   if (!foundUser) return res.status(404).send({ message: "user not found" });
-  userPomodorosArr = foundUser["pomodoros"];
+  let userPomodorosArr = foundUser["pomodoros"];
   
   let avgPomodoroSession = 0;
   let pomodoroMap = new Map();
   let dateCount = 0; 
   let totalDuration = 0;
-  for (let p = 0; p < userPomodorosArr.length; p++) {
-    let dateCompletedKey = userPomodorosArr[p]["dateCompleted"];
-    let pomodoroDuration = userPomodorosArr[p]["duration"];
+  for (const element of userPomodorosArr) {
+    let dateCompletedKey = element["dateCompleted"];
+    let pomodoroDuration = element["duration"];
     if (pomodoroMap.has(dateCompletedKey)) {
       totalDuration = totalDuration + pomodoroDuration
     } else {
@@ -109,10 +106,8 @@ router.get("/pomodoroAverageSession/:userId", async function (req, res, next) {
     }
   }
 
-  // console.log(dateCount);
   totalDuration = totalDuration / 60;
   avgPomodoroSession = Math.round(totalDuration / dateCount); 
-  // console.log(avgPomodoroSession);
   avgPomodoroSession = avgPomodoroSession.toString()
   return res.send({ time: avgPomodoroSession });
 });
@@ -127,7 +122,6 @@ router.put("/update/:userId", function (req, res) {
     employer: req.body.employer,
     description: req.body.description,
   });
-  console.log(req.body.username);
   User.findByIdAndUpdate(req.params.userId, user, { new: true }) 
     .then((a) => res.json(a))
     .catch((err) => res.status(400).json("Error: " + err));
