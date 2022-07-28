@@ -7,6 +7,7 @@
     "start:api": "npx nodemon src/server.js",
     "start:ws": "npx nodemon socket/server.js",
     "start": "concurrently \"yarn start:api\" \"yarn start:ws\"",
+    "start:prod": "node src/server.js",
     "empty": "rm -f yarn.lock && rm -f package-lock.json && rm -rf -f node_modules"
   },
   "keywords": [],

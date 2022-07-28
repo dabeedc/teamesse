@@ -10,7 +10,7 @@ export const useSocket = () => {
   const [error, setError] = useState(null);
 
   const { selectedRoom, online } = useSelector((state) => state.rooms);
-  const { currentUser } = useSelector((state) => state.account);
+  const { currentUser, port } = useSelector((state) => state.account);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -48,7 +48,9 @@ export const useSocket = () => {
 
   useEffect(() => {
     if (isConnecting && currentUser) {
-      const conn = new WebSocket(`ws://localhost:8080/${currentUser.username}`);
+      const conn = new WebSocket(
+        `ws://localhost:${port}/${currentUser.username}`
+      );
 
       const reset = () => {
         dispatch(setClockState(null));

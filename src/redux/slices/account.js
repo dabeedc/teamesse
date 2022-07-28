@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { login, signup, getUserStats, updateUser } from "../api";
+import { login, signup, getUserStats, updateUser, getPort } from "../api";
 
 const accountSlice = createSlice({
   name: "account",
@@ -7,6 +7,7 @@ const accountSlice = createSlice({
     currentUser: null,
     stats: null,
     loading: false,
+    port: 3001,
   },
   reducers: {
     userLogout(state) {
@@ -48,9 +49,19 @@ const accountSlice = createSlice({
       })
       .addCase(updateUserAsync.pending, (state) => {
         state.loading = true;
-      }) 
+      })
       .addCase(updateUserAsync.fulfilled, (state, action) => {
         state.currentUser = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetchPort.rejected, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(fetchPort.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchPort.fulfilled, (state, action) => {
+        state.port = action.payload.port;
         state.loading = false;
       });
   },
@@ -88,6 +99,10 @@ export const updateUserAsync = createAsyncThunk(
     return await updateUser(user);
   }
 );
+
+export const fetchPort = createAsyncThunk("account/port", async (user) => {
+  return await getPort(user);
+});
 
 export const { userLogout } = accountSlice.actions;
 export default accountSlice.reducer;

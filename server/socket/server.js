@@ -1,4 +1,4 @@
-const { WebSocket, WebSocketServer } = require("ws");
+const { WebSocket, WebSocketServer, Server } = require("ws");
 const {
   startTimerForRoom,
   pauseTimerForRoom,
@@ -24,7 +24,9 @@ const subjects = subjectNames.reduce((res, curr) => {
   return res;
 }, {});
 
-const wss = new WebSocketServer({ port: 8080, host: "0.0.0.0" });
+// const wss = new WebSocketServer({ port: 8080, host: "0.0.0.0" });
+
+const wss = new WebSocketServer({ noServer: true });
 
 const broadcastToRoom = (subject, id, msg) => {
   subjects[subject].forEach((client) => {
@@ -189,3 +191,5 @@ wss.on("connection", (ws, req) => {
     broadcastRoomUpdate();
   });
 });
+
+module.exports = { wss };

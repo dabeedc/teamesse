@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3001";
+const BASE_URL = process.env.MODE === "DEV" ? "http://localhost:3001" : "";
 
 const getErrorMessage = (res) => {
   return {
@@ -35,7 +35,7 @@ export const signup = async (userDetails) => {
 
   const json = await res.json();
   return json;
-}
+};
 
 export const getUserStats = async () => {
   const res = await fetch(`${BASE_URL}/stats`, {
@@ -52,11 +52,21 @@ export const getUserStats = async () => {
 
 export const updateUser = async (user) => {
   const response = await fetch(`${BASE_URL}/stats/update/${user._id}`, {
-    method: 'PUT',
+    method: "PUT",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(user)
+    body: JSON.stringify(user),
   });
   return response.json();
-}
+};
+
+export const getPort = async () => {
+  const response = await fetch(`${BASE_URL}/port`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return response.json();
+};
