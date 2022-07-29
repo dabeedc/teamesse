@@ -86,8 +86,6 @@ router.get("/:userId", async function (req, res, next) {
   if (!foundUser) return res.status(404).send({ message: "user not found" });
   let userPomodorosArr = foundUser["pomodoros"];
 
-
-  foundUser[""]
   let accumulatedPomodoros = 0;
   for (const element of userPomodorosArr) {
     accumulatedPomodoros += element["duration"];
