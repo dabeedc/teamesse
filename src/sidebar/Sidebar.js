@@ -71,6 +71,15 @@ export const Sidebar = () => {
             variant="contained"
             sx={{ backgroundColor: "common.fourth", width: "200px" }}
             onClick={() => {
+              navigate("/subjects");
+            }}
+          >
+            Subjects
+          </Button>
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: "common.fourth", width: "200px" }}
+            onClick={() => {
               navigate("/explore");
             }}
           >
