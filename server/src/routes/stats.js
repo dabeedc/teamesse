@@ -13,8 +13,82 @@ const User = require("../../models/user.model");
 const { Router } = require("express");
 const router = Router();
 
-router.get("/", (require, res) => {
-  res.send(allUsersStats);
+const getJSON = (document) => {
+  const { _id, __v, ...rest } = document.toJSON();
+  return { id: _id, ...rest };
+};
+
+router.get("/", async (_, res) => {
+  const users = await User.find();
+  res.send(
+    users
+      .map(getJSON)
+      .map((user) =>
+        user.pomodoros.map(({ _id, dateCompleted, duration, ...rest }) => ({
+          id: _id,
+          username: user.username,
+          userId: user.id,
+          date: dateCompleted,
+          duration: `${duration / 60} mins`,
+          ...rest,
+        }))
+      )
+      .flat(Infinity)
+  );
+});
+
+router.post("/", async (_, res) => {
+  // smile, sweat, rofl, starstruck, thumbs up, tomato, hot beverage
+  // ["U+1F604", "U+1F605", "U+1F923", "U+1F929	", "U+1F44D", "U+1F345", "U+2615"];
+  const emojis = ["😄", "😁", "🤣", "🤩", "👍", "🍅", "☕"];
+
+  const getRandomArbitrary = (min, max) => {
+    return Math.floor(Math.random() * (max - min) + min);
+  };
+
+  // const subjectNames = [
+  //   "math",
+  //   "compsci",
+  //   "english",
+  //   "biology",
+  //   "chemistry",
+  //   "polisci",
+  //   "general",
+  // ];
+
+  const users = await User.find();
+
+  await Promise.all(
+    users.map(async (user) => {
+      user.pomodoros.forEach((session) => {
+        // session.subject = subjectNames[getRandomArbitrary(0, subjectNames.length-1)]; 
+        const reactions = emojis.reduce((result, curr) => { 
+          result[curr] = 0; 
+          return result; 
+        }, {}); 
+        for (let i = 0; i < getRandomArbitrary(0, 30); i++) { 
+          reactions[emojis[getRandomArbitrary(0, emojis.length)]]++; 
+        } 
+        session.reactions = Object.entries(reactions).map(([key, val]) => ({ 
+          emoji: key, 
+          count: val, 
+        })); 
+      }); 
+      await user.save(); 
+    }) 
+  ); 
+ 
+  res.send("ok"); 
+});
+ 
+router.post("/add_reaction", async (req, res) => {
+  const { userId, reactionId, sessionId } = req.body;
+  const user = await User.findById(userId);
+  const session = user.pomodoros.id(sessionId);
+  const reaction = session.reactions.id(reactionId);
+  reaction.count++;
+  await user.save();
+  res.send(user);
 });
 
 function buildDate(key) {
