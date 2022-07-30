@@ -130,9 +130,33 @@ router.get("/pomodoro/:userId", async function (req, res) {
   return res.send(pomodoroList);
 });
 
+router.get("/subject/:userId", async function (req, res) {
+  const foundUser = await User.findById(req.params.userId);
+  if (!foundUser) return res.status(404).send({ message: "user not found" });
+  let userPomodorosArr = foundUser["pomodoros"];
+
+  let pomodoroMap = new Map();
+  for (const element of userPomodorosArr) {
+    let subjectKey = element["subject"];
+    let pomodoroDuration = element["duration"];
+    if (pomodoroMap.has(subjectKey)) {
+      let newDuration = pomodoroMap.get(subjectKey) + pomodoroDuration;
+      pomodoroMap.set(subjectKey, newDuration);
+    } else {
+      pomodoroMap.set(subjectKey, pomodoroDuration);
+    }
+  }
+  let pomodoroObj = Object.fromEntries(pomodoroMap);
+  let pomodoroList = Object.keys(pomodoroObj).map((key) => ({
+    id: key,
+    label: key,
+    value: pomodoroObj[key] / 60,
+  }));
+  return res.send(pomodoroList);
+});
+
 router.get("/:userId", async function (req, res, next) {
   const foundUser = await User.findById(req.params.userId);
-
   if (!foundUser) return res.status(404).send({ message: "user not found" });
   let userPomodorosArr = foundUser["pomodoros"];
 
