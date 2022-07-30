@@ -1,4 +1,5 @@
-
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -11,7 +12,7 @@ const sessionSchema = new Schema({
   duration: Number,
   dateCompleted: Date,
   subject: String,
-  reactions: {type: [reactionSchema]}
+  reactions: [reactionSchema]
 });
 
 const userSchema = new Schema(
@@ -24,6 +25,9 @@ const userSchema = new Schema(
     },
     email: {
       type: String,
+    },
+    password: {
+      type: String
     },
     occupation: {
       type: String,
@@ -45,6 +49,17 @@ const userSchema = new Schema(
     timestamps: true,
   }
 );
+
+// Hashes password
+userSchema.pre('save', async function(next) {
+  const user = this;
+
+  if (user.isModified('password')) {
+      user.password = await bcrypt.hash(user.password, 8);
+  }
+
+  next();
+});
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;
