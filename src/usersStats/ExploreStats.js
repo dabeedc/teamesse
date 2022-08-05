@@ -89,16 +89,8 @@ export const ExploreStats = () => {
         alignItems: "center",
         width: "100%",
         height: "100%",
-        backgroundColor: (theme) => theme.palette.common.second,
       }}
     >
-      <Typography
-        variant="h4"
-        sx={{ backgroundColor: (theme) => theme.palette.common.second }}
-      >
-        User Stats Page
-      </Typography>
-
       <Box
         sx={{
           display: "flex",
