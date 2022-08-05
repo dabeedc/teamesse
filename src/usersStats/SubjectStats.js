@@ -34,10 +34,16 @@ export const SubjectStats = () => {
         margin={{ top: 50, right: 75, bottom: 85, left: 75 }}
         cornerRadius={3}
         borderWidth={1}
+        arcLabelsTextColor='#333333'
+        theme={{
+          textColor: '#FFFFFF',
+          fontSize: 20,
+          tooltip: { container: { color: "black" } },
+        }}
         legends={[
             {
                 translateX: 10,
-                translateY: 75,
+                translateY: 80,
                 itemWidth: 140,
                 itemDirection: 'right-to-left',
                 symbolSize: 25,
