@@ -41,7 +41,8 @@ export const ExploreStats = () => {
     {
       headerName: "Date",
       field: "date",
-      width: 300,
+      width: 150,
+      renderCell: ({ value }) => new Date(value).toLocaleDateString(),
     },
     {
       headerName: "Reactions",
@@ -67,8 +68,10 @@ export const ExploreStats = () => {
                   py: 3,
                 }}
               >
-                <Box sx={{mx: -0.5}}>
-                  <Typography sx={{ m: 0, fontSize: '20px' }}>{emoji}</Typography>
+                <Box sx={{ mx: -0.5 }}>
+                  <Typography sx={{ m: 0, fontSize: "20px" }}>
+                    {emoji}
+                  </Typography>
                   <Typography sx={{ m: 0 }}>{count}</Typography>
                 </Box>
               </Box>
@@ -99,7 +102,7 @@ export const ExploreStats = () => {
           backgroundColor: (theme) => theme.palette.common.fifth,
           flexDirection: "column",
           width: "100%",
-          overflowX: 'scroll'
+          overflowX: "scroll",
         }}
       >
         <br></br>

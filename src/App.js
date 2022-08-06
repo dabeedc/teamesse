@@ -67,7 +67,7 @@ function App() {
             className="mainComponent"
           >
             <Routes>
-              <Route path="/" element={<ColorSampler />} />
+              <Route path="/" element={<LoginPage />} />
               <Route path="/color" element={<ColorSampler />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignUpPage />} />
