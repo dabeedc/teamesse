@@ -16,6 +16,7 @@ import { setOnline } from "./redux/slices/rooms";
 import { useEffect, useState } from "react";
 import { Clock } from "./clock/Clock";
 import { fetchPort } from "./redux/slices/account";
+import { LandingPage } from "./components/landing/LandingPage";
 
 function App() {
   const [on, setOn] = useState(false);
@@ -67,7 +68,7 @@ function App() {
             className="mainComponent"
           >
             <Routes>
-              <Route path="/" element={<ColorSampler />} />
+              <Route path="/" element={<LandingPage />} />
               <Route path="/color" element={<ColorSampler />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignUpPage />} />
