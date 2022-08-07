@@ -20,6 +20,7 @@ import { LandingPage } from "./components/landing/LandingPage";
 
 function App() {
   const [on, setOn] = useState(false);
+  const [auth, setAuth] = useState(false);
   const { focusMode } = useSelector((state) => state.timer);
   const { currentUser } = useSelector((state) => state.account);
   const { clockState } = useSelector((state) => state.rooms);
@@ -33,7 +34,9 @@ function App() {
     dispatch(fetchPort());
   }, [dispatch]);
 
-  return (
+  return !auth ? (
+    <LandingPage />
+  ) : (
     <Router>
       <div className="App">
         <div className="container">
@@ -68,7 +71,7 @@ function App() {
             className="mainComponent"
           >
             <Routes>
-              <Route path="/" element={<LandingPage />} />
+              <Route path="/" element={<Clock />} />
               <Route path="/color" element={<ColorSampler />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignUpPage />} />
