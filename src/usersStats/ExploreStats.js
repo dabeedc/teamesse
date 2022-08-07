@@ -41,14 +41,46 @@ export const ExploreStats = () => {
     {
       headerName: "Date",
       field: "date",
-      width: 220,
+      width: 300,
     },
     {
-      headerName: "Completion",
-      field: "completion",
-      width: 220,
+      headerName: "Reactions",
+      field: "reactions",
+      width: 300,
+      renderCell: ({ value }) => {
+        return value.length ? (
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              gap: 3,
+            }}
+          >
+            {value.map(({ emoji, count }) => (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  height: "50px",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  py: 3,
+                }}
+              >
+                <Box sx={{mx: -0.5}}>
+                  <Typography sx={{ m: 0, fontSize: '20px' }}>{emoji}</Typography>
+                  <Typography sx={{ m: 0 }}>{count}</Typography>
+                </Box>
+              </Box>
+            ))}
+          </Box>
+        ) : (
+          <></>
+        );
+      },
     },
   ];
+
   return (
     <Box
       sx={{
@@ -57,16 +89,8 @@ export const ExploreStats = () => {
         alignItems: "center",
         width: "100%",
         height: "100%",
-        backgroundColor: (theme) => theme.palette.common.second,
       }}
     >
-      <Typography
-        variant="h4"
-        sx={{ backgroundColor: (theme) => theme.palette.common.second }}
-      >
-        User Stats Page
-      </Typography>
-
       <Box
         sx={{
           display: "flex",
@@ -75,6 +99,7 @@ export const ExploreStats = () => {
           backgroundColor: (theme) => theme.palette.common.fifth,
           flexDirection: "column",
           width: "100%",
+          overflowX: 'scroll'
         }}
       >
         <br></br>
@@ -97,15 +122,15 @@ export const ExploreStats = () => {
           rows={stats ?? []}
           rowHeight={100}
           sx={{
-            width: "50%",
+            width: "60%",
             backgroundColor: (theme) => theme.palette.common.third,
             justifyContent: "space-evenly",
-            maxWidth: "1100px",
             borderColor: "common.third",
           }}
           columns={fields}
+          onRowClick={(params) => console.log(params.row.reactions)}
+          sortModel={[{ field: "date", sort: "desc" }]}
         />
-
         <br></br>
         <br></br>
       </Box>

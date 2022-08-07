@@ -32,7 +32,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "export MODE=DEV && react-scripts start",
+    "start": "react-scripts start",
     "start:prod": "cd server && yarn start:prod",
     "build": "react-scripts build",
     "test": "react-scripts test",
