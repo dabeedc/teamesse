@@ -40,11 +40,11 @@ export const StatsMap = () => {
         width: "90%",
         height: "550px",
         backgroundColor: (theme) => theme.palette.common.sixth,
+        color: "text.primary",
       }}
     >
       <ResponsiveCalendar
         theme={{
-          textColor: "#ffffff",
           fontSize: 20,
           tooltip: { container: { color: "black" } },
         }}
