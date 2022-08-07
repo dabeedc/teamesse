@@ -99,7 +99,7 @@ export const ExploreStats = () => {
           backgroundColor: (theme) => theme.palette.common.fifth,
           flexDirection: "column",
           width: "100%",
-          overflowX: 'scroll'
+          overflowX: "scroll",
         }}
       >
         <br></br>

@@ -1,0 +1,80 @@
+{
+  "default": {
+    "palette": {
+      "background": {
+        "default": "#2D142C",
+        "paper": "#510A32"
+      },
+      "text": {
+        "primary": "#fff"
+      },
+      "primary": {
+        "main": "#ee4540"
+      },
+      "secondary": {
+        "main": "#c72c41"
+      },
+      "common": {
+        "first": "#EE4540",
+        "second": "#C72C41",
+        "third": "#801336",
+        "fourth": "#510A32",
+        "fifth": "#2D142C",
+        "blueAccent": "#20B7C9",
+        "greenAccent": "#20C968"
+      }
+    }
+  },
+  "slate": {
+    "palette": {
+      "background": {
+        "default": "#082032",
+        "paper": "#2C394B"
+      },
+      "text": {
+        "primary": "#fff"
+      },
+      "primary": {
+        "main": "#d83948"
+      },
+      "secondary": {
+        "main": "#FF4C29"
+      },
+      "common": {
+        "first": "#FF4C29",
+        "second": "#4f6f86",
+        "third": "#466176",
+        "fourth": "#2C394B",
+        "fifth": "#082032",
+        "blueAccent": "#238cdb",
+        "greenAccent": "#30db23"
+      }
+    }
+  },
+  "light": {
+    "palette": {
+      "background": {
+        "default": "#D3ECA7",
+        "paper": "#A1B57D"
+      },
+      "text": {
+        "primary": "#fff"
+      },
+      "primary": {
+        "main": "#B33030"
+      },
+      "secondary": {
+        "main": "#7230b3"
+      },
+      "common": {
+        "first": "#B33030",
+        "second": "#19282f",
+        "third": "#2b4451",
+        "fourth": "#A1B57D",
+        "fifth": "#D3ECA7",
+        "blueAccent": "#30B3B3",
+        "greenAccent": "#72b330"
+      }
+    }
+  }
+}

@@ -87,12 +87,20 @@ export const Sidebar = () => {
           </Button>
         </Box>
         <TextField
-          sx={{ width: "70%", backgroundColor: "common.second" }}
+          sx={{
+            backgroundColor: "common.second",
+            color: "text.primary",
+          }}
           multiline
           rows={10}
           label="Weekly Goals"
           defaultValue=""
           variant="filled"
+          InputLabelProps={{
+            style: {
+              color: "white",
+            },
+          }}
         />
         <Box
           sx={{
@@ -138,16 +146,17 @@ export const Sidebar = () => {
             Settings
           </Button>
         </Box>
-        {!currentUser && 
-        <Button
-          variant="contained"
-          sx={{ backgroundColor: "common.fourth" }}
-          onClick={() => {
-            navigate("/signup");
-          }}
-        >
-          Sign Up
-        </Button> }  
+        {!currentUser && (
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: "common.fourth" }}
+            onClick={() => {
+              navigate("/signup");
+            }}
+          >
+            Sign Up
+          </Button>
+        )}
       </Box>
     </>
   );
