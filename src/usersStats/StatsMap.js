@@ -6,21 +6,11 @@
 
 import React, { useEffect, useState } from "react";
 import { ResponsiveCalendar } from "@nivo/calendar";
-import { Box, Stack, useTheme } from "@mui/material";
-import { useSelector } from "react-redux";
-import { userStats } from "../redux/slices/account";
-import { useDispatch } from "react-redux";
+import { Box, useTheme } from "@mui/material";
 import { getBaseUrl } from "../utils";
 
 export const StatsMap = () => {
   const [pomodoroData, setPomodoroData] = useState([]);
-  // const { currentUser, stats } = useSelector((state) => state.account);
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(userStats());
-  // }, []);
-
   const theme = useTheme();
 
   useEffect(() => {

@@ -10,9 +10,8 @@
 import React, { useEffect } from "react";
 import { Box, Typography, Avatar } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { userStats } from "../redux/slices/account";
-import { useDispatch } from "react-redux";
 
 export const ExploreStats = () => {
   const { currentUser, stats } = useSelector((state) => state.account);
