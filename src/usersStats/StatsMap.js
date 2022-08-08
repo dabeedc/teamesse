@@ -9,11 +9,11 @@ import React, { useEffect, useState } from "react";
 import { ResponsiveCalendar } from "@nivo/calendar";
 import { Box, useTheme } from "@mui/material";
 import { getBaseUrl } from "../utils";
-import useMediaQuery from '@mui/material/useMediaQuery';
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 export const StatsMap = () => {
   const [pomodoroData, setPomodoroData] = useState([]);
-  const verticalMap = useMediaQuery('(max-width:1500px)');
+  const verticalMap = useMediaQuery("(max-width:1500px)");
   const theme = useTheme();
   useEffect(() => {
     (async () => {
@@ -32,7 +32,7 @@ export const StatsMap = () => {
         flexDirection: "column",
         alignItems: "center",
         width: "90%",
-        height: verticalMap? "1000px" : "550px",
+        height: verticalMap ? "1000px" : "550px",
         backgroundColor: "common.sixth",
         color: "text.primary",
       }}
@@ -52,7 +52,7 @@ export const StatsMap = () => {
         monthBorderColor={theme.palette.common.fifth}
         dayBorderWidth={2}
         dayBorderColor={theme.palette.common.fifth}
-        direction={verticalMap? "vertical" : "horizontal"}
+        direction={verticalMap ? "vertical" : "horizontal"}
         legends={[
           {
             anchor: "bottom-right",
