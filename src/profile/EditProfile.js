@@ -11,7 +11,7 @@
 // https://stackoverflow.com/questions/31198170/want-to-add-spacing-between-buttons#:~:text=You%20can%20use%20or,between%20buttons%20on%20a%20webpage.
 
 import { useNavigate } from "react-router-dom";
-import { React, useState }from "react";
+import { React, useState } from "react";
 import {
   Box,
   Button,
@@ -52,19 +52,15 @@ export const EditProfile = () => {
     <>
       <Box
         sx={{
-          width: "100%",
-          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          width: "90%",
+          paddingY: "50px",
+          maxHeight: "100%",
           backgroundColor: (theme) => theme.palette.common.fifth,
         }}
       >
-        <Typography
-          variant="h4"
-          sx={{ backgroundColor: (theme) => theme.palette.common.second }}
-        >
-          User Profile Page
-        </Typography>
-        <br></br>
-        <br></br>
         <Grid container spacing={2} columns={16}>
           <Grid item xs={8}>
             <Avatar
@@ -79,14 +75,14 @@ export const EditProfile = () => {
             ></Avatar>
           </Grid>
         </Grid>
-        <br></br>
-        <br></br>
+
         <Grid container spacing={2} columns={16}>
           <Grid item xs={8}>
+          <div className="profile">
             <TextField
               sx={{ width: "70%", backgroundColor: "common.third" }}
               multiline
-              rows={23}
+              rows={30}
               label="Description"
               defaultValue={currentUser?.description}
               variant="filled"
@@ -94,12 +90,23 @@ export const EditProfile = () => {
                 style: { color: "#fff" },
                 shrink: currentUser?.description,
               }}
+              inputProps={{ style: { color: "white" } }}
               onChange={(e) => {
                 setDescription(e.target.value);
               }}
             />
+            </div>
+            <div className="profile">
+            <Button
+              variant="contained"
+              sx={{ backgroundColor: "common.third" }}
+            >
+              Delete Account
+            </Button>
+            </div>
           </Grid>
           <Grid item xs={8}>
+          <div className="profile">
             <Button
               variant="contained"
               sx={{ backgroundColor: "common.third" }}
@@ -110,16 +117,8 @@ export const EditProfile = () => {
             >
               Save Profile
             </Button>
-            &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-            <Button
-              variant="contained"
-              sx={{ backgroundColor: "common.third" }}
-            >
-              Delete Account
-            </Button>
-            <br></br>
-            <br></br>
-            <br></br>
+            </div>
+            <div className="profile">
             <TextField
               label="Account Username"
               sx={{
@@ -128,16 +127,16 @@ export const EditProfile = () => {
               }}
               defaultValue={currentUser?.username}
               InputLabelProps={{
-                style: { color: "text.contrastText" },
+                style: { color: "#fff" },
                 shrink: currentUser?.username,
               }}
+              inputProps={{ style: { color: "white" } }}
               onChange={(e) => {
                 setUsername(e.target.value);
               }}
             />
-            <br></br>
-            <br></br>
-            <br></br>
+            </div>
+            <div className="profile">
             <TextField
               label="Name"
               sx={{
@@ -146,16 +145,16 @@ export const EditProfile = () => {
               }}
               defaultValue={currentUser?.name}
               InputLabelProps={{
-                style: { color: "text.contrastText" },
+                style: { color: "#fff" },
                 shrink: currentUser?.name,
               }}
+              inputProps={{ style: { color: "white" } }}
               onChange={(e) => {
                 setName(e.target.value);
               }}
             />
-            <br></br>
-            <br></br>
-            <br></br>
+            </div>
+            <div className="profile">
             <TextField
               label="Email"
               sx={{
@@ -164,16 +163,16 @@ export const EditProfile = () => {
               }}
               defaultValue={currentUser?.email}
               InputLabelProps={{
-                style: { color: "text.contrastText" },
+                style: { color: "#fff" },
                 shrink: currentUser?.email,
               }}
+              inputProps={{ style: { color: "white" } }}
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
             />
-            <br></br>
-            <br></br>
-            <br></br>
+            </div>
+            <div className="profile">
             <TextField
               label="Occupation"
               sx={{
@@ -182,16 +181,16 @@ export const EditProfile = () => {
               }}
               defaultValue={currentUser?.occupation}
               InputLabelProps={{
-                style: { color: "text.contrastText" },
+                style: { color: "#fff" },
                 shrink: currentUser?.occupation,
               }}
+              inputProps={{ style: { color: "white" } }}
               onChange={(e) => {
                 setOccupation(e.target.value);
               }}
             />
-            <br></br>
-            <br></br>
-            <br></br>
+            </div>
+            <div className="profile">
             <TextField
               label="Employer/School"
               sx={{
@@ -200,16 +199,15 @@ export const EditProfile = () => {
               }}
               defaultValue={currentUser?.employer}
               InputLabelProps={{
-                style: { color: "text.contrastText" },
+                style: { color: "#fff" },
                 shrink: currentUser?.employer,
               }}
+              inputProps={{ style: { color: "white" } }}
               onChange={(e) => {
                 setEmployer(e.target.value);
               }}
             />
-            <br></br>
-            <br></br>
-            <br></br>
+            </div>
           </Grid>
         </Grid>
       </Box>

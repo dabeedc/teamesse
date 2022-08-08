@@ -35,11 +35,12 @@ export const PomodoroAverageSessionCard = () => {
     >
       <CardContent>
         <Typography sx={{ color: "#ffffff", mb: 20.0 }}>
+          <div className="display-stats">
           Average Daily Pomodoro Session Time:
-          <br></br>
-          <br></br>
-          <br></br>
-          {pomodoroAverageSession.time} minutes
+          </div>
+          <div className="calc-stats">
+            {pomodoroAverageSession.time} minutes
+          </div>
         </Typography>
       </CardContent>
     </Card>

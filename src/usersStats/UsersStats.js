@@ -18,6 +18,7 @@ export const UserStats = () => {
       style={{
         display: "flex",
         flexDirection: "column",
+        maxHeight: "100%",
         width: "90%",
       }}
     >
