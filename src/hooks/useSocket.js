@@ -50,7 +50,7 @@ export const useSocket = () => {
     if (isConnecting && currentUser) {
       const conn = new WebSocket(
         `${
-          process.env.MODE === "DEV"
+          process.env.NODE_ENV === "development"
             ? `ws://localhost:${port}`
             : "wss://teamesse-pomodoro.herokuapp.com"
         }/${currentUser.username}`

@@ -25,8 +25,10 @@ export const Sidebar = () => {
       >
         {currentUser && (
           <div>
-            <Typography variant="h5">Welcome back,</Typography>
-            <Typography variant="h3" sx={{ mt: 2 }}>
+            <Typography variant="h5" color="white">
+              Welcome back,
+            </Typography>
+            <Typography variant="h3" sx={{ mt: 2 }} color="white">
               {currentUser?.name}
             </Typography>
           </div>

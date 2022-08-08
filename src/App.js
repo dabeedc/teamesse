@@ -19,8 +19,11 @@ import { fetchPort } from "./redux/slices/account";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import themes from "./themes/themes.json";
+import PaletteIcon from "@mui/icons-material/Palette";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import IconButton from "@mui/material/IconButton";
 
-const theme = createTheme(themes.light);
 const GlobalCSS = styled(Box)(({ theme }) => ({
   "& *::-webkit-scrollbar": {
     width: "0.35rem",
@@ -39,12 +42,19 @@ const GlobalCSS = styled(Box)(({ theme }) => ({
   },
 }));
 
+const themeNames = Object.keys(themes);
+
 function App() {
+  const [selectedTheme, setSelectedTheme] = useState(themeNames[0]);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
   const [on, setOn] = useState(false);
   const { focusMode } = useSelector((state) => state.timer);
   const { currentUser } = useSelector((state) => state.account);
   const { clockState } = useSelector((state) => state.rooms);
   const dispatch = useDispatch();
+
+  const theme = createTheme(themes[selectedTheme]);
 
   useEffect(() => {
     dispatch(setOnline(on));
@@ -53,6 +63,13 @@ function App() {
   useEffect(() => {
     dispatch(fetchPort());
   }, [dispatch]);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -92,6 +109,44 @@ function App() {
                 }}
                 className="mainComponent"
               >
+                <Box
+                  sx={{
+                    minWidth: 120,
+                    position: "absolute",
+                    top: 20,
+                    right: 0,
+                  }}
+                >
+                  <IconButton
+                    id="basic-button"
+                    aria-controls={open ? "basic-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
+                    onClick={handleClick}
+                    color="primary"
+                  >
+                    <PaletteIcon />
+                  </IconButton>
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{
+                      "aria-labelledby": "basic-button",
+                    }}
+                  >
+                    {themeNames.map((themeName) => (
+                      <MenuItem
+                        key={themeName}
+                        value={themeName}
+                        onClick={() => setSelectedTheme(themeName)}
+                      >
+                        {themeName}
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </Box>
                 <Routes>
                   <Route path="/" element={<ColorSampler />} />
                   <Route path="/color" element={<ColorSampler />} />
