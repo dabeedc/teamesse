@@ -132,9 +132,6 @@ export const ExploreStats = () => {
           overflowX: "scroll",
         }}
       >
-       
-       
-
         <Avatar
           sx={{
             backgroundColor: "common.second",
@@ -144,9 +141,6 @@ export const ExploreStats = () => {
           src={currentUser?.avatar}
           alt="avatar"
         ></Avatar>
-
-       
-       
 
         <DataGrid
           rows={stats ?? []}
@@ -162,8 +156,6 @@ export const ExploreStats = () => {
           pageSize={50}
           sortModel={[{ field: "date", sort: "desc" }]}
         />
-       
-       
       </Box>
     </Box>
   );

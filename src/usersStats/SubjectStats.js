@@ -29,15 +29,15 @@ export const SubjectStats = () => {
         flexDirection: "column",
         alignItems: "center",
         width: "90%",
-        height: "550px",
-        backgroundColor: (theme) => theme.palette.common.sixth,
+        height: "550px", 
+        backgroundColor: () => theme.palette.common.sixth,
       }}
     >
       <ResponsivePie
         margin={{ top: 50, right: 75, bottom: 85, left: 75 }}
         cornerRadius={3}
         borderWidth={1}
-        arcLabelsTextColor={theme?.palette?.text?.primary}
+        arcLabelsTextColor={theme?.palette?.text?.secondary}
         theme={{
           textColor: theme?.palette?.text?.primary,
           fontSize: 20,
