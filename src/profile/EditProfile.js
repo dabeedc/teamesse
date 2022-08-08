@@ -78,7 +78,7 @@ export const EditProfile = () => {
 
         <Grid container spacing={2} columns={16}>
           <Grid item xs={8}>
-          <div className="profile">
+          <div className="description">
             <TextField
               sx={{ width: "70%", backgroundColor: "common.third" }}
               multiline
@@ -95,14 +95,6 @@ export const EditProfile = () => {
                 setDescription(e.target.value);
               }}
             />
-            </div>
-            <div className="profile">
-            <Button
-              variant="contained"
-              sx={{ backgroundColor: "common.third" }}
-            >
-              Delete Account
-            </Button>
             </div>
           </Grid>
           <Grid item xs={8}>
@@ -207,6 +199,14 @@ export const EditProfile = () => {
                 setEmployer(e.target.value);
               }}
             />
+            </div>
+            <div className="profile">
+            <Button
+              variant="contained"
+              sx={{ backgroundColor: "common.third" }}
+            >
+              Delete Account
+            </Button>
             </div>
           </Grid>
         </Grid>

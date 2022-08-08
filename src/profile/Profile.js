@@ -48,7 +48,7 @@ export const Profile = () => {
 
         <Grid container spacing={4} columns={16}>
           <Grid item xs={8}>
-            <div className="profile">
+            <div className="description">
               <TextField
                 sx={{ width: "70%", backgroundColor: "common.third" }}
                 multiline

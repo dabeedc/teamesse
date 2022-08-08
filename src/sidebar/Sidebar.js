@@ -47,7 +47,7 @@ export const Sidebar = () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            justifyContent: "space-evenly",
+            justifyContent: "space-around",
             height: "200px",
           }}
         >
