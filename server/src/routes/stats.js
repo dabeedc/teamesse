@@ -139,14 +139,9 @@ router.get("/:userId", async function (req, res, next) {
 
 router.get("/pomodoroSession/:userId", async function (req, res, next) {
   const foundUser = await User.findById(req.params.userId);
-
   if (!foundUser) return res.status(404).send({ message: "user not found" });
   let userPomodorosArr = foundUser["pomodoros"];
-
-  let accumulatedPomodoroSessions = 0;
-  for (const element of userPomodorosArr) {
-    accumulatedPomodoroSessions += 1;
-  }
+  let accumulatedPomodoroSessions = userPomodorosArr.length;
   accumulatedPomodoroSessions = accumulatedPomodoroSessions.toString();
   return res.send({ session: accumulatedPomodoroSessions });
 });

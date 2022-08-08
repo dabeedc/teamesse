@@ -12,14 +12,7 @@
 
 import { useNavigate } from "react-router-dom";
 import { React, useState } from "react";
-import {
-  Box,
-  Button,
-  Typography,
-  TextField,
-  Avatar,
-  Grid,
-} from "@mui/material";
+import { Box, Button, TextField, Avatar, Grid } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUserAsync } from "../redux/slices/account";
 
@@ -76,137 +69,137 @@ export const EditProfile = () => {
           </Grid>
         </Grid>
 
-        <Grid container spacing={2} columns={16}>
+        <Grid container spacing={4} columns={16}>
           <Grid item xs={8}>
-          <div className="description">
-            <TextField
-              sx={{ width: "70%", backgroundColor: "common.third" }}
-              multiline
-              rows={30}
-              label="Description"
-              defaultValue={currentUser?.description}
-              variant="filled"
-              InputLabelProps={{
-                style: { color: "#fff" },
-                shrink: currentUser?.description,
-              }}
-              inputProps={{ style: { color: "white" } }}
-              onChange={(e) => {
-                setDescription(e.target.value);
-              }}
-            />
+            <div className="description">
+              <TextField
+                sx={{ width: "70%", backgroundColor: "common.third" }}
+                multiline
+                rows={30}
+                label="Description"
+                defaultValue={currentUser?.description}
+                variant="filled"
+                InputLabelProps={{
+                  style: { color: "#fff" },
+                  shrink: currentUser?.description,
+                }}
+                inputProps={{ style: { color: "white" } }}
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                }}
+              />
             </div>
           </Grid>
           <Grid item xs={8}>
-          <div className="profile">
-            <Button
-              variant="contained"
-              sx={{ backgroundColor: "common.third" }}
-              onClick={() => {
-                updateUserProfile();
-                navigate("/userprofile");
-              }}
-            >
-              Save Profile
-            </Button>
+            <div className="profile">
+              <Button
+                variant="contained"
+                sx={{ backgroundColor: "common.third" }}
+                onClick={() => {
+                  updateUserProfile();
+                  navigate("/userprofile");
+                }}
+              >
+                Save Profile
+              </Button>
             </div>
             <div className="profile">
-            <TextField
-              label="Account Username"
-              sx={{
-                width: "90%",
-                backgroundColor: "common.third",
-              }}
-              defaultValue={currentUser?.username}
-              InputLabelProps={{
-                style: { color: "#fff" },
-                shrink: currentUser?.username,
-              }}
-              inputProps={{ style: { color: "white" } }}
-              onChange={(e) => {
-                setUsername(e.target.value);
-              }}
-            />
+              <TextField
+                label="Account Username"
+                sx={{
+                  width: "90%",
+                  backgroundColor: "common.third",
+                }}
+                defaultValue={currentUser?.username}
+                InputLabelProps={{
+                  style: { color: "#fff" },
+                  shrink: currentUser?.username,
+                }}
+                inputProps={{ style: { color: "white" } }}
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                }}
+              />
             </div>
             <div className="profile">
-            <TextField
-              label="Name"
-              sx={{
-                width: "90%",
-                backgroundColor: "common.third",
-              }}
-              defaultValue={currentUser?.name}
-              InputLabelProps={{
-                style: { color: "#fff" },
-                shrink: currentUser?.name,
-              }}
-              inputProps={{ style: { color: "white" } }}
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-            />
+              <TextField
+                label="Name"
+                sx={{
+                  width: "90%",
+                  backgroundColor: "common.third",
+                }}
+                defaultValue={currentUser?.name}
+                InputLabelProps={{
+                  style: { color: "#fff" },
+                  shrink: currentUser?.name,
+                }}
+                inputProps={{ style: { color: "white" } }}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              />
             </div>
             <div className="profile">
-            <TextField
-              label="Email"
-              sx={{
-                width: "90%",
-                backgroundColor: "common.third",
-              }}
-              defaultValue={currentUser?.email}
-              InputLabelProps={{
-                style: { color: "#fff" },
-                shrink: currentUser?.email,
-              }}
-              inputProps={{ style: { color: "white" } }}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            />
+              <TextField
+                label="Email"
+                sx={{
+                  width: "90%",
+                  backgroundColor: "common.third",
+                }}
+                defaultValue={currentUser?.email}
+                InputLabelProps={{
+                  style: { color: "#fff" },
+                  shrink: currentUser?.email,
+                }}
+                inputProps={{ style: { color: "white" } }}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
             </div>
             <div className="profile">
-            <TextField
-              label="Occupation"
-              sx={{
-                width: "90%",
-                backgroundColor: "common.third",
-              }}
-              defaultValue={currentUser?.occupation}
-              InputLabelProps={{
-                style: { color: "#fff" },
-                shrink: currentUser?.occupation,
-              }}
-              inputProps={{ style: { color: "white" } }}
-              onChange={(e) => {
-                setOccupation(e.target.value);
-              }}
-            />
+              <TextField
+                label="Occupation"
+                sx={{
+                  width: "90%",
+                  backgroundColor: "common.third",
+                }}
+                defaultValue={currentUser?.occupation}
+                InputLabelProps={{
+                  style: { color: "#fff" },
+                  shrink: currentUser?.occupation,
+                }}
+                inputProps={{ style: { color: "white" } }}
+                onChange={(e) => {
+                  setOccupation(e.target.value);
+                }}
+              />
             </div>
             <div className="profile">
-            <TextField
-              label="Employer/School"
-              sx={{
-                width: "90%",
-                backgroundColor: "common.third",
-              }}
-              defaultValue={currentUser?.employer}
-              InputLabelProps={{
-                style: { color: "#fff" },
-                shrink: currentUser?.employer,
-              }}
-              inputProps={{ style: { color: "white" } }}
-              onChange={(e) => {
-                setEmployer(e.target.value);
-              }}
-            />
+              <TextField
+                label="Employer/School"
+                sx={{
+                  width: "90%",
+                  backgroundColor: "common.third",
+                }}
+                defaultValue={currentUser?.employer}
+                InputLabelProps={{
+                  style: { color: "#fff" },
+                  shrink: currentUser?.employer,
+                }}
+                inputProps={{ style: { color: "white" } }}
+                onChange={(e) => {
+                  setEmployer(e.target.value);
+                }}
+              />
             </div>
             <div className="profile">
-            <Button
-              variant="contained"
-              sx={{ backgroundColor: "common.third" }}
-            >
-              Delete Account
-            </Button>
+              <Button
+                variant="contained"
+                sx={{ backgroundColor: "common.third" }}
+              >
+                Delete Account
+              </Button>
             </div>
           </Grid>
         </Grid>
