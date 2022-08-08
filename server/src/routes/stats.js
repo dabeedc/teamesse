@@ -37,50 +37,6 @@ router.get("/", async (_, res) => {
   );
 });
 
-router.post("/", async (_, res) => {
-  // smile, sweat, rofl, starstruck, thumbs up, tomato, hot beverage
-  // ["U+1F604", "U+1F605", "U+1F923", "U+1F929	", "U+1F44D", "U+1F345", "U+2615"];
-  const emojis = ["😄", "😁", "🤣", "🤩", "👍", "🍅", "☕"];
-
-  const getRandomArbitrary = (min, max) => {
-    return Math.floor(Math.random() * (max - min) + min);
-  };
-
-  // const subjectNames = [
-  //   "math",
-  //   "compsci",
-  //   "english",
-  //   "biology",
-  //   "chemistry",
-  //   "polisci",
-  //   "general",
-  // ];
-
-  const users = await User.find();
-
-  await Promise.all(
-    users.map(async (user) => {
-      user.pomodoros.forEach((session) => {
-        // session.subject = subjectNames[getRandomArbitrary(0, subjectNames.length-1)]; 
-        const reactions = emojis.reduce((result, curr) => { 
-          result[curr] = 0; 
-          return result; 
-        }, {}); 
-        for (let i = 0; i < getRandomArbitrary(0, 30); i++) { 
-          reactions[emojis[getRandomArbitrary(0, emojis.length)]]++; 
-        } 
-        session.reactions = Object.entries(reactions).map(([key, val]) => ({ 
-          emoji: key, 
-          count: val, 
-        })); 
-      }); 
-      await user.save(); 
-    }) 
-  ); 
- 
-  res.send("ok"); 
-});
- 
 router.post("/add_reaction", async (req, res) => {
   const { userId, reactionId, sessionId } = req.body;
   const user = await User.findById(userId);
@@ -88,7 +44,19 @@ router.post("/add_reaction", async (req, res) => {
   const reaction = session.reactions.id(reactionId);
   reaction.count++;
   await user.save();
-  res.send(user);
+  res.send({ message: "upvote ok" });
+});
+
+router.post("/remove_reaction", async (req, res) => {
+  const { userId, reactionId, sessionId } = req.body;
+  const user = await User.findById(userId);
+  const session = user.pomodoros.id(sessionId);
+  const reaction = session.reactions.id(reactionId);
+  if (reaction.count > 0) {
+    reaction.count--;
+  }
+  await user.save();
+  res.send({ message: "downvote ok" });
 });
 
 function buildDate(key) {

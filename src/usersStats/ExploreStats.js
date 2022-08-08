@@ -11,7 +11,8 @@ import React, { useEffect } from "react";
 import { Box, Typography, Avatar } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useSelector, useDispatch } from "react-redux";
-import { userStats } from "../redux/slices/account";
+import { upvoteReaction, userStats } from "../redux/slices/account";
+import { getBaseUrl } from "../utils";
 
 export const ExploreStats = () => {
   const { currentUser, stats } = useSelector((state) => state.account);
@@ -47,8 +48,9 @@ export const ExploreStats = () => {
       headerName: "Reactions",
       field: "reactions",
       width: 300,
-      renderCell: ({ value }) => {
-        return value.length ? (
+      renderCell: ({ value, row }) => {
+        const { userId, id: sessionId } = row;
+        return (
           <Box
             sx={{
               display: "flex",
@@ -56,7 +58,7 @@ export const ExploreStats = () => {
               gap: 3,
             }}
           >
-            {value.map(({ emoji, count }) => (
+            {value.map(({ emoji, count, _id: reactionId }) => (
               <Box
                 sx={{
                   display: "flex",
@@ -68,7 +70,35 @@ export const ExploreStats = () => {
                 }}
               >
                 <Box sx={{ mx: -0.5 }}>
-                  <Typography sx={{ m: 0, fontSize: "20px" }}>
+                  <Typography
+                    sx={{
+                      m: 0,
+                      fontSize: "20px",
+                      transition: "all .1s ease-in-out",
+                      "&:hover": {
+                        cursor: "pointer",
+                        transform: "scale(1.75)",
+                      },
+                    }}
+                    onClick={async () => {
+                      const res = await fetch(
+                        `${getBaseUrl()}/stats/add_reaction`,
+                        {
+                          method: "POST",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                          body: JSON.stringify({
+                            userId,
+                            reactionId,
+                            sessionId,
+                          }),
+                        }
+                      );
+                      if (res.ok)
+                        dispatch(upvoteReaction({ sessionId, reactionId }));
+                    }}
+                  >
                     {emoji}
                   </Typography>
                   <Typography sx={{ m: 0 }}>{count}</Typography>
@@ -76,8 +106,6 @@ export const ExploreStats = () => {
               </Box>
             ))}
           </Box>
-        ) : (
-          <></>
         );
       },
     },
@@ -122,7 +150,7 @@ export const ExploreStats = () => {
 
         <DataGrid
           rows={stats ?? []}
-          rowHeight={100}
+          rowHeight={75}
           sx={{
             width: "60%",
             backgroundColor: (theme) => theme.palette.common.third,
@@ -131,7 +159,7 @@ export const ExploreStats = () => {
             color: "text.contrastText",
           }}
           columns={fields}
-          onRowClick={(params) => console.log(params.row.reactions)}
+          pageSize={50}
           sortModel={[{ field: "date", sort: "desc" }]}
         />
         <br></br>
