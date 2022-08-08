@@ -30,7 +30,7 @@ export const SubjectStats = () => {
         alignItems: "center",
         width: "90%",
         height: "550px",
-        backgroundColor: () => theme.palette.common.sixth,
+        backgroundColor: (theme) => theme.palette.common.sixth,
       }}
     >
       <ResponsivePie

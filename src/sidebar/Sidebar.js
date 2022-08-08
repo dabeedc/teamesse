@@ -108,6 +108,7 @@ export const Sidebar = () => {
               sx={{ backgroundColor: "common.fourth" }}
               onClick={() => {
                 dispatch(userLogout());
+                navigate("/");
               }}
             >
               Logout
