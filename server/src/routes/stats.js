@@ -29,7 +29,7 @@ router.get("/", async (_, res) => {
           username: user.username,
           userId: user.id,
           date: dateCompleted,
-          duration: `${duration / 60} mins`,
+          duration: `${(duration / 60).toFixed(2)} mins`,
           ...rest,
         }))
       )

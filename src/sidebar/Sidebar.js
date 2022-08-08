@@ -25,8 +25,10 @@ export const Sidebar = () => {
       >
         {currentUser && (
           <div>
-            <Typography variant="h5">Welcome back,</Typography>
-            <Typography variant="h3" sx={{ mt: 2 }}>
+            <Typography variant="h5" color="white">
+              Welcome back,
+            </Typography>
+            <Typography variant="h3" sx={{ mt: 2 }} color="white">
               {currentUser?.name}
             </Typography>
           </div>
@@ -49,50 +51,44 @@ export const Sidebar = () => {
             height: "200px",
           }}
         >
-          <Button
-            variant="contained"
-            sx={{ backgroundColor: "common.fourth", width: "200px" }}
-            onClick={() => {
-              navigate("/pomodoro");
-            }}
-          >
-            Pomodoro
-          </Button>
-          <Button
-            variant="contained"
-            sx={{ backgroundColor: "common.fourth", width: "200px" }}
-            onClick={() => {
-              navigate("/userstats");
-            }}
-          >
-            Statistics
-          </Button>
-          <Button
-            variant="contained"
-            sx={{ backgroundColor: "common.fourth", width: "200px" }}
-            onClick={() => {
-              navigate("/subjects");
-            }}
-          >
-            Subjects
-          </Button>
-          <Button
-            variant="contained"
-            sx={{ backgroundColor: "common.fourth", width: "200px" }}
-            onClick={() => {
-              navigate("/explore");
-            }}
-          >
-            Explore
-          </Button>
+          {[
+            ["Pomodoro", "/pomodoro"],
+            ["Statistics", "/userstats"],
+            ["Subjects", "/subjects"],
+            ["Explore", "/explore"],
+          ].map(([title, pathname]) => (
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor:
+                  window.location.pathname === pathname
+                    ? "primary"
+                    : "common.fourth",
+                width: "200px",
+              }}
+              onClick={() => {
+                navigate(pathname);
+              }}
+            >
+              {title}
+            </Button>
+          ))}
         </Box>
         <TextField
-          sx={{ width: "70%", backgroundColor: "common.second" }}
+          sx={{
+            backgroundColor: "common.second",
+            color: "text.primary",
+          }}
           multiline
           rows={10}
           label="Weekly Goals"
           defaultValue=""
           variant="filled"
+          InputLabelProps={{
+            style: {
+              color: "white",
+            },
+          }}
         />
         <Box
           sx={{
@@ -138,16 +134,17 @@ export const Sidebar = () => {
             Settings
           </Button>
         </Box>
-        {!currentUser && 
-        <Button
-          variant="contained"
-          sx={{ backgroundColor: "common.fourth" }}
-          onClick={() => {
-            navigate("/signup");
-          }}
-        >
-          Sign Up
-        </Button> }  
+        {!currentUser && (
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: "common.fourth" }}
+            onClick={() => {
+              navigate("/signup");
+            }}
+          >
+            Sign Up
+          </Button>
+        )}
       </Box>
     </>
   );

@@ -1,5 +1,4 @@
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -12,7 +11,7 @@ const sessionSchema = new Schema({
   duration: Number,
   dateCompleted: Date,
   subject: String,
-  reactions: {type: [reactionSchema]}
+  reactions: [reactionSchema]
 });
 
 const userSchema = new Schema(

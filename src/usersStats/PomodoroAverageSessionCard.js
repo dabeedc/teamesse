@@ -16,8 +16,8 @@ export const PomodoroAverageSessionCard = () => {
       let pomodoroAverageSessionRes = await fetch(
         `${getBaseUrl()}/stats/pomodoroAverageSession/62cd0b463b463fa6bfc6f822`
       );
-      let pomodoroAverageSession = await pomodoroAverageSessionRes.json();
-      setPomodoroAverageSession(pomodoroAverageSession);
+      let pomodoroAvgSession = await pomodoroAverageSessionRes.json();
+      setPomodoroAverageSession(pomodoroAvgSession);
     })();
   }, []);
 
