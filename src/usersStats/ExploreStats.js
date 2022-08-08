@@ -126,6 +126,7 @@ export const ExploreStats = () => {
             backgroundColor: (theme) => theme.palette.common.third,
             justifyContent: "space-evenly",
             borderColor: "common.third",
+            color: "text.contrastText",
           }}
           columns={fields}
           onRowClick={(params) => console.log(params.row.reactions)}

@@ -1,5 +1,5 @@
 {
-  "default": {
+  "Default": {
     "palette": {
       "background": {
         "default": "#2D142C",
@@ -25,7 +25,7 @@
       }
     }
   },
-  "slate": {
+  "Slate": {
     "palette": {
       "background": {
         "default": "#082032",
@@ -51,14 +51,15 @@
       }
     }
   },
-  "light": {
+  "Light Green": {
     "palette": {
       "background": {
         "default": "#D3ECA7",
         "paper": "#A1B57D"
       },
       "text": {
-        "primary": "#101a1f"
+        "primary": "#101a1f",
+        "contrastText": "#fff"
       },
       "primary": {
         "main": "#B33030"
