@@ -14,6 +14,15 @@ const accountSlice = createSlice({
       state.currentUser = null;
       alert("Successfully logged out.");
     },
+    upvoteReaction(state, action) {
+      const session = state.stats.find(
+        (stat) => stat.id === action.payload.sessionId
+      );
+      const reaction = session.reactions.find(
+        (reaction) => reaction._id === action.payload.reactionId
+      );
+      reaction.count++;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -104,5 +113,5 @@ export const fetchPort = createAsyncThunk("account/port", async (user) => {
   return await getPort(user);
 });
 
-export const { userLogout } = accountSlice.actions;
+export const { userLogout, upvoteReaction } = accountSlice.actions;
 export default accountSlice.reducer;
