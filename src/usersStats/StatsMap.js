@@ -54,12 +54,12 @@ export const StatsMap = () => {
         from="2022-07-01"
         to="2023-07-01"
         data={pomodoroData}
-        emptyColor="#eeeeee"
+        emptyColor={theme.palette.common.third}
         margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
         yearSpacing={40}
-        monthBorderColor="#ffffff"
+        monthBorderColor={theme.palette.common.fifth}
         dayBorderWidth={2}
-        dayBorderColor="#ffffff"
+        dayBorderColor={theme.palette.common.fifth}
         legends={[
           {
             anchor: "bottom-right",
