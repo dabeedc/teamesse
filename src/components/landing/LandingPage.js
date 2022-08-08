@@ -7,33 +7,54 @@ export const LandingPage = () => {
   let navigate = useNavigate();
 
   return (
-    <Box>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "space-evenly",
+        width: "50%",
+        borderRadius: "16px",
+      }}
+    >
       <h1>teamesse</h1>
       <Typography>
         Let's work together in developing productive habits - in a collaborative
         manner.
         <br />
       </Typography>
-      <Button
-        variant="contained"
-        sx={{ backgroundColor: "common.fourth" }}
-        onClick={() => {
-          navigate("/login");
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          width: "80%",
+          py: "25px",
+          gap: "5%"
         }}
       >
-        Login
-      </Button>
+        <Button
+          variant="contained"
+          sx={{ backgroundColor: "common.fourth" }}
+          onClick={() => {
+            navigate("/login");
+          }}
+        >
+          Login
+        </Button>
 
-      <Button
-        variant="contained"
-        sx={{ backgroundColor: "common.fourth" }}
-        onClick={() => {
-          navigate("/signup");
-        }}
-      >
-        Sign Up
-      </Button>
-      <PomodoroInfo/>
+        <Button
+          variant="contained"
+          sx={{ backgroundColor: "common.fourth" }}
+          onClick={() => {
+            navigate("/signup");
+          }}
+        >
+          Sign Up
+        </Button>
+      </Box>
+
+      <PomodoroInfo />
     </Box>
   );
 };

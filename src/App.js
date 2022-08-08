@@ -20,7 +20,6 @@ import { LandingPage } from "./components/landing/LandingPage";
 
 function App() {
   const [on, setOn] = useState(false);
-  const [auth, setAuth] = useState(false);
   const { focusMode } = useSelector((state) => state.timer);
   const { currentUser } = useSelector((state) => state.account);
   const { clockState } = useSelector((state) => state.rooms);
@@ -34,72 +33,95 @@ function App() {
     dispatch(fetchPort());
   }, [dispatch]);
 
-  return !auth ? (
-    <LandingPage />
-  ) : (
+  return (
     <Router>
-      <div className="App">
-        <div className="container">
-          <div
-            style={
-              focusMode || (clockState?.mode === "focus" && clockState?.running)
-                ? {
-                    pointerEvents: "none",
-                    filter: "brightness(15%)",
-                    transition: "400ms filter linear",
-                  }
-                : { transition: "400ms filter linear" }
-            }
-          >
-            <Sidebar />
-          </div>
-          <div
-            style={{
-              marginLeft: "300px",
-              height: "100vh",
-              width: "100%",
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-              backdropFilter:
-                (focusMode ||
-                  (clockState?.mode === "focus" && clockState?.running)) &&
-                "brightness(30%)",
-              transition: "400ms backdrop-filter linear",
-            }}
-            className="mainComponent"
-          >
-            <Routes>
-              <Route path="/" element={<Clock />} />
-              <Route path="/color" element={<ColorSampler />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignUpPage />} />
-              <Route path="/userprofile" element={<Profile />} />
-              <Route path="/pomodoro" element={<Clock />} />
-              <Route path="/userstats" element={<UserStats />} />
-              <Route path="/subjects" element={<SubjectStats />} />
-              <Route path="/explore" element={<ExploreStats />} />
-              <Route path="/editProfile" element={<EditProfile />} />
-            </Routes>
-          </div>
-          {currentUser && (
-            <Box
-              sx={{
-                position: "fixed",
-                bottom: 10,
-                right: 10,
+      {!currentUser ? (
+        <div className="App">
+          <div className="container">
+            <div
+              style={{
+                height: "100vh",
+                width: "100%",
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center",
+                justifyContent: "center",
               }}
+              className="mainComponent"
             >
-              <Typography>Go {on ? "offline" : "online"}</Typography>
-              <Switch onChange={() => setOn(!on)} value={on} />
-            </Box>
-          )}
+              <Routes>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/signup" element={<SignUpPage />} />
+              </Routes>
+            </div>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="App">
+          <div className="container">
+            <div
+              style={
+                focusMode ||
+                (clockState?.mode === "focus" && clockState?.running)
+                  ? {
+                      pointerEvents: "none",
+                      filter: "brightness(15%)",
+                      transition: "400ms filter linear",
+                    }
+                  : { transition: "400ms filter linear" }
+              }
+            >
+              <Sidebar />
+            </div>
+            <div
+              style={{
+                marginLeft: "300px",
+                height: "100vh",
+                width: "100%",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                backdropFilter:
+                  (focusMode ||
+                    (clockState?.mode === "focus" && clockState?.running)) &&
+                  "brightness(30%)",
+                transition: "400ms backdrop-filter linear",
+              }}
+              className="mainComponent"
+            >
+              <Routes>
+                <Route path="/" element={<Clock />} />
+                <Route path="/color" element={<ColorSampler />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/signup" element={<SignUpPage />} />
+                <Route path="/userprofile" element={<Profile />} />
+                <Route path="/pomodoro" element={<Clock />} />
+                <Route path="/userstats" element={<UserStats />} />
+                <Route path="/subjects" element={<SubjectStats />} />
+                <Route path="/explore" element={<ExploreStats />} />
+                <Route path="/editProfile" element={<EditProfile />} />
+              </Routes>
+            </div>
+            {currentUser && (
+              <Box
+                sx={{
+                  position: "fixed",
+                  bottom: 10,
+                  right: 10,
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                }}
+              >
+                <Typography>Go {on ? "offline" : "online"}</Typography>
+                <Switch onChange={() => setOn(!on)} value={on} />
+              </Box>
+            )}
+          </div>
+        </div>
+      )}
     </Router>
   );
 }
