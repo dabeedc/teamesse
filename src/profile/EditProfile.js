@@ -24,7 +24,6 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateUserAsync } from "../redux/slices/account";
 
-
 export const EditProfile = () => {
   const { currentUser } = useSelector((state) => state.account);
 
@@ -47,10 +46,10 @@ export const EditProfile = () => {
       occupation: newOccupation,
       employer: newEmployer,
       description: newDescription,
-    } 
+    };
     console.log(userToUpdate);
     dispatch(updateUserAsync(userToUpdate));
-  }
+  };
 
   return (
     <>
@@ -114,7 +113,7 @@ export const EditProfile = () => {
                 shrink: currentUser?.description,
               }}
               onChange={(e) => {
-                setDescription(e.target.value)
+                setDescription(e.target.value);
               }}
             />
           </Grid>
@@ -147,11 +146,11 @@ export const EditProfile = () => {
               }}
               defaultValue={currentUser?.username}
               InputLabelProps={{
-                style: { color: "#fff" },
+                style: { color: "text.contrastText" },
                 shrink: currentUser?.username,
               }}
               onChange={(e) => {
-                setUsername(e.target.value)
+                setUsername(e.target.value);
               }}
             />
             <br></br>
@@ -165,11 +164,11 @@ export const EditProfile = () => {
               }}
               defaultValue={currentUser?.name}
               InputLabelProps={{
-                style: { color: "#fff" },
+                style: { color: "text.contrastText" },
                 shrink: currentUser?.name,
               }}
               onChange={(e) => {
-                setName(e.target.value)
+                setName(e.target.value);
               }}
             />
             <br></br>
@@ -183,11 +182,11 @@ export const EditProfile = () => {
               }}
               defaultValue={currentUser?.email}
               InputLabelProps={{
-                style: { color: "#fff" },
+                style: { color: "text.contrastText" },
                 shrink: currentUser?.email,
               }}
               onChange={(e) => {
-                setEmail(e.target.value)
+                setEmail(e.target.value);
               }}
             />
             <br></br>
@@ -201,11 +200,11 @@ export const EditProfile = () => {
               }}
               defaultValue={currentUser?.occupation}
               InputLabelProps={{
-                style: { color: "#fff" },
+                style: { color: "text.contrastText" },
                 shrink: currentUser?.occupation,
               }}
               onChange={(e) => {
-                setOccupation(e.target.value)
+                setOccupation(e.target.value);
               }}
             />
             <br></br>
@@ -219,11 +218,11 @@ export const EditProfile = () => {
               }}
               defaultValue={currentUser?.employer}
               InputLabelProps={{
-                style: { color: "#fff" },
+                style: { color: "text.contrastText" },
                 shrink: currentUser?.employer,
               }}
               onChange={(e) => {
-                setEmployer(e.target.value)
+                setEmployer(e.target.value);
               }}
             />
             <br></br>

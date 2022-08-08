@@ -6,7 +6,7 @@
 
 import React, { useEffect, useState } from "react";
 import { ResponsiveCalendar } from "@nivo/calendar";
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, useTheme } from "@mui/material";
 import { useSelector } from "react-redux";
 import { userStats } from "../redux/slices/account";
 import { useDispatch } from "react-redux";
@@ -20,6 +20,8 @@ export const StatsMap = () => {
   // useEffect(() => {
   //   dispatch(userStats());
   // }, []);
+
+  const theme = useTheme();
 
   useEffect(() => {
     (async () => {
@@ -39,12 +41,13 @@ export const StatsMap = () => {
         alignItems: "center",
         width: "90%",
         height: "550px",
-        backgroundColor: (theme) => theme.palette.common.sixth,
+        backgroundColor: "common.sixth",
+        color: "text.primary",
       }}
     >
       <ResponsiveCalendar
         theme={{
-          textColor: "#ffffff",
+          textColor: theme.palette.text.primary,
           fontSize: 20,
           tooltip: { container: { color: "black" } },
         }}
