@@ -74,22 +74,6 @@ export const Sidebar = () => {
             </Button>
           ))}
         </Box>
-        <TextField
-          sx={{
-            backgroundColor: "common.second",
-            color: "text.primary",
-          }}
-          multiline
-          rows={10}
-          label="Weekly Goals"
-          defaultValue=""
-          variant="filled"
-          InputLabelProps={{
-            style: {
-              color: "white",
-            },
-          }}
-        />
         <Box
           sx={{
             display: "flex",
