@@ -12,15 +12,10 @@ const formatAsTimeString = (secs) => {
   return `${extend(numHours)}:${extend(numMinutes)}:${extend(numSecs)}`;
 };
 
-const sendToRoom = (subject, subjects, msg) => {
+const sendToRoom = (subject, subjects, msg, type = "timer") => {
   if (subjects && subject in subjects) {
     subjects[subject].forEach((client) => {
-      client.send(
-        JSON.stringify({
-          type: "timer",
-          ...msg,
-        })
-      );
+      client.send(JSON.stringify({ type, ...msg }));
     });
   }
 };
@@ -103,7 +98,11 @@ const startTimerForRoom = ({
       focusInterval,
       breakInterval,
       mode: mode === "focus" ? "break" : "focus",
+      broadcastToAll,
     });
+    if (mode === "focus") {
+      sendToRoom(subject, subjects, { subject, focusInterval }, "completed");
+    }
     broadcastToAll();
   });
 

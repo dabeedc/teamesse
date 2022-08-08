@@ -12,6 +12,7 @@ export const TimeSelect = ({ title, initialTime, setInitialTime, disabled }) => 
       onChange={(e) => setInitialTime(e.target.value)}
       disabled={disabled}
     >
+      <MenuItem value={5}>5 seconds</MenuItem>
       {[1, ...Array.from({ length: 32 }, (_, i) => 5 * (i + 1))].map(
         (interval) => {
           return (
