@@ -51,42 +51,28 @@ export const Sidebar = () => {
             height: "200px",
           }}
         >
-          <Button
-            variant="contained"
-            sx={{ backgroundColor: "common.fourth", width: "200px" }}
-            onClick={() => {
-              navigate("/pomodoro");
-            }}
-          >
-            Pomodoro
-          </Button>
-          <Button
-            variant="contained"
-            sx={{ backgroundColor: "common.fourth", width: "200px" }}
-            onClick={() => {
-              navigate("/userstats");
-            }}
-          >
-            Statistics
-          </Button>
-          <Button
-            variant="contained"
-            sx={{ backgroundColor: "common.fourth", width: "200px" }}
-            onClick={() => {
-              navigate("/subjects");
-            }}
-          >
-            Subjects
-          </Button>
-          <Button
-            variant="contained"
-            sx={{ backgroundColor: "common.fourth", width: "200px" }}
-            onClick={() => {
-              navigate("/explore");
-            }}
-          >
-            Explore
-          </Button>
+          {[
+            ["Pomodoro", "/pomodoro"],
+            ["Statistics", "/userstats"],
+            ["Subjects", "/subjects"],
+            ["Explore", "/explore"],
+          ].map(([title, pathname]) => (
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor:
+                  window.location.pathname === pathname
+                    ? "primary"
+                    : "common.fourth",
+                width: "200px",
+              }}
+              onClick={() => {
+                navigate(pathname);
+              }}
+            >
+              {title}
+            </Button>
+          ))}
         </Box>
         <TextField
           sx={{
