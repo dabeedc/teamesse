@@ -10,9 +10,8 @@
 import React, { useEffect } from "react";
 import { Box, Typography, Avatar } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { userStats } from "../redux/slices/account";
-import { useDispatch } from "react-redux";
 
 export const ExploreStats = () => {
   const { currentUser, stats } = useSelector((state) => state.account);
@@ -41,7 +40,8 @@ export const ExploreStats = () => {
     {
       headerName: "Date",
       field: "date",
-      width: 300,
+      width: 150,
+      renderCell: ({ value }) => new Date(value).toLocaleDateString(),
     },
     {
       headerName: "Reactions",
@@ -67,8 +67,10 @@ export const ExploreStats = () => {
                   py: 3,
                 }}
               >
-                <Box sx={{mx: -0.5}}>
-                  <Typography sx={{ m: 0, fontSize: '20px' }}>{emoji}</Typography>
+                <Box sx={{ mx: -0.5 }}>
+                  <Typography sx={{ m: 0, fontSize: "20px" }}>
+                    {emoji}
+                  </Typography>
                   <Typography sx={{ m: 0 }}>{count}</Typography>
                 </Box>
               </Box>
@@ -99,7 +101,7 @@ export const ExploreStats = () => {
           backgroundColor: (theme) => theme.palette.common.fifth,
           flexDirection: "column",
           width: "100%",
-          overflowX: 'scroll'
+          overflowX: "scroll",
         }}
       >
         <br></br>
@@ -126,6 +128,7 @@ export const ExploreStats = () => {
             backgroundColor: (theme) => theme.palette.common.third,
             justifyContent: "space-evenly",
             borderColor: "common.third",
+            color: "text.contrastText",
           }}
           columns={fields}
           onRowClick={(params) => console.log(params.row.reactions)}

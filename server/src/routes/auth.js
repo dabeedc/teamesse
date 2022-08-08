@@ -1,4 +1,5 @@
 const allUsers = require("../data/users.json");
+const bcrypt = require('bcryptjs');
 const User = require("../../models/user.model.js");
 const { v4: uuid } = require("uuid");
 const { Router } = require("express");
@@ -6,20 +7,24 @@ const router = Router();
 
 const users = allUsers.map((user) => ({ id: uuid(), ...user }));
 
-router.get("/users", (_, res) => {
-  res.send(users);
+router.get("/users", async (_, res) => {
+  const users = await User.find({});
+  return users;
 });
 
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  const user = users.find((user) => user.username === username);
+
+  const user = await User.findOne({username});
 
   if (!user) {
     res.status(404).send({ message: `Username ${username} not found.` });
     return;
   }
 
-  if (user.password !== password) {
+  const validPassword = await bcrypt.compare(password, user.password);
+
+  if (!validPassword) {
     res.status(401).send({ message: "Incorrect password." });
     return;
   }

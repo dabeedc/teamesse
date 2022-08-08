@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setClockState, setSelectedRoom } from "../redux/slices/rooms";
+import { getBaseUrl } from "../utils";
 
 export const useSocket = () => {
   const [socket, setSocket] = useState(null);
@@ -50,7 +51,7 @@ export const useSocket = () => {
     if (isConnecting && currentUser) {
       const conn = new WebSocket(
         `${
-          process.env.MODE === "DEV"
+          process.env.NODE_ENV === "development"
             ? `ws://localhost:${port}`
             : "wss://teamesse-pomodoro.herokuapp.com"
         }/${currentUser.username}`
@@ -74,6 +75,7 @@ export const useSocket = () => {
           message,
           sender,
           subjects,
+          subject,
           mode,
           timeLeft,
           ratio,
@@ -99,6 +101,25 @@ export const useSocket = () => {
               breakInterval,
             })
           );
+        } else if (type && type === "completed") {
+          (async () => {
+            try {
+              const res = await fetch(`${getBaseUrl()}/sessions/new`, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  id: currentUser._id,
+                  subject,
+                  duration: focusInterval,
+                }),
+              });
+              if (!res.ok) throw new Error("Couldn't update session");
+            } catch (err) {
+              console.log(err);
+            }
+          })();
         }
       });
 
