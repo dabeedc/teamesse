@@ -13,12 +13,12 @@ export const LandingPage = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "space-evenly",
-        width: "50%",
+        width: "70%",
         borderRadius: "16px",
       }}
     >
       <h1>teamesse</h1>
-      <Typography>
+      <Typography sx={{fontSize:20}}>
         Let's work together in developing productive habits - in a collaborative
         manner.
         <br />
