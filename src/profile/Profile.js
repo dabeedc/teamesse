@@ -9,12 +9,11 @@
 // https://smartdevpreneur.com/the-complete-guide-to-material-ui-grid-align-items/#Material-UI_Grid_Align_Left
 // https://stackoverflow.com/questions/69367920/react-material-ui-grid-horizontally-align-items-for-containers-with-different-nu
 // https://stackoverflow.com/questions/31198170/want-to-add-spacing-between-buttons#:~:text=You%20can%20use%20or,between%20buttons%20on%20a%20webpage.
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React from "react";
 import {
   Box,
   Button,
-  Typography,
   TextField,
   Avatar,
   Grid,
@@ -34,18 +33,6 @@ export const Profile = () => {
           backgroundColor: (theme) => theme.palette.common.fifth,
         }}
       >
-        {/* <Box sx={{ paddingLeft: "17%", paddingTop: "5%" }}>
-          <Avatar
-            sx={{
-              backgroundColor: (theme) => theme.palette.common.third,
-              width: 250,
-              height: 250,
-            }}
-          ></Avatar>
-          <br></br>
-          <br></br>
-        </Box> */}
-
         <br></br>
         <br></br>
 

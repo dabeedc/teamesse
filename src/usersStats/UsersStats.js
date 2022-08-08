@@ -10,6 +10,7 @@ import { PomodoroCard } from "./PomodoroCard";
 import { PomodoroSessionCard } from "./PomodoroSessionCard";
 import { PomodoroAverageSessionCard } from "./PomodoroAverageSessionCard";
 import { Box } from "@mui/material";
+import "./stats.css";
 
 export const UserStats = () => {
   return (
@@ -28,17 +29,19 @@ export const UserStats = () => {
           justifyContent: "center",
         }}
       >
-        <PomodoroSessionCard />
-        <PomodoroCard />
-        <PomodoroAverageSessionCard />
+        <div className="stats-card">
+          <PomodoroSessionCard />
+          <PomodoroCard />
+          <PomodoroAverageSessionCard />
+        </div>
       </div>
       <div
         style={{
-          marginTop: "100px",
           width: "100%",
-          height: "60%",
+          height: "100%",
+          display: "flex",
           justifyContent: "center",
-          marginLeft: "100px",
+          position: "relative",
         }}
       >
         <StatsMap />

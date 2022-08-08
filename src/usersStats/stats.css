@@ -1,0 +1,20 @@
+/* References:
+https://www.w3schools.com/css/css_rwd_mediaqueries.asp
+https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Media_queries
+https://stackoverflow.com/questions/60286185/how-to-align-items-in-two-cards-side-by-side */
+
+.stats-card{
+    display: flex;
+    max-width: 100%;
+    max-height: 100%;
+    flex-direction: row;
+}
+
+@media only screen and (max-width: 1500px) {
+    .stats-card{ 
+    display: flex;
+    flex-direction: column;
+    justify-content: "center";
+    position: "relative";
+    }
+}

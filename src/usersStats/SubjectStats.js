@@ -16,7 +16,6 @@ export const SubjectStats = () => {
         `${getBaseUrl()}/stats/subject/62cd0b463b463fa6bfc6f822`
       );
       let subjectList = await subjectRes.json();
-      console.log(subjectList);
       setSubjectData(subjectList);
     })();
   }, []);
@@ -31,7 +30,7 @@ export const SubjectStats = () => {
         alignItems: "center",
         width: "90%",
         height: "550px",
-        backgroundColor: (theme) => theme.palette.common.sixth,
+        backgroundColor: () => theme.palette.common.sixth,
       }}
     >
       <ResponsivePie
