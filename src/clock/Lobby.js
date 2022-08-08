@@ -12,9 +12,7 @@ import { setSelectedRoom } from "../redux/slices/rooms";
 
 export const Lobby = ({ hidden, subjects, messages, send, loading }) => {
   const [inputMessage, setInputMessage] = useState("");
-  const { online, selectedRoom } = useSelector(
-    (state) => state.rooms
-  );
+  const { online, selectedRoom } = useSelector((state) => state.rooms);
   const { currentUser } = useSelector((state) => state.account);
   const dispatch = useDispatch();
 
@@ -54,9 +52,11 @@ export const Lobby = ({ hidden, subjects, messages, send, loading }) => {
                     ":hover": {
                       cursor: "pointer",
                       backgroundColor: (theme) => theme.palette.common.third,
+                      color: "white",
                     },
                     backgroundColor: (theme) =>
                       subject === selectedRoom && theme.palette.common.third,
+                    color: subject === selectedRoom && "white",
                     borderRadius: "5px",
                     py: "2px",
                     px: "5px",

@@ -6,20 +6,12 @@
 
 import React, { useEffect, useState } from "react";
 import { ResponsiveCalendar } from "@nivo/calendar";
-import { Box, Stack } from "@mui/material";
-import { useSelector } from "react-redux";
-import { userStats } from "../redux/slices/account";
-import { useDispatch } from "react-redux";
+import { Box, useTheme } from "@mui/material";
 import { getBaseUrl } from "../utils";
 
 export const StatsMap = () => {
   const [pomodoroData, setPomodoroData] = useState([]);
-  // const { currentUser, stats } = useSelector((state) => state.account);
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(userStats());
-  // }, []);
+  const theme = useTheme();
 
   useEffect(() => {
     (async () => {
@@ -39,24 +31,25 @@ export const StatsMap = () => {
         alignItems: "center",
         width: "90%",
         height: "550px",
-        backgroundColor: (theme) => theme.palette.common.sixth,
+        backgroundColor: "common.sixth",
+        color: "text.primary",
       }}
     >
       <ResponsiveCalendar
         theme={{
-          textColor: "#ffffff",
+          textColor: theme.palette.text.primary,
           fontSize: 20,
           tooltip: { container: { color: "black" } },
         }}
         from="2022-07-01"
         to="2023-07-01"
         data={pomodoroData}
-        emptyColor="#eeeeee"
+        emptyColor={theme.palette.common.third}
         margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
         yearSpacing={40}
-        monthBorderColor="#ffffff"
+        monthBorderColor={theme.palette.common.fifth}
         dayBorderWidth={2}
-        dayBorderColor="#ffffff"
+        dayBorderColor={theme.palette.common.fifth}
         legends={[
           {
             anchor: "bottom-right",
