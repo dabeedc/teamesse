@@ -21,7 +21,7 @@ const accountSlice = createSlice({
         state.loading = true;
       })
       .addCase(userLogin.fulfilled, (state, action) => {
-        state.currentUser = action.payload;
+        state.currentUser = action.payload._doc;
         state.loading = false;
       })
       .addCase(userLogin.rejected, (state, action) => {
@@ -41,7 +41,7 @@ const accountSlice = createSlice({
         state.loading = true;
       })
       .addCase(userSignup.fulfilled, (state, action) => {
-        state.currentUser = action.payload;
+        state.currentUser = action.payload._doc;
         state.loading = false;
       })
       .addCase(updateUserAsync.rejected, (state, action) => {
@@ -51,7 +51,7 @@ const accountSlice = createSlice({
         state.loading = true;
       })
       .addCase(updateUserAsync.fulfilled, (state, action) => {
-        state.currentUser = action.payload;
+        state.currentUser = action.payload._doc;
         state.loading = false;
       })
       .addCase(fetchPort.rejected, (state, action) => {
