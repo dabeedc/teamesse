@@ -23,39 +23,39 @@ export const SubjectStats = () => {
   const theme = useTheme();
 
   return (
-  <Box
-    sx={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      width: "90%",
-      height: "550px",
-      backgroundColor: (theme) => theme.palette.common.sixth,
-    }}
-  >
-    <ResponsivePie
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        width: "90%",
+        height: "550px",
+        backgroundColor: (theme) => theme.palette.common.sixth,
+      }}
+    >
+      <ResponsivePie
         margin={{ top: 50, right: 75, bottom: 85, left: 75 }}
         cornerRadius={3}
         borderWidth={1}
-        arcLabelsTextColor='#333333'
+        arcLabelsTextColor={theme?.palette?.text?.primary}
         theme={{
-          textColor: '#FFFFFF',
+          textColor: theme?.palette?.text?.primary,
           fontSize: 20,
           tooltip: { container: { color: "black" } },
         }}
         legends={[
-            {
-                translateX: 10,
-                translateY: 80,
-                itemWidth: 140,
-                itemDirection: 'right-to-left',
-                symbolSize: 25,
-                direction: 'row',
-                itemTextColor: '#FFFFFF',
-                symbolShape: 'square',
-                itemHeight: 18,
-                anchor: 'bottom',
-            }
+          {
+            translateX: 10,
+            translateY: 80,
+            itemWidth: 140,
+            itemDirection: "right-to-left",
+            symbolSize: 25,
+            direction: "row",
+            itemTextColor: theme?.palette?.text?.primary,
+            symbolShape: "square",
+            itemHeight: 18,
+            anchor: "bottom",
+          },
         ]}
         arcLinkLabelsTextColor={theme?.palette?.text?.primary}
         data={subjectData}
