@@ -34,13 +34,6 @@ export const Profile = () => {
           backgroundColor: (theme) => theme.palette.common.fifth,
         }}
       >
-        <Typography
-          variant="h4"
-          sx={{ backgroundColor: (theme) => theme.palette.common.second }}
-        >
-          User Profile Page
-        </Typography>
-
         {/* <Box sx={{ paddingLeft: "17%", paddingTop: "5%" }}>
           <Avatar
             sx={{

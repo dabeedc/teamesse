@@ -22,6 +22,9 @@
         "fifth": "#2D142C",
         "blueAccent": "#20B7C9",
         "greenAccent": "#20C968"
+      },
+      "info": {
+        "main": "#fff"
       }
     }
   },
@@ -48,6 +51,9 @@
         "fifth": "#082032",
         "blueAccent": "#238cdb",
         "greenAccent": "#30db23"
+      },
+      "info": {
+        "main": "#fff"
       }
     }
   },
@@ -75,6 +81,9 @@
         "fifth": "#D3ECA7",
         "blueAccent": "#30B3B3",
         "greenAccent": "#72b330"
+      },
+      "info": {
+        "main": "#fff"
       }
     }
   }
