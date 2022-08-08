@@ -35,11 +35,10 @@ export const PomodoroCard = () => {
     >
       <CardContent>
         <Typography sx={{ color: "#ffffff", mb: 20.0 }}>
+          <div className="display-stats">
           Total Pomodoro Session Time:
-          <br></br>
-          <br></br>
-          <br></br>
-          {pomodoroTotalTime.time} minutes
+          </div>
+          <div className="calc-stats">{pomodoroTotalTime.time} minutes</div>
         </Typography>
       </CardContent>
     </Card>

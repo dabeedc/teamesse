@@ -11,13 +11,7 @@
 // https://stackoverflow.com/questions/31198170/want-to-add-spacing-between-buttons#:~:text=You%20can%20use%20or,between%20buttons%20on%20a%20webpage.
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import {
-  Box,
-  Button,
-  TextField,
-  Avatar,
-  Grid,
-} from "@mui/material";
+import { Box, Button, TextField, Avatar, Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 
 export const Profile = () => {
@@ -28,14 +22,15 @@ export const Profile = () => {
     <>
       <Box
         sx={{
-          width: "100%",
-          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          width: "90%",
+          paddingY: "50px",
+          maxHeight: "100%",
           backgroundColor: (theme) => theme.palette.common.fifth,
         }}
       >
-        <br></br>
-        <br></br>
-
         <Grid container spacing={2} columns={16}>
           <Grid item xs={8}>
             <Avatar
@@ -50,119 +45,112 @@ export const Profile = () => {
             ></Avatar>
           </Grid>
         </Grid>
-        <br></br>
-        <br></br>
 
-        <Grid container spacing={2} columns={16}>
+        <Grid container spacing={4} columns={16}>
           <Grid item xs={8}>
-            <TextField
-              sx={{ width: "70%", backgroundColor: "common.third" }}
-              multiline
-              rows={23}
-              label="Description"
-              value={currentUser?.description}
-              variant="filled"
-              InputLabelProps={{
-                style: { color: "#fff" },
-                shrink: currentUser?.description,
-              }}
-            />
+            <div className="profile">
+              <TextField
+                sx={{ width: "70%", backgroundColor: "common.third" }}
+                multiline
+                rows={30}
+                label="Description"
+                value={currentUser?.description}
+                variant="filled"
+                InputLabelProps={{
+                  style: { color: "#fff" },
+                  shrink: currentUser?.description,
+                }}
+                inputProps={{ style: { color: "white" } }}
+              />
+            </div>
           </Grid>
           <Grid item xs={8}>
-            <Button
-              variant="contained"
-              sx={{ backgroundColor: "common.third" }}
-              onClick={() => {
-                navigate("/editProfile");
-              }}
-            >
-              Edit Profile
-            </Button>
-            &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-            <Button
-              variant="contained"
-              sx={{ backgroundColor: "common.third" }}
-            >
-              Toggle Visibility
-            </Button>
-            <br></br>
-            <br></br>
-            <br></br>
-            <TextField
-              label="Account Username"
-              sx={{
-                width: "90%",
-                backgroundColor: "common.third",
-              }}
-              value={currentUser?.username}
-              InputLabelProps={{
-                style: { color: "#fff" },
-                shrink: currentUser?.username,
-              }}
-            />
-            <br></br>
-            <br></br>
-            <br></br>
-            <TextField
-              label="Name"
-              sx={{
-                width: "90%",
-                backgroundColor: "common.third",
-              }}
-              value={currentUser?.name}
-              InputLabelProps={{
-                style: { color: "#fff" },
-                shrink: currentUser?.name,
-              }}
-            />
-            <br></br>
-            <br></br>
-            <br></br>
-            <TextField
-              label="Email"
-              sx={{
-                width: "90%",
-                backgroundColor: "common.third",
-              }}
-              value={currentUser?.email}
-              InputLabelProps={{
-                style: { color: "#fff" },
-                shrink: currentUser?.email,
-              }}
-            />
-            <br></br>
-            <br></br>
-            <br></br>
-            <TextField
-              label="Occupation"
-              sx={{
-                width: "90%",
-                backgroundColor: "common.third",
-              }}
-              value={currentUser?.occupation}
-              InputLabelProps={{
-                style: { color: "#fff" },
-                shrink: currentUser?.occupation,
-              }}
-            />
-            <br></br>
-            <br></br>
-            <br></br>
-            <TextField
-              label="Employer/School"
-              sx={{
-                width: "90%",
-                backgroundColor: "common.third",
-              }}
-              value={currentUser?.employer}
-              InputLabelProps={{
-                style: { color: "#fff" },
-                shrink: currentUser?.employer,
-              }}
-            />
-            <br></br>
-            <br></br>
-            <br></br>
+            <div className="profile">
+              <Button
+                variant="contained"
+                sx={{ backgroundColor: "common.third" }}
+                onClick={() => {
+                  navigate("/editProfile");
+                }}
+              >
+                Edit Profile
+              </Button>
+            </div>
+            <div className="profile">
+              <TextField
+                label="Account Username"
+                sx={{
+                  width: "90%",
+                  backgroundColor: "common.third",
+                }}
+                value={currentUser?.username}
+                InputLabelProps={{
+                  style: { color: "#fff" },
+                  shrink: currentUser?.username,
+                }}
+                inputProps={{ style: { color: "white" } }}
+              />
+            </div>
+            <div className="profile">
+              <TextField
+                label="Name"
+                sx={{
+                  width: "90%",
+                  backgroundColor: "common.third",
+                }}
+                value={currentUser?.name}
+                InputLabelProps={{
+                  style: { color: "#fff" },
+                  shrink: currentUser?.name,
+                }}
+                inputProps={{ style: { color: "white" } }}
+              />
+            </div>
+            <div className="profile">
+              <TextField
+                label="Email"
+                sx={{
+                  width: "90%",
+                  backgroundColor: "common.third",
+                }}
+                value={currentUser?.email}
+                InputLabelProps={{
+                  style: { color: "#fff" },
+                  shrink: currentUser?.email,
+                }}
+                inputProps={{ style: { color: "white" } }}
+              />
+            </div>
+            <div className="profile">
+              <TextField
+                label="Occupation"
+                sx={{
+                  width: "90%",
+                  backgroundColor: "common.third",
+                }}
+                value={currentUser?.occupation}
+                InputLabelProps={{
+                  style: { color: "#fff" },
+                  shrink: currentUser?.occupation,
+                }}
+                inputProps={{ style: { color: "white" } }}
+              />
+            </div>
+            <div className="profile">
+              <TextField
+                label="Employer/School"
+                sx={{
+                  width: "90%",
+                  backgroundColor: "common.third",
+                }}
+                value={currentUser?.employer}
+                InputLabelProps={{
+                  style: { color: "#fff" },
+                  shrink: currentUser?.employer,
+                }}
+                inputProps={{ style: { color: "white" } }}
+              />
+            </div>
           </Grid>
         </Grid>
       </Box>

@@ -3,16 +3,18 @@
 // https://nivo.rocks/guides/theming/
 // https://mui.com/material-ui/react-card/#basic-card
 // https://mui.com/material-ui/react-grid/
+// https://mui.com/material-ui/react-use-media-query/
 
 import React, { useEffect, useState } from "react";
 import { ResponsiveCalendar } from "@nivo/calendar";
 import { Box, useTheme } from "@mui/material";
 import { getBaseUrl } from "../utils";
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export const StatsMap = () => {
   const [pomodoroData, setPomodoroData] = useState([]);
+  const verticalMap = useMediaQuery('(max-width:1500px)');
   const theme = useTheme();
-
   useEffect(() => {
     (async () => {
       let pomodoroRes = await fetch(
@@ -30,7 +32,7 @@ export const StatsMap = () => {
         flexDirection: "column",
         alignItems: "center",
         width: "90%",
-        height: "550px",
+        height: verticalMap? "1000px" : "550px",
         backgroundColor: "common.sixth",
         color: "text.primary",
       }}
@@ -50,6 +52,7 @@ export const StatsMap = () => {
         monthBorderColor={theme.palette.common.fifth}
         dayBorderWidth={2}
         dayBorderColor={theme.palette.common.fifth}
+        direction={verticalMap? "vertical" : "horizontal"}
         legends={[
           {
             anchor: "bottom-right",

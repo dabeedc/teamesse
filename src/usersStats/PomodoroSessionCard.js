@@ -35,11 +35,10 @@ export const PomodoroSessionCard = () => {
     >
       <CardContent>
         <Typography sx={{ color: "#ffffff", mb: 20.0 }}>
-          Total Pomodoro Sessions:
-          <br></br>
-          <br></br>
-          <br></br>
-          {pomodoroTotalSessions.session} sessions
+          <div className="display-stats">Total Pomodoro Sessions:</div>
+          <div className="calc-stats">
+            {pomodoroTotalSessions.session} sessions
+          </div>
         </Typography>
       </CardContent>
     </Card>
