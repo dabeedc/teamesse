@@ -11,6 +11,7 @@ import { Box, useTheme, Typography } from "@mui/material";
 import { getBaseUrl } from "../utils";
 import { useSelector } from "react-redux";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { StatsToolTip } from "./StatsToolTip";
 
 export const StatsMap = () => {
   const { currentUser } = useSelector((state) => state.account);
@@ -67,38 +68,10 @@ export const StatsMap = () => {
           },
         ]}
         tooltip={({ color, value, day }) => (
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              backgroundColor: "white",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "black",
-              borderRadius: "2px",
-            }}
-          >
-            <Box
-              sx={{
-                backgroundColor: color,
-                width: "12px",
-                height: "12px",
-                margin: "5px",
-              }}
-            />
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                margin: "3px",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Typography sx={{ mr: "3px" }}>{day}:</Typography>
-              <Typography fontWeight="bold">{value} minutes</Typography>
-            </Box>
-          </Box>
+          <StatsToolTip color={color}>
+            <Typography sx={{ mr: "3px" }}>{day}:</Typography>
+            <Typography fontWeight="bold">{value} minutes</Typography>
+          </StatsToolTip>
         )}
       />
     </Box>
