@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 
-export const StatsToolTip = ({ color, ...children }) => {
+export const StatsToolTip = ({ color, children }) => {
   return (
     <Box
       sx={{

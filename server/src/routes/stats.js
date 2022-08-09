@@ -6,8 +6,6 @@
 // https://stackoverflow.com/questions/16507866/how-to-iterate-over-objects-property-value-pairs
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round
 
-const allUsersStats = require("../data/usersStats.json");
-
 const User = require("../../models/user.model");
 
 const { Router } = require("express");
@@ -116,7 +114,7 @@ router.get("/subject/:userId", async function (req, res) {
   let pomodoroList = Object.keys(pomodoroObj).map((key) => ({
     id: key,
     label: key,
-    value: pomodoroObj[key] / 60,
+    value: Math.round(pomodoroObj[key] / 60),
   }));
   return res.send(pomodoroList);
 });
@@ -149,8 +147,8 @@ router.get("/pomodoroStats/:userId", async function (req, res) {
   avgPomodoroSession = Math.round(totalDuration / dateCount).toString();
   return res.send({
     sessions: accumulatedPomodoroSessions,
-    time: totalDuration,
-    avgPomodoroSessions: avgPomodoroSession,
+    time: Math.round(totalDuration),
+    avgPomodoroSessions: Math.round(avgPomodoroSession),
   });
 });
 
