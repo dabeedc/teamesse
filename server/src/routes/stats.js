@@ -60,7 +60,7 @@ router.post("/remove_reaction", async (req, res) => {
 });
 
 function buildDate(key) {
-  let day = new Date(key).getDay();
+  let day = new Date(key).getDate();
   if (day < 10) {
     day = `0${day}`;
   }
@@ -77,11 +77,9 @@ router.get("/pomodoro/:userId", async function (req, res) {
   const foundUser = await User.findById(req.params.userId);
   if (!foundUser) return res.status(404).send({ message: "user not found" });
   let userPomodorosArr = foundUser["pomodoros"];
-
   let pomodoroMap = new Map();
   for (const element of userPomodorosArr) {
     let dateCompletedKey = element["dateCompleted"];
-    
     let pomodoroDuration = element["duration"];
     if (pomodoroMap.has(dateCompletedKey)) {
       let newDuration = pomodoroMap[dateCompletedKey] + pomodoroDuration;
@@ -103,7 +101,6 @@ router.get("/subject/:userId", async function (req, res) {
   const foundUser = await User.findById(req.params.userId);
   if (!foundUser) return res.status(404).send({ message: "user not found" });
   let userPomodorosArr = foundUser["pomodoros"];
-
   let pomodoroMap = new Map();
   for (const element of userPomodorosArr) {
     let subjectKey = element["subject"];
@@ -128,10 +125,8 @@ router.get("/pomodoroStats/:userId", async function (req, res) {
   const foundUser = await User.findById(req.params.userId);
   if (!foundUser) return res.status(404).send({ message: "user not found" });
   let userPomodorosArr = foundUser["pomodoros"];
-
   let accumulatedPomodoroSessions = userPomodorosArr.length;
   accumulatedPomodoroSessions = accumulatedPomodoroSessions.toString();
-
   let avgPomodoroSession = 0;
   let pomodoroMap = new Map();
   let dateCount = 0;

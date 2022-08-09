@@ -4,23 +4,25 @@
 
 import React, { useEffect, useState } from "react";
 import { ResponsivePie } from "@nivo/pie";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { getBaseUrl } from "../utils";
 import { useTheme } from "@mui/material/styles";
+import { useSelector } from "react-redux";
+import { StatsToolTip } from "./StatsToolTip";
 
 export const SubjectStats = () => {
+  const { currentUser } = useSelector((state) => state.account);
   const [subjectData, setSubjectData] = useState([]);
+  const theme = useTheme();
   useEffect(() => {
     (async () => {
       let subjectRes = await fetch(
-        `${getBaseUrl()}/stats/subject/62cd0b463b463fa6bfc6f822`
+        `${getBaseUrl()}/stats/subject/` + currentUser._id
       );
       let subjectList = await subjectRes.json();
       setSubjectData(subjectList);
     })();
   }, []);
-
-  const theme = useTheme();
 
   return (
     <Box
@@ -29,7 +31,7 @@ export const SubjectStats = () => {
         flexDirection: "column",
         alignItems: "center",
         width: "90%",
-        height: "550px", 
+        height: "700px",
         backgroundColor: () => theme.palette.common.sixth,
       }}
     >
@@ -43,22 +45,17 @@ export const SubjectStats = () => {
           fontSize: 20,
           tooltip: { container: { color: "black" } },
         }}
-        legends={[
-          {
-            translateX: 10,
-            translateY: 80,
-            itemWidth: 140,
-            itemDirection: "right-to-left",
-            symbolSize: 25,
-            direction: "row",
-            itemTextColor: theme?.palette?.text?.primary,
-            symbolShape: "square",
-            itemHeight: 18,
-            anchor: "bottom",
-          },
-        ]}
-        arcLinkLabelsTextColor={theme?.palette?.text?.primary}
         data={subjectData}
+        tooltip={({ datum }) => {
+          const { color, data } = datum;
+          return (
+            <StatsToolTip color={color}>
+              <Typography>{data?.label}:</Typography>
+              <Typography>{data?.value} minutes</Typography>
+            </StatsToolTip>
+          );
+        }}
+        arcLinkLabelsTextColor={theme?.palette?.text?.primary}
       />
     </Box>
   );
