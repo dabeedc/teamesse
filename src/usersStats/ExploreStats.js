@@ -68,6 +68,7 @@ export const ExploreStats = () => {
                   justifyContent: "center",
                   py: 3,
                 }}
+                key={`${sessionId}-${reactionId}`}
               >
                 <Box sx={{ mx: -0.5 }}>
                   <Typography
