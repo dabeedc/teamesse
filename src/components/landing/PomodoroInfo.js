@@ -1,13 +1,12 @@
-import { ColorSampler } from "../ColorSampler";
-import { Box, Button, TextField, Avatar, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import signature from "../../teamesse.png" 
+import { Box, Typography } from "@mui/material";
+import signature from "../../teamesse.png";
+import "./landing.css";
 
-export const PomodoroInfo = () => {
+export const PomodoroInfo = ({ selectedTheme }) => {
   return (
     <Box>
       <h1>What is the pomodoro technique?</h1>
-      <Typography sx={{fontSize:20}}>
+      <Typography sx={{ fontSize: 20 }}>
         Italian for tomato, pomodoro, is a slice of time that is used for time
         management; pomodoros or alternating focused work sessions accompanied
         by short and long breaks may prevent mental fatigue and promote
@@ -17,7 +16,11 @@ export const PomodoroInfo = () => {
         the lengths of time for short and long breaks and let's get to work.
         Together!
       </Typography>
-      <img src={signature} alt="logo" width="20%" height="20%"/>
+      {selectedTheme === "Light Green" ? (
+        <img src={signature} width="20%" height="20%" />
+      ) : (
+        <img src={signature} id="logo" width="20%" height="20%" />
+      )}
     </Box>
   );
 };

@@ -1,11 +1,9 @@
-import { ColorSampler } from "../ColorSampler";
 import { Box, Button, TextField, Avatar, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { PomodoroInfo } from "./PomodoroInfo";
 
-export const LandingPage = () => {
+export const LandingPage = ({ selectedTheme }) => {
   let navigate = useNavigate();
-
   return (
     <Box
       sx={{
@@ -18,7 +16,7 @@ export const LandingPage = () => {
       }}
     >
       <h1>teamesse</h1>
-      <Typography sx={{fontSize:20}}>
+      <Typography sx={{ fontSize: 20 }}>
         Let's work together in developing productive habits - in a collaborative
         manner.
         <br />
@@ -30,7 +28,7 @@ export const LandingPage = () => {
           justifyContent: "center",
           width: "80%",
           py: "25px",
-          gap: "5%"
+          gap: "5%",
         }}
       >
         <Button
@@ -54,7 +52,7 @@ export const LandingPage = () => {
         </Button>
       </Box>
 
-      <PomodoroInfo />
+      <PomodoroInfo selectedTheme={selectedTheme} />
     </Box>
   );
 };
