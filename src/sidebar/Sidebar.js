@@ -58,6 +58,7 @@ export const Sidebar = () => {
             ["Explore", "/explore"],
           ].map(([title, pathname]) => (
             <Button
+              key={title}
               variant="contained"
               sx={{
                 backgroundColor:

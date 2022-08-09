@@ -20,7 +20,7 @@ export const ExploreStats = () => {
 
   useEffect(() => {
     dispatch(userStats());
-  }, []);
+  }, [dispatch]);
 
   let fields = [
     {

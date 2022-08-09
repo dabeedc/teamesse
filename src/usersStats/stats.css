@@ -24,6 +24,7 @@ https://stackoverflow.com/questions/60286185/how-to-align-items-in-two-cards-sid
     font-size: large;
     flex-direction: column;
 }
+
 .calc-stats {
     display: block;
     font-size: large;

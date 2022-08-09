@@ -8,7 +8,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { getBaseUrl } from "../utils";
 
-export const PomodoroSessionCard = () => {
+export const PomodoroSessionCard = ({ titleFontSize, dataFontSize }) => {
   const [pomodoroTotalSessions, setPomodoroTotalSessions] = useState({});
 
   useEffect(() => {
@@ -34,11 +34,11 @@ export const PomodoroSessionCard = () => {
       }}
     >
       <CardContent>
-        <Typography sx={{ color: "#ffffff", mb: 20.0 }}>
-          <div className="display-stats">Total Pomodoro Sessions:</div>
-          <div className="calc-stats">
-            {pomodoroTotalSessions.session} sessions
-          </div>
+        <Typography className="display-stats" fontSize={titleFontSize}>
+          Total Pomodoro Sessions:
+        </Typography>
+        <Typography className="calc-stats" fontSize={dataFontSize}>
+          {pomodoroTotalSessions.session} sessions
         </Typography>
       </CardContent>
     </Card>

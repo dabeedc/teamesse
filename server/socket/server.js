@@ -1,4 +1,4 @@
-const { WebSocket, WebSocketServer, Server } = require("ws");
+const { WebSocket, Server } = require("ws");
 const {
   startTimerForRoom,
   pauseTimerForRoom,
