@@ -81,7 +81,7 @@ export const EditProfile = () => {
                 variant="filled"
                 InputLabelProps={{
                   style: { color: "#fff" },
-                  shrink: currentUser?.description,
+                  shrink: !!currentUser?.description,
                 }}
                 inputProps={{ style: { color: "white" } }}
                 onChange={(e) => {
@@ -113,7 +113,7 @@ export const EditProfile = () => {
                 defaultValue={currentUser?.username}
                 InputLabelProps={{
                   style: { color: "#fff" },
-                  shrink: currentUser?.username,
+                  shrink: !!currentUser?.username,
                 }}
                 inputProps={{ style: { color: "white" } }}
                 onChange={(e) => {
@@ -131,7 +131,7 @@ export const EditProfile = () => {
                 defaultValue={currentUser?.name}
                 InputLabelProps={{
                   style: { color: "#fff" },
-                  shrink: currentUser?.name,
+                  shrink: !!currentUser?.name,
                 }}
                 inputProps={{ style: { color: "white" } }}
                 onChange={(e) => {
@@ -149,7 +149,7 @@ export const EditProfile = () => {
                 defaultValue={currentUser?.email}
                 InputLabelProps={{
                   style: { color: "#fff" },
-                  shrink: currentUser?.email,
+                  shrink: !!currentUser?.email,
                 }}
                 inputProps={{ style: { color: "white" } }}
                 onChange={(e) => {
@@ -167,7 +167,7 @@ export const EditProfile = () => {
                 defaultValue={currentUser?.occupation}
                 InputLabelProps={{
                   style: { color: "#fff" },
-                  shrink: currentUser?.occupation,
+                  shrink: !!currentUser?.occupation,
                 }}
                 inputProps={{ style: { color: "white" } }}
                 onChange={(e) => {
@@ -185,7 +185,7 @@ export const EditProfile = () => {
                 defaultValue={currentUser?.employer}
                 InputLabelProps={{
                   style: { color: "#fff" },
-                  shrink: currentUser?.employer,
+                  shrink: !!currentUser?.employer,
                 }}
                 inputProps={{ style: { color: "white" } }}
                 onChange={(e) => {
