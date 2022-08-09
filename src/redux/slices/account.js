@@ -60,7 +60,7 @@ const accountSlice = createSlice({
         state.loading = true;
       })
       .addCase(updateUserAsync.fulfilled, (state, action) => {
-        state.currentUser = action.payload._doc;
+        state.currentUser = action.payload;
         state.loading = false;
       })
       .addCase(fetchPort.rejected, (state, action) => {

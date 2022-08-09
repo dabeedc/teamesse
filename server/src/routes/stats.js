@@ -159,19 +159,4 @@ router.get("/pomodoroStats/:userId", async function (req, res) {
   });
 });
 
-router.put("/update/:userId", function (req, res) {
-  const user = new User({
-    _id: req.params.userId,
-    username: req.body.username,
-    name: req.body.name,
-    email: req.body.email,
-    occupation: req.body.occupation,
-    employer: req.body.employer,
-    description: req.body.description,
-  });
-  User.findByIdAndUpdate(req.params.userId, user, { new: true })
-    .then((a) => res.json(a))
-    .catch((err) => res.status(400).json("Error: " + err));
-});
-
 module.exports = router;

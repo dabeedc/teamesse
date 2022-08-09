@@ -51,7 +51,7 @@ export const getUserStats = async () => {
 };
 
 export const updateUser = async (user) => {
-  const response = await fetch(`${getBaseUrl()}/stats/update/${user._id}`, {
+  const response = await fetch(`${getBaseUrl()}/profile/update/${user._id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

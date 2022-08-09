@@ -30,7 +30,7 @@ export const EditProfile = () => {
 
   const updateUserProfile = () => {
     let userToUpdate = {
-      _id: "62cd0b463b463fa6bfc6f79f",
+      _id: currentUser._id,
       username: newUsername,
       name: newName,
       email: newEmail,
