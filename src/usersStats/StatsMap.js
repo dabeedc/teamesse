@@ -7,7 +7,7 @@
 
 import React, { useEffect, useState } from "react";
 import { ResponsiveCalendar } from "@nivo/calendar";
-import { Box, useTheme } from "@mui/material";
+import { Box, useTheme, Typography } from "@mui/material";
 import { getBaseUrl } from "../utils";
 import { useSelector } from "react-redux";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -66,6 +66,40 @@ export const StatsMap = () => {
             itemDirection: "right-to-left",
           },
         ]}
+        tooltip={({ color, value, day }) => (
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              backgroundColor: "white",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "black",
+              borderRadius: "2px",
+            }}
+          >
+            <Box
+              sx={{
+                backgroundColor: color,
+                width: "12px",
+                height: "12px",
+                margin: "5px",
+              }}
+            />
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                margin: "3px",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Typography sx={{ mr: "3px" }}>{day}:</Typography>
+              <Typography fontWeight="bold">{value} minutes</Typography>
+            </Box>
+          </Box>
+        )}
       />
     </Box>
   );
