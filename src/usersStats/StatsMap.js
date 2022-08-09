@@ -9,19 +9,22 @@ import React, { useEffect, useState } from "react";
 import { ResponsiveCalendar } from "@nivo/calendar";
 import { Box, useTheme } from "@mui/material";
 import { getBaseUrl } from "../utils";
+import { useSelector } from "react-redux";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 export const StatsMap = () => {
+  const { currentUser } = useSelector((state) => state.account);
   const [pomodoroData, setPomodoroData] = useState([]);
   const verticalMap = useMediaQuery("(max-width:1500px)");
   const theme = useTheme();
+
   useEffect(() => {
     (async () => {
-      let pomodoroRes = await fetch(
-        `${getBaseUrl()}/stats/pomodoro/62cd0b463b463fa6bfc6f822`
+      let pomodoroStats = await fetch(
+        `${getBaseUrl()}/stats/pomodoro/` + currentUser._id
       );
-      let pomodoroList = await pomodoroRes.json();
-      setPomodoroData(pomodoroList);
+      let userPomodoroStats = await pomodoroStats.json();
+      setPomodoroData(userPomodoroStats);
     })();
   }, []);
 
