@@ -130,7 +130,10 @@ function App() {
                   className="mainComponent"
                 >
                   <Routes>
-                    <Route path="/" element={<LandingPage />} />
+                    <Route
+                      path="/"
+                      element={<LandingPage selectedTheme={selectedTheme} />}
+                    />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/signup" element={<SignUpPage />} />
                   </Routes>
