@@ -118,14 +118,14 @@ export const ExploreStats = () => {
         flexDirection: "column",
         alignItems: "center",
         width: "100%",
-        height: "100%",
+        maxHeight: "100%",
       }}
     >
       <Box
         sx={{
           display: "flex",
           alignItems: "center",
-          height: 1300,
+          height: "100%",
           backgroundColor: (theme) => theme.palette.common.fifth,
           flexDirection: "column",
           width: "100%",
@@ -137,6 +137,7 @@ export const ExploreStats = () => {
             backgroundColor: "common.second",
             width: 250,
             height: 250,
+            my: 5,
           }}
           src={currentUser?.avatar}
           alt="avatar"
@@ -147,6 +148,7 @@ export const ExploreStats = () => {
           rowHeight={75}
           sx={{
             width: "60%",
+            minHeight: "1000px",
             backgroundColor: (theme) => theme.palette.common.third,
             justifyContent: "space-evenly",
             borderColor: "common.third",
