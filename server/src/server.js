@@ -3,6 +3,7 @@ const express = require("express");
 const auth = require("./routes/auth");
 const stats = require("./routes/stats");
 const sessions = require("./routes/sessions");
+const profile = require("./routes/profile");
 const { wss } = require("../socket/server");
 const path = require("path");
 
@@ -22,6 +23,7 @@ app.use(cors());
 app.use("/auth", auth);
 app.use("/stats", stats);
 app.use("/sessions", sessions);
+app.use("/profile", profile);
 
 app.get("/port", (_, res) => res.status(200).send({ port: PORT }));
 
