@@ -12,6 +12,7 @@ const accountSlice = createSlice({
   reducers: {
     userLogout(state) {
       state.currentUser = null;
+      window.localStorage.clear();
       alert("Successfully logged out.");
     },
     upvoteReaction(state, action) {
@@ -23,6 +24,9 @@ const accountSlice = createSlice({
       );
       reaction.count++;
     },
+    setCurrentUser(state, action) {
+      state.currentUser = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -31,6 +35,10 @@ const accountSlice = createSlice({
       })
       .addCase(userLogin.fulfilled, (state, action) => {
         state.currentUser = action.payload._doc;
+        window.localStorage.setItem(
+          "currentUser",
+          JSON.stringify(action.payload._doc)
+        );
         state.loading = false;
       })
       .addCase(userLogin.rejected, (state, action) => {
@@ -113,5 +121,6 @@ export const fetchPort = createAsyncThunk("account/port", async (user) => {
   return await getPort(user);
 });
 
-export const { userLogout, upvoteReaction } = accountSlice.actions;
+export const { userLogout, upvoteReaction, setCurrentUser } =
+  accountSlice.actions;
 export default accountSlice.reducer;
