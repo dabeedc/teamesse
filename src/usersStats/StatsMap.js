@@ -47,8 +47,8 @@ export const StatsMap = () => {
           fontSize: 20,
           tooltip: { container: { color: "black" } },
         }}
-        from="2022-07-01"
-        to="2023-07-01"
+        from="2021-01-02"
+        to="2022-12-31"
         data={pomodoroData}
         emptyColor={theme.palette.common.third}
         margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
