@@ -1,5 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { login, signup, getUserStats, updateUser, getPort } from "../api";
+import {
+  login,
+  signup,
+  getUserStats,
+  updateUser,
+  getPort,
+  deleteUser,
+} from "../api";
 
 const accountSlice = createSlice({
   name: "account",
@@ -13,7 +20,7 @@ const accountSlice = createSlice({
     userLogout(state) {
       state.currentUser = null;
       window.localStorage.clear();
-      alert("Successfully logged out.");
+      // alert("Successfully logged out.");
     },
     upvoteReaction(state, action) {
       const session = state.stats.find(
@@ -71,6 +78,13 @@ const accountSlice = createSlice({
         state.currentUser = action.payload;
         state.loading = false;
       })
+      .addCase(deleteUserAsync.pending, (state) => {
+        state.error = null;
+      })
+      .addCase(deleteUserAsync.fulfilled, (state, action) => {})
+      .addCase(deleteUserAsync.rejected, (state, action) => {
+        state.error = action.error;
+      })
       .addCase(fetchPort.rejected, (state, action) => {
         state.loading = false;
       })
@@ -114,6 +128,17 @@ export const updateUserAsync = createAsyncThunk(
   "users/updateUser",
   async (user) => {
     return await updateUser(user);
+  }
+);
+
+export const deleteUserAsync = createAsyncThunk(
+  "users/deleteUser",
+  async (_id, { rejectWithValue, dispatch }) => {
+    try {
+      return await deleteUser(_id);
+    } catch (err) {
+      throw rejectWithValue(err);
+    }
   }
 );
 

@@ -14,7 +14,11 @@ import { useNavigate } from "react-router-dom";
 import { React, useState } from "react";
 import { Box, Button, TextField, Avatar, Grid } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import { updateUserAsync } from "../redux/slices/account";
+import {
+  updateUserAsync,
+  userLogout,
+  deleteUserAsync,
+} from "../redux/slices/account";
 
 export const EditProfile = () => {
   const { currentUser } = useSelector((state) => state.account);
@@ -24,9 +28,15 @@ export const EditProfile = () => {
   const [newEmail, setEmail] = useState(currentUser?.email);
   const [newOccupation, setOccupation] = useState(currentUser?.occupation);
   const [newEmployer, setEmployer] = useState(currentUser?.employer);
-  const dispatch = useDispatch();
 
   let navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  function deleteUserProfile() {
+    dispatch(deleteUserAsync(currentUser._id));
+    dispatch(userLogout());
+    navigate("/");
+  }
 
   const updateUserProfile = () => {
     let userToUpdate = {
@@ -197,6 +207,9 @@ export const EditProfile = () => {
               <Button
                 variant="contained"
                 sx={{ backgroundColor: "common.third" }}
+                onClick={() => {
+                  deleteUserProfile();
+                }}
               >
                 Delete Account
               </Button>
