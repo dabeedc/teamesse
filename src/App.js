@@ -15,7 +15,7 @@ import { Box } from "@mui/system";
 import { setOnline } from "./redux/slices/rooms";
 import { useEffect, useState } from "react";
 import { Clock } from "./clock/Clock";
-import { fetchPort } from "./redux/slices/account";
+import { fetchPort, setCurrentUser } from "./redux/slices/account";
 import { LandingPage } from "./components/landing/LandingPage";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -56,6 +56,14 @@ function App() {
   const dispatch = useDispatch();
 
   const theme = createTheme(themes[selectedTheme]);
+
+  useEffect(() => {
+    if (window.localStorage.getItem("currentUser")) {
+      dispatch(
+        setCurrentUser(JSON.parse(window.localStorage.getItem("currentUser")))
+      );
+    }
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(setOnline(on));
