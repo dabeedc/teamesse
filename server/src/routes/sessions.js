@@ -19,4 +19,9 @@ router.post("/new", async (req, res) => {
   res.send(user);
 });
 
+router.get("/lofi", async (req, res) => {
+  const lofiGirl = await Users.find({ username: "lofi" });
+  res.send(lofiGirl);
+});
+
 module.exports = router;
