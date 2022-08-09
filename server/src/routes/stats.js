@@ -6,8 +6,6 @@
 // https://stackoverflow.com/questions/16507866/how-to-iterate-over-objects-property-value-pairs
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round
 
-const allUsersStats = require("../data/usersStats.json");
-
 const User = require("../../models/user.model");
 
 const { Router } = require("express");

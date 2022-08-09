@@ -1,11 +1,7 @@
-const allUsers = require("../data/users.json");
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 const User = require("../../models/user.model.js");
-const { v4: uuid } = require("uuid");
 const { Router } = require("express");
 const router = Router();
-
-const users = allUsers.map((user) => ({ id: uuid(), ...user }));
 
 router.get("/users", async (_, res) => {
   const users = await User.find({});
@@ -15,7 +11,7 @@ router.get("/users", async (_, res) => {
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
-  const user = await User.findOne({username});
+  const user = await User.findOne({ username });
 
   if (!user) {
     res.status(404).send({ message: `Username ${username} not found.` });
@@ -35,14 +31,14 @@ router.post("/login", async (req, res) => {
 
 router.post("/signup", async (req, res) => {
   try {
-	const user = new User({
-		...req.body
-	})
-	await user.save();
-	const {password: password, ...userDetails} = user; // filters out the password. don't want to send it with the rest of the user details
-	res.status(200).send(userDetails);
-  } catch(e) { 
-	res.status(500);
+    const user = new User({
+      ...req.body,
+    });
+    await user.save();
+    const { password: password, ...userDetails } = user; // filters out the password. don't want to send it with the rest of the user details
+    res.status(200).send(userDetails);
+  } catch (e) {
+    res.status(500);
   }
 });
 
