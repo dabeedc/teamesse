@@ -8,7 +8,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { getBaseUrl } from "../utils";
 
-export const PomodoroAverageSessionCard = () => {
+export const PomodoroAverageSessionCard = ({ titleFontSize, dataFontSize }) => {
   const [pomodoroAverageSession, setPomodoroAverageSession] = useState({});
 
   useEffect(() => {
@@ -34,13 +34,11 @@ export const PomodoroAverageSessionCard = () => {
       }}
     >
       <CardContent>
-        <Typography sx={{ color: "#ffffff", mb: 20.0 }}>
-          <div className="display-stats">
+        <Typography className="display-stats" fontSize={titleFontSize}>
           Average Daily Pomodoro Session Time:
-          </div>
-          <div className="calc-stats">
-            {pomodoroAverageSession.time} minutes
-          </div>
+        </Typography>
+        <Typography className="calc-stats" fontSize={dataFontSize}>
+          {pomodoroAverageSession.time} minutes
         </Typography>
       </CardContent>
     </Card>

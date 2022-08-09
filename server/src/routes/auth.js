@@ -35,7 +35,7 @@ router.post("/signup", async (req, res) => {
       ...req.body,
     });
     await user.save();
-    const { password: password, ...userDetails } = user; // filters out the password. don't want to send it with the rest of the user details
+    const { password, ...userDetails } = user; // filters out the password. don't want to send it with the rest of the user details
     res.status(200).send(userDetails);
   } catch (e) {
     res.status(500);

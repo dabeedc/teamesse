@@ -12,6 +12,9 @@ import { PomodoroAverageSessionCard } from "./PomodoroAverageSessionCard";
 import { Box } from "@mui/material";
 import "./stats.css";
 
+const TITLE_FONT_SIZE = 20;
+const DATA_FONT_SIZE = 35;
+
 export const UserStats = () => {
   return (
     <Box
@@ -31,9 +34,18 @@ export const UserStats = () => {
         }}
       >
         <div className="stats-card">
-          <PomodoroSessionCard />
-          <PomodoroCard />
-          <PomodoroAverageSessionCard />
+          <PomodoroSessionCard
+            titleFontSize={TITLE_FONT_SIZE}
+            dataFontSize={DATA_FONT_SIZE}
+          />
+          <PomodoroCard
+            titleFontSize={TITLE_FONT_SIZE}
+            dataFontSize={DATA_FONT_SIZE}
+          />
+          <PomodoroAverageSessionCard
+            titleFontSize={TITLE_FONT_SIZE}
+            dataFontSize={DATA_FONT_SIZE}
+          />
         </div>
       </div>
       <div
