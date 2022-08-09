@@ -61,6 +61,14 @@ export const updateUser = async (user) => {
   return response.json();
 };
 
+export const deleteUser = async (_id) => {
+  const response = await fetch(`${getBaseUrl()}/profile/delete/${_id}`, {
+    method: "DELETE",
+  });
+  if (!response.ok) throw getErrorMessage(response);
+  return response.json();
+};
+
 export const getPort = async () => {
   const response = await fetch(`${getBaseUrl()}/port`);
   return response.json();
