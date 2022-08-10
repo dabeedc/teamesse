@@ -20,6 +20,7 @@ export const Sidebar = () => {
           width: "300px",
           height: "100vh",
           position: "fixed",
+          borderRadius: "0px 10px 10px 0px",
           backgroundColor: (theme) => theme.palette.common.third,
         }}
       >
@@ -83,7 +84,7 @@ export const Sidebar = () => {
             justifyContent: "space-evenly",
             width: "80%",
             height: "80px",
-            borderRadius: "16px",
+            borderRadius: "5px",
             backgroundColor: (theme) => theme.palette.common.second,
           }}
         >

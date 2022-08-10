@@ -27,7 +27,6 @@ export const Profile = () => {
           alignItems: "center",
           width: "90%",
           paddingY: "50px",
-          maxHeight: "100%",
           backgroundColor: (theme) => theme.palette.common.fifth,
         }}
       >
@@ -50,7 +49,11 @@ export const Profile = () => {
           <Grid item xs={8}>
             <div className="description">
               <TextField
-                sx={{ width: "70%", backgroundColor: "common.third" }}
+                sx={{
+                  width: "70%",
+                  backgroundColor: "common.third",
+                  borderRadius: "5px",
+                }}
                 multiline
                 rows={30}
                 label="Description"
@@ -82,6 +85,7 @@ export const Profile = () => {
                 sx={{
                   width: "90%",
                   backgroundColor: "common.third",
+                  borderRadius: "5px",
                 }}
                 value={currentUser?.username}
                 InputLabelProps={{
@@ -97,6 +101,7 @@ export const Profile = () => {
                 sx={{
                   width: "90%",
                   backgroundColor: "common.third",
+                  borderRadius: "5px",
                 }}
                 value={currentUser?.name}
                 InputLabelProps={{
@@ -112,6 +117,7 @@ export const Profile = () => {
                 sx={{
                   width: "90%",
                   backgroundColor: "common.third",
+                  borderRadius: "5px",
                 }}
                 value={currentUser?.email}
                 InputLabelProps={{
@@ -127,6 +133,7 @@ export const Profile = () => {
                 sx={{
                   width: "90%",
                   backgroundColor: "common.third",
+                  borderRadius: "5px",
                 }}
                 value={currentUser?.occupation}
                 InputLabelProps={{
@@ -142,6 +149,7 @@ export const Profile = () => {
                 sx={{
                   width: "90%",
                   backgroundColor: "common.third",
+                  borderRadius: "5px",
                 }}
                 value={currentUser?.employer}
                 InputLabelProps={{

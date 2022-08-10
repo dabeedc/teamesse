@@ -12,6 +12,7 @@ router.put("/update/:userId", async function (req, res) {
     user.occupation = req.body.occupation;
     user.employer = req.body.employer;
     user.description = req.body.description;
+    user.avatar = req.body.avatar;
 
     await user.save();
     res.send(user);

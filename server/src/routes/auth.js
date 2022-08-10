@@ -42,9 +42,4 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-// TODO
-router.delete("/:userId", (_, res) => {
-  res.status(501).send({ message: "/delete not yet implemented." });
-});
-
 module.exports = router;
