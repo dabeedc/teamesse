@@ -11,6 +11,9 @@ import { TimeSelect } from "./TimeSelect";
 import { useSelector } from "react-redux";
 import { Lobby } from "./Lobby";
 import { useSocket } from "../hooks/useSocket";
+import startClockSound from "../sounds/startClock.mp3"
+import skipClockSound from "../sounds/skipClock.mp3";
+import resetClockSound from "../sounds/resetClock.mp3"
 
 import "./clock.css";
 
@@ -150,6 +153,8 @@ export const Clock = () => {
               >
                 <Button
                   onClick={() => {
+                    const audio = new Audio(startClockSound);
+                    audio.play();
                     switch (clockState?.state) {
                       case "running":
                         return pauseClock();
@@ -169,6 +174,8 @@ export const Clock = () => {
                 </Button>
                 <Button
                   onClick={() => {
+                    const audio = new Audio(skipClockSound);
+                    audio.play();
                     startClock({
                       mode: clockState?.mode === "focus" ? "break" : "focus",
                       breakInterval,
@@ -181,7 +188,11 @@ export const Clock = () => {
                   Skip
                 </Button>
                 <Button
-                  onClick={() => resetClock()}
+                  onClick={() => {
+                    const audio = new Audio(resetClockSound);
+                    audio.play();
+                    resetClock()
+                  }}
                   disabled={clockState?.running}
                 >
                   Reset
