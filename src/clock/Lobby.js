@@ -13,7 +13,6 @@ import { setSelectedRoom } from "../redux/slices/rooms";
 import { getBaseUrl } from "../utils";
 import joinRoomSound from "../sounds/joinRoom.mp3";
 
-
 export const Lobby = ({ hidden, subjects, messages, send, loading }) => {
   const [inputMessage, setInputMessage] = useState("");
   const [userInfo, setUserInfo] = useState({});
@@ -233,22 +232,23 @@ export const Lobby = ({ hidden, subjects, messages, send, loading }) => {
                       fontSize: "12px",
                       my: 0.5,
                       color: "common.first",
+                      width: "100%",
                     }}
                   >
                     {sender}: {message}
                   </Typography>
                 ) : (
-                  <Typography
-                    key={i}
+                  <Box
                     sx={{
-                      alignSelf:
-                        currentUser?.username === sender
-                          ? "flex-start"
-                          : "flex-end",
+                      width: "100%",
+                      textAlign:
+                        currentUser?.username === sender ? "left" : "right",
                     }}
                   >
-                    {sender}: {message}
-                  </Typography>
+                    <Typography key={i} sx={{ width: "100%" }}>
+                      {sender}: {message}
+                    </Typography>
+                  </Box>
                 )
               )}
             </Box>
