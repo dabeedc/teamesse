@@ -11,6 +11,8 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedRoom } from "../redux/slices/rooms";
 import { getBaseUrl } from "../utils";
+import joinRoomSound from "../sounds/joinRoom.mp3";
+
 
 export const Lobby = ({ hidden, subjects, messages, send, loading }) => {
   const [inputMessage, setInputMessage] = useState("");
@@ -108,6 +110,8 @@ export const Lobby = ({ hidden, subjects, messages, send, loading }) => {
                     if (selectedRoom === subject) {
                       dispatch(setSelectedRoom(null));
                     } else {
+                      const audio = new Audio(joinRoomSound);
+                      audio.play();
                       dispatch(setSelectedRoom(subject));
                     }
                   }}
