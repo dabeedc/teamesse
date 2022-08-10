@@ -3,7 +3,7 @@ import {
   Box,
   List,
   ListItem,
-  ListItemText,
+  Popover,
   TextField,
   Typography,
 } from "@mui/material";
@@ -14,10 +14,22 @@ import { getBaseUrl } from "../utils";
 
 export const Lobby = ({ hidden, subjects, messages, send, loading }) => {
   const [inputMessage, setInputMessage] = useState("");
-  const [avatars, setAvatars] = useState({});
+  const [userInfo, setUserInfo] = useState({});
   const { online, selectedRoom } = useSelector((state) => state.rooms);
   const { currentUser } = useSelector((state) => state.account);
   const dispatch = useDispatch();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [hoveredUser, setHoveredUser] = useState(null);
+
+  const handlePopoverOpen = (event, user) => {
+    setAnchorEl(event.currentTarget);
+    setHoveredUser(user);
+  };
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+    setHoveredUser(null);
+  };
 
   const ref = useRef(null);
 
@@ -28,19 +40,19 @@ export const Lobby = ({ hidden, subjects, messages, send, loading }) => {
 
   useEffect(() => {
     (async () => {
-      const avatars = await Promise.all(
+      const info = await Promise.all(
         subjects.map(async ({ users }) => {
           return Promise.all(
             users.map(async (user) => {
-              const { avatar } = await getAvatar(user);
-              return { user, avatar };
+              const { info } = await getAvatar(user);
+              return { user, info };
             })
           );
         })
       );
-      setAvatars(
-        avatars.flat(Infinity).reduce((result, { user, avatar }) => {
-          result[user] = avatar;
+      setUserInfo(
+        info.flat(Infinity).reduce((result, { user, info }) => {
+          result[user] = info;
           return result;
         }, {})
       );
@@ -48,7 +60,7 @@ export const Lobby = ({ hidden, subjects, messages, send, loading }) => {
   }, [subjects]);
 
   const getAvatar = async (user) => {
-    const res = await fetch(`${getBaseUrl()}/profile/avatar/${user}`);
+    const res = await fetch(`${getBaseUrl()}/profile/info/${user}`);
     const json = await res.json();
     return json;
   };
@@ -112,13 +124,8 @@ export const Lobby = ({ hidden, subjects, messages, send, loading }) => {
                   {users.map((user, i) => (
                     <ListItem
                       key={`${user}-${i}`}
-                      sx={{
-                        "*": { fontSize: "12px", m: 0 },
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
+                      onMouseEnter={(e) => handlePopoverOpen(e, user)}
+                      onMouseLeave={handlePopoverClose}
                     >
                       <Avatar
                         alt="Remy Sharp"
@@ -126,10 +133,63 @@ export const Lobby = ({ hidden, subjects, messages, send, loading }) => {
                         src={
                           currentUser.username === user
                             ? currentUser.avatar
-                            : avatars[user]
+                            : userInfo[user]?.avatar
                         }
                       />
-                      <ListItemText primary={user} sx={{ ml: 1 }} />
+                      <Typography sx={{ ml: 1, fontSize: "small" }}>
+                        {user}
+                      </Typography>
+                      <Popover
+                        id="mouse-over-popover"
+                        sx={{
+                          pointerEvents: "none",
+                        }}
+                        open={Boolean(anchorEl) && hoveredUser === user}
+                        anchorEl={anchorEl}
+                        anchorOrigin={{
+                          vertical: "top",
+                          horizontal: "right",
+                        }}
+                        transformOrigin={{
+                          vertical: "top",
+                          horizontal: "left",
+                        }}
+                        onClose={handlePopoverClose}
+                        disableRestoreFocus
+                      >
+                        <Box
+                          sx={{
+                            m: 1,
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                          }}
+                        >
+                          <Avatar
+                            alt={user}
+                            sx={{ width: 50, height: 50 }}
+                            src={userInfo[user]?.avatar}
+                          />
+                          <Box sx={{ ml: 2 }}>
+                            <Typography sx={{ fontSize: "x-large" }}>
+                              {userInfo[user]?.name}
+                            </Typography>
+                            <Typography sx={{ fontSize: "small" }}>
+                              {userInfo[user]?.pomodoros?.length ?? 0} pomodoros
+                              completed
+                            </Typography>
+                            <Typography sx={{ fontSize: "small" }}>
+                              {Math.round(
+                                userInfo[user]?.pomodoros?.reduce(
+                                  (result, curr) => (result += curr.duration),
+                                  0
+                                ) / 60
+                              ) ?? 0}{" "}
+                              minutes focused
+                            </Typography>
+                          </Box>
+                        </Box>
+                      </Popover>
                     </ListItem>
                   ))}
                 </List>
@@ -203,9 +263,10 @@ export const Lobby = ({ hidden, subjects, messages, send, loading }) => {
               size="small"
               value={inputMessage}
               InputLabelProps={{
-                style: { color: "#fff" },
+                style: { color: "white" },
                 shrink: !!inputMessage,
               }}
+              inputProps={{ style: { color: "white" } }}
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {

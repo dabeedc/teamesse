@@ -26,9 +26,9 @@ router.delete("/delete/:userId", function (req, res, next) {
     .catch((err) => res.status(404).json("Error: " + err));
 });
 
-router.get("/avatar/:username", async (req, res) => {
+router.get("/info/:username", async (req, res) => {
   const user = await User.findOne({ username: req.params.username });
-  res.send({ avatar: user?.avatar });
+  res.send({ info: user });
 });
 
 module.exports = router;
