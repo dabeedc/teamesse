@@ -129,7 +129,7 @@ export const Lobby = ({ hidden, subjects, messages, send, loading }) => {
                     >
                       <Avatar
                         alt={user}
-                        sx={{ width: 15, height: 15 }}
+                        sx={{ width: 18, height: 18 }}
                         src={
                           currentUser.username === user
                             ? currentUser.avatar
@@ -167,7 +167,7 @@ export const Lobby = ({ hidden, subjects, messages, send, loading }) => {
                         >
                           <Avatar
                             alt={user}
-                            sx={{ width: 50, height: 50 }}
+                            sx={{ width: 80, height: 80 }}
                             src={userInfo[user]?.avatar}
                           />
                           <Box sx={{ ml: 2 }}>
