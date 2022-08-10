@@ -16,7 +16,7 @@ export const PomodoroSessionCard = ({ titleFontSize, dataFontSize, data }) => {
         borderWidth: "5px",
         borderStyle: "solid",
         borderRadius: 20,
-        minWidth: "450px",
+        minWidth: "29%",
         height: "200px",
       }}
     >

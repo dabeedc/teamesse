@@ -54,15 +54,15 @@ export const UserStats = () => {
             dataFontSize={DATA_FONT_SIZE}
             data={pomodoroStats.sessions}
           />
-          <PomodoroCard
-            titleFontSize={TITLE_FONT_SIZE}
-            dataFontSize={DATA_FONT_SIZE}
-            data={pomodoroStats.time}
-          />
           <PomodoroAverageSessionCard
             titleFontSize={TITLE_FONT_SIZE}
             dataFontSize={DATA_FONT_SIZE}
             data={pomodoroStats.avgPomodoroSessions}
+          />
+          <PomodoroCard
+            titleFontSize={TITLE_FONT_SIZE}
+            dataFontSize={DATA_FONT_SIZE}
+            data={pomodoroStats.time}
           />
         </div>
       </div>

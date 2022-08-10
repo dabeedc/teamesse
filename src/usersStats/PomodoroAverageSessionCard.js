@@ -16,7 +16,7 @@ export const PomodoroAverageSessionCard = ({
     <Card
       style={{
         margin: "40px",
-        minWidth: "450px",
+        minWidth: "38%",
         borderColor: "#ffffff",
         borderWidth: "5px",
         borderStyle: "solid",
