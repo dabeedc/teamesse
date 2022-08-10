@@ -33,7 +33,14 @@ Stretch Requirements:
 ![pomodoro](https://github.com/dabeedc/teamesse/blob/main/pomodoroproto.drawio.png)
 ![userprofile](https://github.com/dabeedc/teamesse/blob/main/userprofileproto.drawio.png)
 
-## 3. Tools from CPSC 455 we used in our project
+## 2. Tools from CPSC 455 we used in our project
+
+- React
+- Redux
+- NodeJS
+- Express.js
+- MongoDB
+- Heroku
 
 ## 4. Description of Above and Beyond functionality
 For our pomodoro app, we have went above and beyond to achieve app responsiveness. For example, in the Statistics page, the pomodoro statistics cards and the statistics calendar adjust accordingly in response to the width of the browser for enhanced user experience. In addition, we have implemented the toggle feature for users to enable various toggle modes, specifically default, slate, and light green. The different color schemas will allow users to customize and choose a specific thematic background to their preference across all the pages of the app.

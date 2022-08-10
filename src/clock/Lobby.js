@@ -128,7 +128,7 @@ export const Lobby = ({ hidden, subjects, messages, send, loading }) => {
                       onMouseLeave={handlePopoverClose}
                     >
                       <Avatar
-                        alt="Remy Sharp"
+                        alt={user}
                         sx={{ width: 15, height: 15 }}
                         src={
                           currentUser.username === user
