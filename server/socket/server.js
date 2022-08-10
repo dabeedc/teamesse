@@ -132,7 +132,10 @@ const handleMessage = ({ ws, data }) => {
               subject,
               "server",
               `${ws.id} started the ${mode} timer! ${
-                mode === "focus" ? focusInterval / 60 : breakInterval / 60
+                Math.round(
+                  (mode === "focus" ? focusInterval / 60 : breakInterval / 60) *
+                    100
+                ) / 100
               } minutes in this interval.`
             );
             startTimerForRoom({
