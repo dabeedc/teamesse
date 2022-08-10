@@ -188,10 +188,7 @@ function App() {
                     className="mainComponent"
                   >
                     <Routes>
-                      <Route
-                        path="/"
-                        element={<LandingPage selectedTheme={selectedTheme} />}
-                      />
+                      <Route path="/" element={<Clock />} />
                       <Route path="/color" element={<ColorSampler />} />
                       <Route path="/userprofile" element={<Profile />} />
                       <Route path="/pomodoro" element={<Clock />} />
