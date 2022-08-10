@@ -65,9 +65,19 @@ export const useSocket = () => {
         setSocket(null);
       };
 
+      const ping = () => {
+        setTimeout(() => {
+          if (conn) {
+            conn.send(JSON.stringify({ type: "ping" }));
+            ping();
+          }
+        }, 5000);
+      };
+
       conn.addEventListener("open", () => {
         setSocket(conn);
         setIsConnecting(false);
+        ping();
       });
 
       conn.addEventListener("message", (e) => {
