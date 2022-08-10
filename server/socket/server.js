@@ -57,7 +57,7 @@ const broadcastRoomUpdate = () => {
   );
 };
 
-const getUsername = (path) => path.split("/")[1].toLowerCase();
+const getUsername = (path) => path.split("/")[1];
 
 const connectToRoom = (subject, ws) => {
   if (subject in subjects) {
