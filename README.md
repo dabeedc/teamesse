@@ -6,32 +6,33 @@ Our project is for people who require extra motivation to study and those who wa
 ## 2. Project Task Requirements
 Minimal Requirements:
 - Pomodoro Timer
-  - [x] Create timer.
-  - [x] Dropdowns for intervals (study time), break times, interval count.
-  - [x] Buttons for starting, stopping, pausing/resuming.
-  - [x] General UI design (night mode toggle).
+  - ✅ Create timer.
+  - ✅ Dropdowns for intervals (study time), break times, interval count.
+  - ✅ Buttons for starting, stopping, pausing/resuming.
+  - ✅ General UI design (night mode toggle).
 
 - User Profile
-  - [x] Create/read/upload/delete display picture.
-  - [x] Create/read/edit/delete text boxes for user information (occupation/personal info/school/interests/description, etc).
-  - [x] General UI design (display picture, user information, etc).
-  - [x] Stat showcase (time spent studying, how many pomodoros achieved, etc).
+  - ✅ Create/read/upload/delete display picture.
+  - ✅ Create/read/edit/delete text boxes for user information (occupation/personal info/school/interests/description, etc).
+  - ✅ General UI design (display picture, user information, etc).
+  - ✅ Stat showcase (time spent studying, how many pomodoros achieved, etc).
 
 - Authentication
-  - [x] Password hashing
-  - [x] Persistent sessions using LocalStorage
-  - [x] Account verification against MongoDB
+  - ✅ Password hashing
+  - ✅ Persistent sessions using LocalStorage
+  - ✅ Account verification against MongoDB
 
 Standard Requirements:
-- [x] Tracking study habits and/or pomodoro stats (GitHub style heatmap for days/intervals).
-- [x] Commenting/reacting to other user's pomodoro stats.
+- ✅ Tracking study habits and/or pomodoro stats (GitHub style heatmap for days/intervals).
+- ✅ Commenting/reacting to other user's pomodoro stats.
 
 Stretch Requirements:
-- [x] Live collaboration pomodoro session.
-- [x] Add (optional) music to play during pomodoro session.
-- [!] Optional chatroom/video call feature.
-- [!] Add sounds for start/finish/pause of pomodoro session.
-- [!] Sharing user profile/pomodoro stats with other users.
+- ✅ Theming system
+- ✅ Live collaboration pomodoro session.
+- ✅ Add (optional) music to play during pomodoro session.
+- ⚠️ Optional chatroom/video call feature.
+- ⚠️ Add sounds for start/finish/pause of pomodoro session.
+- ⚠️ Sharing user profile/pomodoro stats with other users.
 
 ![pomodoro](https://github.com/dabeedc/teamesse/blob/main/pomodoroproto.drawio.png)
 ![userprofile](https://github.com/dabeedc/teamesse/blob/main/userprofileproto.drawio.png)
@@ -73,24 +74,20 @@ To visualize the individual data points in the data visualization components, in
 We wanted to have some interactivity between our users since this is a social application at its core. We added the ability for users to react to each other's pomodoro sessions with emojis. In the Explore page, each pomodoro session has a list of emojis and a count of how many reactions there were for each emoji on that session. 
 
 ![reactions](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003643.jpg)
+
 ### Theming
 In addition, we have implemented the toggle feature for users to enable various toggle modes, specifically default, slate, and light green. The different color schemas will allow users to customize and choose a specific thematic background to their preference across all the pages of the app. 
 ![default](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003508.jpg)
 ![slate](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003520.jpg)
 ![lightgreen](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003534.jpg)
+
 ### Responsive Calendar
 The responsive calendar utilizes the nivo api with the dedicated backend endpoint. To populate the responsive calendar with the user data of the pomodoro sessions, we have implemented aggregated query from MongoDB to fetch the information about the data and the total duration of pomodoro sessions completed per date. The responsive calendar also includes the discussed custom tooltip to display the statistics information.
-
-- nivo api
-- dedicated backend endpoint
-- mongodb aggregation
-- custom tooltips
 
 ![tooltip](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003556.jpg)
 
 ### CSS, Responsive Design
 For our pomodoro app, we have went above and beyond to achieve app responsiveness. For example, in the Statistics page, the pomodoro statistics cards and the statistics calendar adjust accordingly in response to the width of the browser for enhanced user experience. The statistics calendar rotates sideways to re-adjust and fit according to the specified width of the page. The pomodoro statistics cards stack re-adjust and fit by stacking vertically to align with the changed width of the page.
-
 
 ## 5. Description of Next Steps
 For next steps, we would like to add the functionality of adding and connecting with friends for pomodoro sessions and provide the additional social aspect to the application. Furthermore, we would like to further improve the app by including the feature for users to create custom pomodoro groups and invite other users/friends to join for collaborative study sessions.
@@ -98,7 +95,21 @@ For next steps, we would like to add the functionality of adding and connecting 
 ## 6. List of Contributions
 
 ### Scott King (x2f2b)
-I led the development of the WebSocket server that controls the social pomodoro clock, as well as all the React/HTML/CSS that was involved with the clock features. I also assisted with implementing the reaction feature on both the frontend and backend. 
+- Led the development of the WebSocket server that controls the social pomodoro clock, as well as all the UI design and React/HTML/CSS code that was involved with the clock features
+- Assisted with implementing the reaction feature on both the frontend and backend
+- Implemented Redux infrastructure and populated store with global state
+- Overall UX/UI
+
+### James Park (y3o8)
+- Implemented the MongoDB queries required to display the statistics information with the data visualization components including the statistics cards and responsive calendar in the Statistics page of the app
+- Worked on adding the data chart component in our app to show the proportion of various subjects studied from the pomodoro sessions with the aggregated time data in the Subjects page
+- Implemented adding the shared user statistics table as part of the Explore page
+- Overall UX/UI
+
+### David Chung (d4n1b)
+- Designed and implemented the UX/UI of the application through the usage of react-router alongside components such as the landing page, user login/signup, and editing of user profile (both the frontend and backend).
+- Worked collaboratively to incorporate the Mongoose Model to connect our frontend and backend with the MongoDB database.
+- Assisted with overall features within the statistics page such as the reaction feature (frontend and backend).
 
 ### Application Gallery
 teamesse landing page  
