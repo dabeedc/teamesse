@@ -1,7 +1,7 @@
 # teamesse
 
 ## 1. Project Description
-Our project is for people who require extra motivation to study and those who want to partake in building good study habits in a collaborative matter. Users will be able to use the pomodoro timer and then be able to share their study stats with others. We will store user profiles i.e. status (occupation/student/school), things they are studying for/working on, their studying stats, and brief info about the user. Users will be able to share their studying stats with other users on the app and comment on progress towards each others goals. For stretch goals, we will consider implementing a live pomodoro timer (shared sessions) and voice chat and/or video calling, if time permits.
+Our project is for people who require extra motivation to study and those who want to partake in building good study habits in a collaborative matter. Users will be able to use the pomodoro timer and then be able to share their study stats with others. We will store user profiles i.e. status (occupation/student/school), things they are studying for/working on, their studying stats, and brief info about the user. Users will be able to share their studying stats with other users on the app and comment on progress towards each others' goals. For stretch goals, we will consider implementing a live pomodoro timer (shared sessions) and voice chat and/or video calling, if time permits.
 
 ## 2. Project Task Requirements
 Minimal Requirements:
@@ -53,7 +53,7 @@ For our backend API, we used NodeJS with Express.js to expose a REST API on a we
 We are storing persistent data in MongoDB. We opted to store all of our user data (including pomodoro session) in one MongoDB collection. We thought about maintaining separate collections for user profiles and pomodoro sessions, but opted for the one-collection approach to avoid the need for relational queries. A few of our REST API endpoints return aggregated data from MongoDB (eg. average time of a pomodoro session per day) which are made using queries to MongoDB. 
 
 ### Heroku
-To deploy our application, we utilized Heroku. Our Heroku application has GitHub integration enabled, allowing us to automatically deploy our application via continuous delivery whenever we make a merge to the `main` branch in our Github repository. 
+To deploy our application, we utilized Heroku. Our Heroku application has GitHub integration enabled, allowing us to automatically deploy our application via continuous delivery whenever we make a merge to the `main` branch in our GitHub repository. 
 
 
 ## 4. Description of Above and Beyond functionality
@@ -92,7 +92,7 @@ The responsive calendar utilizes the nivo api with the dedicated backend endpoin
 ![tooltip](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003556.jpg)
 
 ### CSS, Responsive Design
-For our pomodoro app, we have went above and beyond to achieve app responsiveness. For example, in the Statistics page, the pomodoro statistics cards and the statistics calendar adjust accordingly in response to the width of the browser for enhanced user experience. The statistics calendar rotates sideways to re-adjust and fit according to the specified width of the page. The pomodoro statistics re-adjust by stacking vertically to align with the changed width of the page.
+For our pomodoro app, we have went above and beyond to achieve app responsiveness. For example, in the Statistics page, the pomodoro statistics cards and the statistics calendar adjust accordingly in response to the width of the browser for enhanced user experience. The statistics calendar rotates sideways to re-adjust and fit according to the specified width of the page. The pomodoro statistics cards re-adjust by stacking vertically to align with the changed width of the page.
 
 ## 5. Description of Next Steps
 For next steps, we would like to add the functionality of adding and connecting with friends for pomodoro sessions and provide the additional social aspect to the application. Furthermore, we would like to further improve the app by including the feature for users to create custom pomodoro groups and invite other users/friends to join for collaborative study sessions. Also, we would like to add the interactive feature for users to share screen, video call, and collaborate in the study sessions.
@@ -109,7 +109,7 @@ For next steps, we would like to add the functionality of adding and connecting 
 - Implemented the MongoDB queries required to display the statistics information with the data visualization components including the statistics cards and responsive calendar in the Statistics page of the app
 - Worked on adding the data chart component in our app to show the proportion of various subjects studied from the pomodoro sessions with the aggregated time data in the Subjects page
 - Implemented adding the shared user statistics table as part of the Explore page
-- Overall UX/UI
+- Collaborated on UX/UI design and responsiveness of the appplication
 
 ### David Chung (d4n1b)
 - Designed and implemented the UX/UI of the application through the usage of react-router alongside components such as the landing page, user login/signup, and editing of user profile (both the frontend and backend).
