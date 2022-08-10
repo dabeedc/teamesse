@@ -77,10 +77,10 @@ router.get("/pomodoro/:userId", async function (req, res) {
   let userPomodorosArr = foundUser["pomodoros"];
   let pomodoroMap = new Map();
   for (const element of userPomodorosArr) {
-    let dateCompletedKey = element["dateCompleted"];
+    let dateCompletedKey = new Date(element["dateCompleted"]).toLocaleDateString();
     let pomodoroDuration = element["duration"];
     if (pomodoroMap.has(dateCompletedKey)) {
-      let newDuration = pomodoroMap[dateCompletedKey] + pomodoroDuration;
+      let newDuration = pomodoroMap.get(dateCompletedKey) + pomodoroDuration;
       pomodoroMap.set(dateCompletedKey, newDuration);
     } else {
       pomodoroMap.set(dateCompletedKey, pomodoroDuration);
@@ -88,7 +88,7 @@ router.get("/pomodoro/:userId", async function (req, res) {
   }
   let pomodoroObj = Object.fromEntries(pomodoroMap);
   let pomodoroList = Object.keys(pomodoroObj).map((key) => ({
-    value: pomodoroObj[key] / 60,
+    value: Math.round(pomodoroObj[key] / 60),
     day: buildDate(key),
   }));
 

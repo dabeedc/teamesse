@@ -50,8 +50,8 @@ export const SubjectStats = () => {
           const { color, data } = datum;
           return (
             <StatsToolTip color={color}>
-              <Typography>{data?.label}:</Typography>
-              <Typography>{data?.value} minutes</Typography>
+              <Typography sx={{ mr: "3px" }}>{data?.label}:</Typography>
+              <Typography fontWeight="bold">{data?.value} minutes</Typography>
             </StatsToolTip>
           );
         }}
