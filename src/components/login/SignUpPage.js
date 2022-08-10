@@ -59,7 +59,7 @@ const SignUpPage = () => {
 
 
     let password = formValues.password;
-    if(password.includes("password") || password.length < 6 || password == "") {
+    if(password.length < 6) {
       newErrorState.passwordError = true;
       validFields = false;
     } else {
