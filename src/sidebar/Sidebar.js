@@ -19,6 +19,7 @@ export const Sidebar = () => {
           justifyContent: "space-evenly",
           width: "300px",
           height: "100vh",
+          zIndex: 1000,
           position: "fixed",
           borderRadius: "0px 10px 10px 0px",
           backgroundColor: (theme) => theme.palette.common.third,
