@@ -16,7 +16,7 @@ import { StatsToolTip } from "./StatsToolTip";
 export const StatsMap = () => {
   const { currentUser } = useSelector((state) => state.account);
   const [pomodoroData, setPomodoroData] = useState([]);
-  const verticalMap = useMediaQuery("(max-width:1520px)");
+  const verticalMap = useMediaQuery("(max-width:1550px)");
   const theme = useTheme();
 
   useEffect(() => {

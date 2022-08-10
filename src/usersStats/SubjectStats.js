@@ -25,12 +25,11 @@ export const SubjectStats = () => {
     })();
   }, []);
 
-  const initialDataMessage =
-    "No data yet, complete pomodoros for data analysis";
+  const initialDataMessage = "No data yet, complete pomodoros for data analysis"
   const initialData = [
     {
       id: initialDataMessage,
-      label: initialDataMessage,
+      label: "No data, please complete pomodoro sessions",
       value: 0.0,
     },
   ];
