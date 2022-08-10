@@ -88,7 +88,7 @@ router.get("/pomodoro/:userId", async function (req, res) {
   }
   let pomodoroObj = Object.fromEntries(pomodoroMap);
   let pomodoroList = Object.keys(pomodoroObj).map((key) => ({
-    value: Math.round(pomodoroObj[key] / 60),
+    value: (pomodoroObj[key] / 60).toFixed(2),
     day: buildDate(key),
   }));
 
@@ -114,7 +114,7 @@ router.get("/subject/:userId", async function (req, res) {
   let pomodoroList = Object.keys(pomodoroObj).map((key) => ({
     id: key,
     label: key,
-    value: Math.round(pomodoroObj[key] / 60),
+    value:(pomodoroObj[key] / 60).toFixed(2),
   }));
   return res.send(pomodoroList);
 });
@@ -151,8 +151,8 @@ router.get("/pomodoroStats/:userId", async function (req, res) {
   }
   return res.send({
     sessions: accumulatedPomodoroSessions,
-    time: Math.round(totalDuration),
-    avgPomodoroSessions: Math.round(avgPomodoroSession),
+    time: totalDuration.toFixed(2),
+    avgPomodoroSessions: avgPomodoroSession.toFixed(2),
   });
 });
 

@@ -182,11 +182,11 @@ export const Lobby = ({ hidden, subjects, messages, send, loading }) => {
                               completed
                             </Typography>
                             <Typography sx={{ fontSize: "small" }}>
-                              {Math.round(
+                              {((
                                 userInfo[user]?.pomodoros?.reduce(
                                   (result, curr) => (result += curr.duration),
                                   0
-                                ) / 60
+                                ) / 60).toFixed(2)
                               ) ?? 0}{" "}
                               minutes focused
                             </Typography>

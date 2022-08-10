@@ -24,7 +24,8 @@ export const SubjectStats = () => {
     })();
   }, []);
 
-  const initialDataMessage = "No data yet, complete pomodoros for data analysis"
+  const initialDataMessage =
+    "No data yet, complete pomodoros for data analysis";
   const initialData = [
     {
       id: initialDataMessage,
