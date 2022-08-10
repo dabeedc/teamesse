@@ -144,7 +144,11 @@ router.get("/pomodoroStats/:userId", async function (req, res) {
     }
   }
   totalDuration = totalDuration / 60;
-  avgPomodoroSession = Math.round(totalDuration / dateCount).toString();
+  if (dateCount == 0) {
+    avgPomodoroSession = totalDuration;
+  } else {
+    avgPomodoroSession = totalDuration / dateCount;
+  }
   return res.send({
     sessions: accumulatedPomodoroSessions,
     time: Math.round(totalDuration),
