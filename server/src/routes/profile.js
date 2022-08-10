@@ -20,10 +20,15 @@ router.put("/update/:userId", async function (req, res) {
   }
 });
 
-router.delete('/delete/:userId', function (req, res, next) {
-    User.findByIdAndDelete(req.params.userId)
-      .then(() => res.json({ id: req.params.userId }))
-      .catch((err) => res.status(404).json("Error: " + err));
-  });
+router.delete("/delete/:userId", function (req, res, next) {
+  User.findByIdAndDelete(req.params.userId)
+    .then(() => res.json({ id: req.params.userId }))
+    .catch((err) => res.status(404).json("Error: " + err));
+});
+
+router.get("/avatar/:username", async (req, res) => {
+  const user = await User.findOne({ username: req.params.username });
+  res.send({ avatar: user?.avatar });
+});
 
 module.exports = router;

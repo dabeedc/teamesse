@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Box,
   List,
   ListItem,
@@ -9,9 +10,11 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedRoom } from "../redux/slices/rooms";
+import { getBaseUrl } from "../utils";
 
 export const Lobby = ({ hidden, subjects, messages, send, loading }) => {
   const [inputMessage, setInputMessage] = useState("");
+  const [avatars, setAvatars] = useState({});
   const { online, selectedRoom } = useSelector((state) => state.rooms);
   const { currentUser } = useSelector((state) => state.account);
   const dispatch = useDispatch();
@@ -22,6 +25,33 @@ export const Lobby = ({ hidden, subjects, messages, send, loading }) => {
     // https://bobbyhadz.com/blog/react-scroll-to-bottom
     ref.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  useEffect(() => {
+    (async () => {
+      const avatars = await Promise.all(
+        subjects.map(async ({ users }) => {
+          return Promise.all(
+            users.map(async (user) => {
+              const { avatar } = await getAvatar(user);
+              return { user, avatar };
+            })
+          );
+        })
+      );
+      setAvatars(
+        avatars.flat(Infinity).reduce((result, { user, avatar }) => {
+          result[user] = avatar;
+          return result;
+        }, {})
+      );
+    })();
+  }, [subjects]);
+
+  const getAvatar = async (user) => {
+    const res = await fetch(`${getBaseUrl()}/profile/avatar/${user}`);
+    const json = await res.json();
+    return json;
+  };
 
   return (
     online && (
@@ -82,9 +112,20 @@ export const Lobby = ({ hidden, subjects, messages, send, loading }) => {
                   {users.map((user, i) => (
                     <ListItem
                       key={`${user}-${i}`}
-                      sx={{ "*": { fontSize: "12px", m: 0, pl: 0.5 } }}
+                      sx={{
+                        "*": { fontSize: "12px", m: 0 },
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
                     >
-                      <ListItemText primary={user} />
+                      <Avatar
+                        alt="Remy Sharp"
+                        sx={{ width: 15, height: 15 }}
+                        src={avatars[user]}
+                      />
+                      <ListItemText primary={user} sx={{ ml: 1 }} />
                     </ListItem>
                   ))}
                 </List>
