@@ -81,7 +81,7 @@ We wanted to have some interactivity between our users since this is a social ap
 ![reactions](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003643.jpg)
 
 ### Theming
-In addition, we have implemented the toggle feature for users to enable various toggle modes, specifically default, slate, and light green. The different color schemas will allow users to customize and choose a specific thematic background to their preference across all the pages of the app. 
+In addition, we have implemented a drop down menu with various themes available to users - default, slate, and light green for various moods. The different color schemas will allow users to customize and choose a specific thematic background to their preference across all the pages of the app. 
 ![default](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003508.jpg)
 ![slate](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003520.jpg)
 ![lightgreen](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003534.jpg)
