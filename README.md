@@ -35,7 +35,23 @@ Stretch Requirements:
 
 ![pomodoro](https://github.com/dabeedc/teamesse/blob/main/pomodoroproto.drawio.png)
 ![userprofile](https://github.com/dabeedc/teamesse/blob/main/userprofileproto.drawio.png)
-![teamesse](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20002908.jpg)
+
+### Application Gallery
+teamesse landing page  
+![teamesse](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20002908.jpg)  
+Login card  
+![login](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003037.jpg)  
+Signup card  
+![signup](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003009.jpg)  
+Dashboard with all features available   
+![dashboard](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003109.jpg)   
+Customizable focus and break intervals  
+![session](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003444.jpg)       
+Elegant data visualization  
+![piechart](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003611.jpg)      
+Quickly edit user profile  
+![edit](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003713.jpg)   
+
 
 ## 3. Tools from CPSC 455 we used in our project
 
@@ -62,18 +78,23 @@ To facilitate the social aspect of the pomodoro clock, we implemented a WebSocke
 
 Any user in a study room can control the pomodoro clock, which will trigger the corresponding action in the WebSocket server (eg. starting/stopping/pausing/resetting the clock). Once a focus or break session is over, the server will send a message to the client that the session is complete, and the client can react to the message appropriately. 
 
+![clock](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003306.jpg)
+
 ### Focus Mode
 To facilitate a true pomodoro experience, we implemented a focus mode in the pomodoro clock that dims the background and brings the clock to the center of the page using CSS. Additionally, we disable the chat functionality in the study room to help our users avoid distraction. We used CSS transitions/shadows as well as custom `pointer-events` behaviour to implement this feature. 
 
+![focusMode](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003419.jpg)
 ### Customized Tooltip
 To visualize the individual data points in the data visualization components, including the Subjects and Statistics pages, we have created the customized tooltip. The tooltip allows users to hover each data point in the calendar map which displays the specific calendar date (YYYY-MM-DD) with the total minutes of pomodoro sessions completed. In the Subjects page, the tooltip allows users to hover each section of the data chart which displays the subject with the accumulated minutes studied.
-
 ### Reactions
 We wanted to have some interactivity between our users since this is a social application at its core. We added the ability for users to react to each other's pomodoro sessions with emojis. In the Explore page, each pomodoro session has a list of emojis and a count of how many reactions there were for each emoji on that session. 
 
+![reactions](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003643.jpg)
 ### Theming
 In addition, we have implemented the toggle feature for users to enable various toggle modes, specifically default, slate, and light green. The different color schemas will allow users to customize and choose a specific thematic background to their preference across all the pages of the app. 
-
+![default](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003508.jpg)
+![slate](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003520.jpg)
+![lightgreen](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003534.jpg)
 ### Responsive Calendar
 The responsive calendar utilizes the nivo api with the dedicated backend endpoint. To populate the responsive calendar with the user data of the pomodoro sessions, we have implemented aggregated query from MongoDB to fetch the information about the data and the total duration of pomodoro sessions completed per date. The responsive calendar also includes the discussed custom tooltip to display the statistics information.
 
@@ -82,9 +103,16 @@ The responsive calendar utilizes the nivo api with the dedicated backend endpoin
 - mongodb aggregation
 - custom tooltips
 
+![tooltip](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003556.jpg)
+
 ### CSS, Responsive Design
 For our pomodoro app, we have went above and beyond to achieve app responsiveness. For example, in the Statistics page, the pomodoro statistics cards and the statistics calendar adjust accordingly in response to the width of the browser for enhanced user experience. The statistics calendar rotates sideways to re-adjust and fit according to the specified width of the page. The pomodoro statistics cards stack re-adjust and fit by stacking vertically to align with the changed width of the page.
 
 
 ## 5. Description of Next Steps
 For next steps, we would like to add the functionality of adding and connecting with friends for pomodoro sessions and provide the additional social aspect to the application. Furthermore, we would like to further improve the app by including the feature for users to create custom pomodoro groups and invite other users/friends to join for collaborative study sessions.
+
+## 6. List of Contributions
+
+### Scott King (x2f2b)
+I led the development of the WebSocket server that controls the social pomodoro clock, as well as all the React/HTML/CSS that was involved with the clock features. I also assisted with implementing the reaction feature on both the frontend and backend. 
