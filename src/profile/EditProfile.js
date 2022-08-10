@@ -28,6 +28,7 @@ export const EditProfile = () => {
   const [newEmail, setEmail] = useState(currentUser?.email);
   const [newOccupation, setOccupation] = useState(currentUser?.occupation);
   const [newEmployer, setEmployer] = useState(currentUser?.employer);
+  const [newAvatarURL, setAvatarURL] = useState(currentUser?.avatar);
 
   let navigate = useNavigate();
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ export const EditProfile = () => {
       occupation: newOccupation,
       employer: newEmployer,
       description: newDescription,
+      avatar: newAvatarURL,
     };
     dispatch(updateUserAsync(userToUpdate));
   };
@@ -75,7 +77,26 @@ export const EditProfile = () => {
               }}
               src={currentUser?.avatar}
               alt="avatar"
-            ></Avatar>
+              onClick={() => {
+                console.log("click");
+              }}
+            />
+            <div className="avatarURL">
+              <TextField
+                sx={{ width: "70%", backgroundColor: "common.third", mt: "15px" }}
+                label="Update URL"
+                defaultValue={currentUser?.avatar}
+                variant="filled"
+                InputLabelProps={{
+                  style: { color: "#fff" },
+                  shrink: !!currentUser?.avatar,
+                }}
+                inputProps={{ style: { color: "white" } }}
+                onChange={(e) => {
+                  setAvatarURL(e.target.value);
+                }}
+              />
+            </div>
           </Grid>
         </Grid>
 
