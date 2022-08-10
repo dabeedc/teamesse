@@ -29,9 +29,9 @@ Standard Requirements:
 Stretch Requirements:
 - [x] Live collaboration pomodoro session.
 - [x] Add (optional) music to play during pomodoro session.
-- [] Optional chatroom/video call feature.
-- [] Add sounds for start/finish/pause of pomodoro session.
-- [] Sharing user profile/pomodoro stats with other users.
+- [!] Optional chatroom/video call feature.
+- [!] Add sounds for start/finish/pause of pomodoro session.
+- [!] Sharing user profile/pomodoro stats with other users.
 
 ![pomodoro](https://github.com/dabeedc/teamesse/blob/main/pomodoroproto.drawio.png)
 ![userprofile](https://github.com/dabeedc/teamesse/blob/main/userprofileproto.drawio.png)
@@ -39,7 +39,7 @@ Stretch Requirements:
 ## 3. Tools from CPSC 455 we used in our project
 
 ### React/HTML/JS/CSS
-The UI of our application is built with React. We built our app with the Material-UI React component library and organized our jsx files by features (eg. Statistics, Subjects, Pomodoro Clock, User Settings, Auth). We created reusable components to reduce code duplication and prioritized reusability and extensibility in the composition of our components. In addition, we have used CSS to style the different components and implement app responsiveness to further enhance user experience.
+The UI of our application is built with React. We built our app with the Material-UI React component library and organized our jsx files by features (eg. Statistics, Subjects, Pomodoro Clock, User Settings, Auth). We created reusable components to reduce code duplication and prioritized reusability and extensibility in the composition of our components. In addition, we have used CSS to style the different components and to implement app responsiveness to further enhance user experience.
 
 ### Redux
 We are using Redux to manage the global state of our application. We use the Redux store to manage various pieces of state including themes, current user details, and pomodoro clock state.
