@@ -24,6 +24,15 @@ export const SubjectStats = () => {
     })();
   }, []);
 
+  const initialDataMessage = "No data yet, complete pomodoros for data analysis"
+  const initialData = [
+    {
+      id: initialDataMessage,
+      label: initialDataMessage,
+      value: 0.0,
+    },
+  ];
+
   return (
     <Box
       sx={{
@@ -45,7 +54,7 @@ export const SubjectStats = () => {
           fontSize: 20,
           tooltip: { container: { color: "black" } },
         }}
-        data={subjectData}
+        data={subjectData.length > 0 ? subjectData : initialData}
         tooltip={({ datum }) => {
           const { color, data } = datum;
           return (
