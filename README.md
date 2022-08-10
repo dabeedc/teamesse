@@ -6,44 +6,85 @@ Our project is for people who require extra motivation to study and those who wa
 ## 2. Project Task Requirements
 Minimal Requirements:
 - Pomodoro Timer
-  - Create timer.
-  - Dropdowns for intervals (study time), break times, interval count.
-  - Buttons for starting, stopping, pausing/resuming.
-  - General UI design (night mode toggle).
+  - [x] Create timer.
+  - [x] Dropdowns for intervals (study time), break times, interval count.
+  - [x] Buttons for starting, stopping, pausing/resuming.
+  - [x] General UI design (night mode toggle).
 
 - User Profile
-  - Create/read/upload/delete display picture.
-  - Create/read/edit/delete text boxes for user information (occupation/personal info/school/interests/description, etc).
-  - General UI design (display picture, user information, etc).
-  - Stat showcase (time spent studying, how many pomodoros achieved, etc).
+  - [x] Create/read/upload/delete display picture.
+  - [x] Create/read/edit/delete text boxes for user information (occupation/personal info/school/interests/description, etc).
+  - [x] General UI design (display picture, user information, etc).
+  - [x] Stat showcase (time spent studying, how many pomodoros achieved, etc).
 
 - Authentication
+  - [x] Password hashing
+  - [x] Persistent sessions using LocalStorage
+  - [x] Account verification against MongoDB
 
 Standard Requirements:
-- Tracking study habits and/or pomodoro stats (GitHub style heatmap for days/intervals).
-- Sharing user profile/pomodoro stats with other users.
-- Commenting/reacting to other user's pomodoro stats.
+- [x] Tracking study habits and/or pomodoro stats (GitHub style heatmap for days/intervals).
+- [x] Commenting/reacting to other user's pomodoro stats.
 
 Stretch Requirements:
-- Live collaboration pomodoro session.
-- Optional chatroom/video call feature.
-- Add (optional) music to play during pomodoro session.
-- Add sounds for start/finish/pause of pomodoro session.
+- [x] Live collaboration pomodoro session.
+- [x] Add (optional) music to play during pomodoro session.
+- [] Optional chatroom/video call feature.
+- [] Add sounds for start/finish/pause of pomodoro session.
+- [] Sharing user profile/pomodoro stats with other users.
 
 ![pomodoro](https://github.com/dabeedc/teamesse/blob/main/pomodoroproto.drawio.png)
 ![userprofile](https://github.com/dabeedc/teamesse/blob/main/userprofileproto.drawio.png)
+![teamesse](previewScreenshots/Screenshot 2022-08-10 002908.jpg "teamesse")
 
-## 2. Tools from CPSC 455 we used in our project
+## 3. Tools from CPSC 455 we used in our project
 
-- React
-- Redux
-- NodeJS
-- Express.js
-- MongoDB
-- Heroku
+### React/HTML/JS/CSS
+The UI of our application is built with React. We built our app with the Material-UI React component library and organized our jsx files by features (eg. Statistics, Subjects, Pomodoro Clock, User Settings, Auth). We created reusable components to reduce code duplication and prioritized reusability and extensibility in the composition of our components. In addition, we have used CSS to style the different components and implement app responsiveness to further enhance user experience.
+
+### Redux
+We are using Redux to manage the global state of our application. We use the Redux store to manage various pieces of state including themes, current user details, and pomodoro clock state.
+
+### NodeJS/Express.js
+For our backend API, we used NodeJS with Express.js to expose a REST API on a webserver that is called by our UI. We separated our API routes into auth, profile, session, and stats. We are also hosting a WebSocket server on the same port as our Express server, which we will discuss further in the Above and Beyond functionality.
+
+### MongoDB
+We are storing persistent data in MongoDB. We opted to store all of our user data (including pomodoro session) in one MongoDB collection. We thought about maintaining separate collections for user profiles and pomodoro sessions, but opted for the one-collection approach to avoid the need for relational queries. A few of our REST API endpoints return aggregated data from MongoDB (eg. average time of a pomodoro session per day) which are made using queries to MongoDB. 
+
+### Heroku
+To deploy our application, we utilized Heroku. Our Heroku application has GitHub integration enabled, allowing us to automatically deploy our application via continuous delivery whenever we make a merge to the `main` branch in our Github repository. 
+
 
 ## 4. Description of Above and Beyond functionality
-For our pomodoro app, we have went above and beyond to achieve app responsiveness. For example, in the Statistics page, the pomodoro statistics cards and the statistics calendar adjust accordingly in response to the width of the browser for enhanced user experience. In addition, we have implemented the toggle feature for users to enable various toggle modes, specifically default, slate, and light green. The different color schemas will allow users to customize and choose a specific thematic background to their preference across all the pages of the app.
+
+### Pomodoro Clock Server (WebSocket API)
+To facilitate the social aspect of the pomodoro clock, we implemented a WebSocket server that is served on the same NodeJS HTTP server as our Express.js REST API. We came up with a complex client-server messaging system with the WebSocket API to broadcast messages in a study room, allow users to send instant messages to each other, and see a list of users in each room. WebSockets allow us to provide real-time updates to our users to create a truly social experience. 
+
+Any user in a study room can control the pomodoro clock, which will trigger the corresponding action in the WebSocket server (eg. starting/stopping/pausing/resetting the clock). Once a focus or break session is over, the server will send a message to the client that the session is complete, and the client can react to the message appropriately. 
+
+### Focus Mode
+To facilitate a true pomodoro experience, we implemented a focus mode in the pomodoro clock that dims the background and brings the clock to the center of the page using CSS. Additionally, we disable the chat functionality in the study room to help our users avoid distraction. We used CSS transitions/shadows as well as custom `pointer-events` behaviour to implement this feature. 
+
+### Customized Tooltip
+To visualize the individual data points in the data visualization components, including the Subjects and Statistics pages, we have created the customized tooltip. The tooltip allows users to hover each data point in the calendar map which displays the specific calendar date (YYYY-MM-DD) with the total minutes of pomodoro sessions completed. In the Subjects page, the tooltip allows users to hover each section of the data chart which displays the subject with the accumulated minutes studied.
+
+### Reactions
+We wanted to have some interactivity between our users since this is a social application at its core. We added the ability for users to react to each other's pomodoro sessions with emojis. In the Explore page, each pomodoro session has a list of emojis and a count of how many reactions there were for each emoji on that session. 
+
+### Theming
+In addition, we have implemented the toggle feature for users to enable various toggle modes, specifically default, slate, and light green. The different color schemas will allow users to customize and choose a specific thematic background to their preference across all the pages of the app. 
+
+### Responsive Calendar
+The responsive calendar utilizes the nivo api with the dedicated backend endpoint. To populate the responsive calendar with the user data of the pomodoro sessions, we have implemented aggregated query from MongoDB to fetch the information about the data and the total duration of pomodoro sessions completed per date. The responsive calendar also includes the discussed custom tooltip to display the statistics information.
+
+- nivo api
+- dedicated backend endpoint
+- mongodb aggregation
+- custom tooltips
+
+### CSS, Responsive Design
+For our pomodoro app, we have went above and beyond to achieve app responsiveness. For example, in the Statistics page, the pomodoro statistics cards and the statistics calendar adjust accordingly in response to the width of the browser for enhanced user experience. The statistics calendar rotates sideways to re-adjust and fit according to the specified width of the page. The pomodoro statistics cards stack re-adjust and fit by stacking vertically to align with the changed width of the page.
+
 
 ## 5. Description of Next Steps
 For next steps, we would like to add the functionality of adding and connecting with friends for pomodoro sessions and provide the additional social aspect to the application. Furthermore, we would like to further improve the app by including the feature for users to create custom pomodoro groups and invite other users/friends to join for collaborative study sessions.
