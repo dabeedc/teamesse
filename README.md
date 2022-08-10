@@ -36,7 +36,7 @@ Stretch Requirements:
 ## 3. Tools from CPSC 455 we used in our project
 
 ## 4. Description of Above and Beyond functionality
-For our pomodoro app, we have went above and beyond to achieve app responsiveness. For example, in the Statistics page, the pomodoro statistics cards and the statistics calendar adjust accordingly in response to the width of the browser for enhanced user experience.
+For our pomodoro app, we have went above and beyond to achieve app responsiveness. For example, in the Statistics page, the pomodoro statistics cards and the statistics calendar adjust accordingly in response to the width of the browser for enhanced user experience. In addition, we have implemented the toggle feature for users to enable various toggle modes, specifically default, slate, and light green. The different color schemas will allow users to customize and choose a specific thematic background to their preference across all the pages of the app.
 
 ## 5. Description of Next Steps
 For next steps, we would like to add the functionality of adding and connecting with friends for pomodoro sessions and provide the additional social aspect to the application. Furthermore, we would like to further improve the app by including the feature for users to create custom pomodoro groups and invite other users/friends to join for collaborative study sessions.
