@@ -111,18 +111,25 @@ For next steps, we would like to add the functionality of adding and connecting 
 - Worked collaboratively to incorporate the Mongoose Model to connect our frontend and backend with the MongoDB database.
 - Assisted with overall features within the statistics page such as the reaction feature (frontend and backend).
 
-### Application Gallery
-teamesse landing page  
+## Application Gallery
+
+### teamesse landing page  
 ![teamesse](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20002908.jpg)  
-Login card  
+
+### Login card  
 ![login](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003037.jpg)  
-Signup card  
+
+### Signup card  
 ![signup](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003009.jpg)  
-Dashboard with all features available   
+
+### Dashboard with all features available   
 ![dashboard](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003109.jpg)   
-Customizable focus and break intervals  
+
+### Customizable focus and break intervals  
 ![session](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003444.jpg)       
-Elegant data visualization  
+
+### Elegant data visualization  
 ![piechart](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003611.jpg)      
-Quickly edit user profile  
+
+### Quickly edit user profile  
 ![edit](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003713.jpg)   
