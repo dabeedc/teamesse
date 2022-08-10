@@ -118,6 +118,14 @@ For next steps, we would like to add the functionality of adding and connecting 
 - Worked collaboratively to incorporate the Mongoose Model to connect our frontend and backend with the MongoDB database.
 - Assisted with overall features within the statistics page such as the reaction feature (frontend and backend).
 
+### Anson Chung
+- Implemented several frontend components such as the SignUp form and the SideBar.
+- Created the Mongoose Schema model for users and incorporated the creation and saving of these models using both the frontend and the backend.
+- Introduced form validation in the SignUp page.
+- Added sounds for when a user goes on online, joins a room and when the pomodoro clock is started, stopped, and reset.
+- Led the development of backend authentication during signup and login.
+- Collaborated with UX/UI.
+
 ## Application Gallery
 
 ### teamesse landing page  
