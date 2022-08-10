@@ -35,7 +35,7 @@ Stretch Requirements:
 
 ![pomodoro](https://github.com/dabeedc/teamesse/blob/main/pomodoroproto.drawio.png)
 ![userprofile](https://github.com/dabeedc/teamesse/blob/main/userprofileproto.drawio.png)
-![teamesse](previewScreenshots/Screenshot 2022-08-10 002908.jpg "teamesse")
+![teamesse](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20002908.jpg)
 
 ## 3. Tools from CPSC 455 we used in our project
 
