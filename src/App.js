@@ -24,6 +24,7 @@ import PaletteIcon from "@mui/icons-material/Palette";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
+import onlineOfflineToggleSound from "./sounds/onlineOfflineToggle.mp3";
 
 const GlobalCSS = styled(Box)(({ theme }) => ({
   "& *::-webkit-scrollbar": {
@@ -79,6 +80,12 @@ function App() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleToggle = () => {
+    const audio = new Audio(onlineOfflineToggleSound);
+    audio.play();
+    setOn(!on)
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -206,7 +213,7 @@ function App() {
                       }}
                     >
                       <Typography>Go {on ? "offline" : "online"}</Typography>
-                      <Switch onChange={() => setOn(!on)} value={on} />
+                      <Switch onChange={handleToggle} value={on} />
                     </Box>
                   )}
                 </>
