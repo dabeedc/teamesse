@@ -29,9 +29,9 @@ Standard Requirements:
 Stretch Requirements:
 - ✅ Theming system
 - ✅ Live collaboration pomodoro session.
-- ✅ Add (optional) music to play during pomodoro session.
+- ✅ Add sounds for start/finish/pause of pomodoro session.
+- ⚠️ Add (optional) music to play during pomodoro session.
 - ⚠️ Optional chatroom/video call feature.
-- ⚠️ Add sounds for start/finish/pause of pomodoro session.
 - ⚠️ Sharing user profile/pomodoro stats with other users.
 - ⚠️ Support for a friend list and messaging system .
 
