@@ -36,23 +36,6 @@ Stretch Requirements:
 ![pomodoro](https://github.com/dabeedc/teamesse/blob/main/pomodoroproto.drawio.png)
 ![userprofile](https://github.com/dabeedc/teamesse/blob/main/userprofileproto.drawio.png)
 
-### Application Gallery
-teamesse landing page  
-![teamesse](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20002908.jpg)  
-Login card  
-![login](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003037.jpg)  
-Signup card  
-![signup](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003009.jpg)  
-Dashboard with all features available   
-![dashboard](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003109.jpg)   
-Customizable focus and break intervals  
-![session](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003444.jpg)       
-Elegant data visualization  
-![piechart](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003611.jpg)      
-Quickly edit user profile  
-![edit](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003713.jpg)   
-
-
 ## 3. Tools from CPSC 455 we used in our project
 
 ### React/HTML/JS/CSS
@@ -116,3 +99,19 @@ For next steps, we would like to add the functionality of adding and connecting 
 
 ### Scott King (x2f2b)
 I led the development of the WebSocket server that controls the social pomodoro clock, as well as all the React/HTML/CSS that was involved with the clock features. I also assisted with implementing the reaction feature on both the frontend and backend. 
+
+### Application Gallery
+teamesse landing page  
+![teamesse](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20002908.jpg)  
+Login card  
+![login](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003037.jpg)  
+Signup card  
+![signup](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003009.jpg)  
+Dashboard with all features available   
+![dashboard](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003109.jpg)   
+Customizable focus and break intervals  
+![session](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003444.jpg)       
+Elegant data visualization  
+![piechart](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003611.jpg)      
+Quickly edit user profile  
+![edit](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003713.jpg)   
