@@ -100,16 +100,16 @@ For next steps, we would like to add the functionality of adding and connecting 
 ## 6. List of Contributions
 
 ### Scott King (x2f2b)
-- Led the development of the WebSocket server that controls the social pomodoro clock, as well as all the UI design and React/HTML/CSS code that was involved with the clock features
-- Assisted with implementing the reaction feature on both the frontend and backend
-- Implemented Redux infrastructure and populated store with global state
-- Overall UX/UI
+- Led the development of the WebSocket server that controls the social pomodoro clock, as well as all the UI design and React/HTML/CSS code that was involved with the clock features.
+- Assisted with implementing the reaction feature on both the frontend and backend.
+- Implemented Redux infrastructure and populated store with global state.
+- Overall UX/UI.
 
 ### James Park (y3o8)
-- Implemented the MongoDB queries required to display the statistics information with the data visualization components including the statistics cards and responsive calendar in the Statistics page of the app
-- Worked on adding the data chart component in our app to show the proportion of various subjects studied from the pomodoro sessions with the aggregated time data in the Subjects page
-- Implemented adding the shared user statistics table as part of the Explore page
-- Collaborated on UX/UI design and responsiveness of the appplication
+- Implemented the MongoDB queries required to display the statistics information with the data visualization components including the statistics cards and responsive calendar in the Statistics page of the app.
+- Worked on adding the data chart component in our app to show the proportion of various subjects studied from the pomodoro sessions with the aggregated time data in the Subjects page.
+- Implemented adding the shared user statistics table as part of the Explore page.
+- Collaborated on UX/UI design and responsiveness of the application.
 
 ### David Chung (d4n1b)
 - Designed and implemented the UX/UI of the application through the usage of react-router alongside components such as the landing page, user login/signup, and editing of user profile (both the frontend and backend).
