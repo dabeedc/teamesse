@@ -33,6 +33,7 @@ Stretch Requirements:
 - ⚠️ Optional chatroom/video call feature.
 - ⚠️ Add sounds for start/finish/pause of pomodoro session.
 - ⚠️ Sharing user profile/pomodoro stats with other users.
+- ⚠️ Support for a friend list and messaging system .
 
 ![pomodoro](https://github.com/dabeedc/teamesse/blob/main/pomodoroproto.drawio.png)
 ![userprofile](https://github.com/dabeedc/teamesse/blob/main/userprofileproto.drawio.png)
@@ -70,6 +71,10 @@ To facilitate a true pomodoro experience, we implemented a focus mode in the pom
 ![focusMode](https://github.com/dabeedc/teamesse/blob/main/previewScreenshots/Screenshot%202022-08-10%20003419.jpg)
 ### Customized Tooltip
 To visualize the individual data points in the data visualization components, including the Subjects and Statistics pages, we have created the customized tooltip. The tooltip allows users to hover each data point in the calendar map which displays the specific calendar date (YYYY-MM-DD) with the total minutes of pomodoro sessions completed. In the Subjects page, the tooltip allows users to hover each section of the data chart which displays the subject with the accumulated minutes studied.
+![sessiontt]()
+![stattt]()
+![subjectstt]()
+
 ### Reactions
 We wanted to have some interactivity between our users since this is a social application at its core. We added the ability for users to react to each other's pomodoro sessions with emojis. In the Explore page, each pomodoro session has a list of emojis and a count of how many reactions there were for each emoji on that session. 
 
