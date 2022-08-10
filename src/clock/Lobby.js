@@ -123,7 +123,11 @@ export const Lobby = ({ hidden, subjects, messages, send, loading }) => {
                       <Avatar
                         alt="Remy Sharp"
                         sx={{ width: 15, height: 15 }}
-                        src={avatars[user]}
+                        src={
+                          currentUser.username === user
+                            ? currentUser.avatar
+                            : avatars[user]
+                        }
                       />
                       <ListItemText primary={user} sx={{ ml: 1 }} />
                     </ListItem>
